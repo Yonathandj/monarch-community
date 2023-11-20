@@ -1,7 +1,11 @@
 export default function DashboardNavbar() {
   return (
     <header>
-      <nav></nav>
+      <nav>
+        <section>
+          
+        </section>
+      </nav>
     </header>
   );
 }

@@ -1,7 +1,12 @@
 import { ClerkProvider } from "@clerk/nextjs";
 
-import { Inter } from "next/font/google";
-const inter = Inter({ subsets: ["latin"] });
+import { cn } from "../@/lib/utils";
+
+import { Inter as FontSans } from "next/font/google";
+export const fontSans = FontSans({
+  subsets: ["latin"],
+  variable: "--font-sans",
+});
 
 import "./globals.css";
 
@@ -17,7 +22,12 @@ export default function RootLayout({ children }) {
   return (
     <ClerkProvider>
       <html lang="en">
-        <body className={inter.className}>
+        <body
+          className={cn(
+            "min-h-screen bg-background font-sans antialiased",
+            fontSans.variable
+          )}
+        >
           <div className="max-w-[1200px] mx-auto p-2">{children}</div>
         </body>
       </html>
