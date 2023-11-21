@@ -7,6 +7,10 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 
+import { SignedOut } from "@clerk/nextjs";
+
+import UsersCard from "./users-card";
+
 import { HamburgerMenuIcon } from "@radix-ui/react-icons";
 
 export default function HamburgerMenu() {
@@ -23,7 +27,11 @@ export default function HamburgerMenu() {
               Share your ideas with people around the world through blogs.
             </SheetDescription>
           </SheetHeader>
-          <section className="mt-6"></section>
+          <section className="mt-8">
+            <SignedOut>
+              <UsersCard />
+            </SignedOut>
+          </section>
         </SheetContent>
       </Sheet>
     </section>
