@@ -6,7 +6,7 @@ export default function DashboardNavbar() {
   return (
     <header>
       <nav className="flex items-center justify-between p-2">
-        <section className="flex gap-x-2 items-center">
+        <section className="flex gap-x-4 items-center">
           <Logo />
           <Search />
         </section>
