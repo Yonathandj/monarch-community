@@ -1,11 +1,13 @@
 import {
   Card,
-  CardContent,
-  CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
+  CardDescription,
 } from "@/components/ui/card";
+
+import SignInButton from "./sign-in-button";
+import SignUpButton from "./sign-up-button";
 
 export default function UsersCard() {
   return (
@@ -18,8 +20,9 @@ export default function UsersCard() {
           Place where bloggers share, stay up-to-date and grow their careers.
         </CardDescription>
       </CardHeader>
-      <CardFooter>
-        <p>Card Footer</p>
+      <CardFooter className="flex gap-x-4">
+        <SignInButton />
+        <SignUpButton />
       </CardFooter>
     </Card>
   );
