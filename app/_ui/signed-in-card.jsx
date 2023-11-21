@@ -17,7 +17,9 @@ export default async function SignedInCard() {
     <Card>
       <CardHeader>
         <CardTitle className="text-lg font-bold">
-          Welcome {`${firstName} ${lastName}`} to Monarch Community
+          Welcome{" "}
+          <span className="text-purple-600">{`${firstName} ${lastName}`}</span>{" "}
+          to Monarch Community
         </CardTitle>
         <CardDescription>
           Share your thoughts and ideas now for everyone around the world
