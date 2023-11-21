@@ -6,11 +6,11 @@ import { AspectRatio } from "@/components/ui/aspect-ratio";
 export default function Logo() {
   return (
     <Link href={"/"}>
-      <section className="w-14 h-auto">
+      <section className="w-16 h-auto">
         <AspectRatio ratio={4 / 3}>
           <Image
             fill
-            className="rounded-[2px]"
+            className="rounded"
             src={"/monarch-logo.jpg"}
             alt="monarch community logo"
           />
