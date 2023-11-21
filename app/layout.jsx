@@ -16,6 +16,9 @@ export const metadata = {
     default: "Monarch Community",
   },
   description: "Share your ideas with people around the world through blogs",
+  icons: {
+    icon: '/favicon-96x96.png'
+  }
 };
 
 export default function RootLayout({ children }) {
@@ -24,7 +27,7 @@ export default function RootLayout({ children }) {
       <html lang="en">
         <body
           className={cn(
-            "min-h-screen font-sans antialiased",
+            "min-h-screen font-sans antialiased bg-gray-50",
             fontSans.variable
           )}
         >
