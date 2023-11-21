@@ -10,7 +10,7 @@ import {
 import { SignedIn, SignedOut } from "@clerk/nextjs";
 
 import UsersCard from "./users-card";
-import SignOutButton from "./sign-out-button";
+import SignedInCard from "./signed-in-card";
 
 import { HamburgerMenuIcon } from "@radix-ui/react-icons";
 
@@ -33,9 +33,8 @@ export default async function HamburgerMenu() {
             <SignedOut>
               <UsersCard />
             </SignedOut>
-
             <SignedIn>
-              <SignOutButton />
+              <SignedInCard />
             </SignedIn>
           </section>
         </SheetContent>

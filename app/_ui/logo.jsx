@@ -1,21 +1,14 @@
 import Link from "next/link";
-import Image from "next/image";
 
-import { AspectRatio } from "@/components/ui/aspect-ratio";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 export default function Logo() {
   return (
     <Link href={"/"}>
-      <section className="w-16 h-auto">
-        <AspectRatio ratio={4 / 3}>
-          <Image
-            fill
-            className="rounded"
-            src={"/monarch-logo.jpg"}
-            alt="monarch community logo"
-          />
-        </AspectRatio>
-      </section>
+      <Avatar className="w-16 h-16">
+        <AvatarImage src="/monarch-logo.jpg" alt="Monarch Community Logo" />
+        <AvatarFallback>MC</AvatarFallback>
+      </Avatar>
     </Link>
   );
 }
