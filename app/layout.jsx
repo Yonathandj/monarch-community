@@ -1,4 +1,5 @@
 import { ClerkProvider } from "@clerk/nextjs";
+import { dark } from "@clerk/themes";
 
 import { cn } from "@/lib/utils";
 
@@ -17,13 +18,17 @@ export const metadata = {
   },
   description: "Share your ideas with people around the world through blogs",
   icons: {
-    icon: '/favicon-96x96.png'
-  }
+    icon: "/favicon-96x96.png",
+  },
 };
 
 export default function RootLayout({ children }) {
   return (
-    <ClerkProvider>
+    <ClerkProvider
+      appearance={{
+        baseTheme: dark,
+      }}
+    >
       <html lang="en">
         <body
           className={cn(
