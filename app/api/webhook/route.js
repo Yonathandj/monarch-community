@@ -4,7 +4,9 @@ import { headers } from 'next/headers'
 export async function POST(req) {
     const WEBHOOK_SECRET = process.env.WEBHOOK_SECRET
     if (!WEBHOOK_SECRET) {
-        throw new Error('Please add webhook secret to .env')
+        return new Response('Error occured', {
+            status: 500
+        })
     }
 
     const headerPayload = headers();

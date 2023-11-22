@@ -32,7 +32,7 @@ export default function RootLayout({ children }) {
       <html lang="en">
         <body
           className={cn(
-            "min-h-screen font-sans antialiased bg-gray-50",
+            "min-h-screen font-sans antialiased",
             fontSans.variable
           )}
         >

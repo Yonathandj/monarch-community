@@ -7,7 +7,7 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 
-import { SignedIn, SignedOut } from "@clerk/nextjs";
+import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 
 import UsersCard from "./users-card";
 import SignedInCard from "./signed-in-card";
@@ -34,6 +34,9 @@ export default async function HamburgerMenu() {
               <UsersCard />
             </SignedOut>
             <SignedIn>
+              <section className="block sm:hidden mb-4 ml-4">
+                <UserButton />
+              </section>
               <SignedInCard />
             </SignedIn>
           </section>
