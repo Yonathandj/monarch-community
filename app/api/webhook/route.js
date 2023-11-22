@@ -40,7 +40,7 @@ export async function POST(req) {
         })
     }
 
-    console.log(event)
+    console.log(event.data.email_addresses)
 
     return new Response('Transaction success', { status: 200 })
 }
