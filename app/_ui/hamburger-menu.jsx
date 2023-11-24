@@ -16,7 +16,7 @@ import { HamburgerMenuIcon } from "@radix-ui/react-icons";
 
 export default async function HamburgerMenu() {
   return (
-    <section className="mt-2">
+    <section className="mt-[6px]">
       <Sheet>
         <SheetTrigger>
           <HamburgerMenuIcon className="w-6 h-6" />
