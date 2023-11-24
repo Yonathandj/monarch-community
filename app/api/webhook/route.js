@@ -1,7 +1,9 @@
 import { Webhook } from 'svix'
+import { nanoid } from 'nanoid';
 import { headers } from 'next/headers'
 
 import user from '@/app/_lib/_models/user';
+import connectDB from '@/app/_lib/connectDB';
 
 export async function POST(req) {
     const WEBHOOK_SECRET = process.env.WEBHOOK_SECRET
@@ -43,8 +45,11 @@ export async function POST(req) {
     }
 
     if (event.type === 'user.created') {
+        connectDB()
+
         const { id: userId } = event.data;
         const userAlreadyExist = await user.findOne({ userId }).exec();
+
         if (userAlreadyExist) {
             return new Response('User already exist', {
                 status: 400
@@ -54,10 +59,9 @@ export async function POST(req) {
         const _id = `monarchUser_${nanoid(16)}`;
         const clerk = {
             userId: event.data.id,
-            firstName: event.data.first_name,
-            lastName: event.data.last_name,
+            fullName: event.data?.first_name || event.data?.last_name ? `${event.data?.first_name || ''} ${event.data?.last_name || ''}` : event.data.email_addresses[0].email_address.split('@')[0],
             email: event.data.email_addresses[0].email_address,
-            profileImageURL: event.data?.image_url || '',
+            profileImageURL: event.data?.image_url,
         }
         const newUser = new user({
             _id,
@@ -69,12 +73,5 @@ export async function POST(req) {
         }
         return new Response('Something went wrong with the system! Try again!', { status: 500 })
     }
-
-    if (event.type === 'user.deleted') {
-        const { id: userId } = event.data;
-
-        const selectedUser = await user.findOne({ userId }).exec();
-        // HANDLE DELETE ALL WITH ID
-        const result = await user.deleteOne({})
-    }
+    return new Response('Operation success', { status: 200 })
 }
