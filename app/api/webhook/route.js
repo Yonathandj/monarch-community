@@ -55,13 +55,12 @@ export async function POST(req) {
                 status: 400
             });
         }
-
         const _id = `monarchUser_${nanoid(16)}`;
         const clerk = {
             userId: event.data.id,
             fullName: event.data?.first_name || event.data?.last_name ? `${event.data?.first_name || ''} ${event.data?.last_name || ''}` : event.data.email_addresses[0].email_address.split('@')[0],
             email: event.data.email_addresses[0].email_address,
-            profileImageURL: event.data?.image_url,
+            profileImageURL: event.data.image_url,
         }
         const newUser = new user({
             _id,
@@ -73,5 +72,5 @@ export async function POST(req) {
         }
         return new Response('Something went wrong with the system! Try again!', { status: 500 })
     }
-    return new Response('Operation success', { status: 200 })
+    return new Response('Not found', { status: 404 })
 }
