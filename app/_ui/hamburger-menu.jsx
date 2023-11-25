@@ -9,6 +9,7 @@ import {
 
 import { SignedIn, SignedOut } from "@clerk/nextjs";
 
+import Logo from "./logo";
 import UsersCard from "./users-card";
 import SignedInCard from "./signed-in-card";
 
@@ -16,7 +17,7 @@ import { HamburgerMenuIcon } from "@radix-ui/react-icons";
 
 export default async function HamburgerMenu() {
   return (
-    <section className="mt-[6px]">
+    <section className="mt-1">
       <Sheet>
         <SheetTrigger>
           <HamburgerMenuIcon className="w-6 h-6" />
@@ -30,6 +31,9 @@ export default async function HamburgerMenu() {
           </SheetHeader>
 
           <section className="mt-8">
+            <section className="mb-2 ml-4 block sm:hidden">
+              <Logo />
+            </section>
             <SignedOut>
               <UsersCard />
             </SignedOut>

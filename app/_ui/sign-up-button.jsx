@@ -14,3 +14,14 @@ export default function SignUpButton() {
     </SignUpButtonClerk>
   );
 }
+
+export function SignUpButtonUserAvatar() {
+  return (
+    <SignUpButtonClerk className="w-full flex justify-between items-center">
+      <Button>
+        Sign Up
+        <LightningBoltIcon className="w-4 h-4" />
+      </Button>
+    </SignUpButtonClerk>
+  );
+}

@@ -14,3 +14,14 @@ export default function SignOutButton() {
     </SignOutButtonClerk>
   );
 }
+
+export function SignOutButtonUserAvatar() {
+  return (
+    <SignOutButtonClerk className="w-full flex justify-between items-center">
+      <Button>
+        Sign Out
+        <ScissorsIcon className="w-4 h-4" />
+      </Button>
+    </SignOutButtonClerk>
+  );
+}

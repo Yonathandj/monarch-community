@@ -14,3 +14,15 @@ export default function WriteButton() {
     </Button>
   );
 }
+
+export function WriteButtonUserAvatar() {
+  return (
+    <Link
+      href={"/posts/write"}
+      className="flex justify-between items-center w-full"
+    >
+      <p>Write</p>
+      <Pencil2Icon className="w-4 h-4" />
+    </Link>
+  );
+}

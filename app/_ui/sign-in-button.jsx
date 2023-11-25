@@ -14,3 +14,14 @@ export default function SignInButton() {
     </SignInButtonClerk>
   );
 }
+
+export function SignInButtonUserAvatar() {
+  return (
+    <SignInButtonClerk className="w-full flex justify-between items-center">
+      <Button>
+        Sign In
+        <RocketIcon className="w-4 h-4" />
+      </Button>
+    </SignInButtonClerk>
+  );
+}

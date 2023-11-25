@@ -10,3 +10,13 @@ export const getUserById = async (userId) => {
         throw new Error('Failed to fetch current user!');
     }
 }
+
+export const getTotalUsers = async () => {
+    try {
+        connectDB()
+        const totalUsers = await user.find().estimatedDocumentCount().exec();
+        return totalUsers;
+    } catch (error) {
+        throw new Error('Failed to fetch current user!');
+    }
+}
