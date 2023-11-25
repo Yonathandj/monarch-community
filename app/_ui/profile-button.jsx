@@ -21,7 +21,7 @@ export function ProfileButtonUserAvatar() {
       href={"/users/profile"}
       className="flex justify-between items-center w-full"
     >
-      <p>Profile</p>
+      Profile
       <PersonIcon className="w-4 h-4" />
     </Link>
   );
