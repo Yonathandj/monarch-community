@@ -1,7 +1,9 @@
+import { cn } from "@/lib/utils";
+
 import { ClerkProvider } from "@clerk/nextjs";
 import { neobrutalism } from "@clerk/themes";
 
-import { cn } from "@/lib/utils";
+import { EdgeStoreProvider } from "./_lib/edgestore";
 
 import { Inter as FontSans } from "next/font/google";
 export const fontSans = FontSans({
@@ -36,7 +38,9 @@ export default function RootLayout({ children }) {
             fontSans.variable
           )}
         >
-          <div className="max-w-[1200px] mx-auto p-4">{children}</div>
+          <div className="max-w-[1200px] mx-auto p-4">
+            <EdgeStoreProvider>{children}</EdgeStoreProvider>
+          </div>
         </body>
       </html>
     </ClerkProvider>
