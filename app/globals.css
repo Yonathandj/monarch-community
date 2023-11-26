@@ -49,6 +49,18 @@
   }
 }
 
+.rti--container {
+  border: none !important;
+}
+.rti--container:focus-within {
+  border: none !important;
+  box-shadow: none !important;
+}
+input.rti--input {
+  width: 100% !important;
+  font-size: smaller !important;
+}
+
 @layer base {
   * {
     @apply border-border;

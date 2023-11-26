@@ -5,10 +5,11 @@ import dynamic from "next/dynamic";
 import { useContext } from "react";
 import { PostContext } from "../_provider/post-context-provider";
 
-import { Textarea } from "@/components/ui/textarea";
+import { TagsInput } from "react-tag-input-component";
 
 import { SingleImageDropzone } from "./single-image-dropzone";
 
+import { Textarea } from "@/components/ui/textarea";
 const Editor = dynamic(() => import("@/components/ui/editor"), { ssr: false });
 
 export default function WriteForm() {
@@ -24,6 +25,13 @@ export default function WriteForm() {
           setPost({ ...post, headerImage: file });
         }}
         className="mx-auto"
+      />
+      <TagsInput
+        name="tags"
+        value={post.tags}
+        onChange={(tags) => setPost({ ...post, tags })}
+        separators={["Tab"]}
+        placeHolder="Untagged post (press tab to add)"
       />
       <Textarea
         name="title"
