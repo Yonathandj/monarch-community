@@ -8,8 +8,8 @@ import "@blocknote/core/style.css";
 import { BlockNoteView, useBlockNote } from "@blocknote/react";
 
 export default function Editor({ editable }) {
-    const { post, setPost } = useContext(PostContext);
-    
+  const { post, setPost } = useContext(PostContext);
+
   const handleChange = useDebouncedCallback((topLevelBlocks) => {
     setPost({
       ...post,

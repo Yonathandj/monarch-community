@@ -28,6 +28,7 @@ export default function WriteForm() {
       <Textarea
         name="title"
         placeholder="Untitled post"
+        value={post.title}
         onChange={(e) => setPost({ ...post, title: e.target.value })}
         className="mt-4 border-none shadow-none text-4xl focus-visible:ring-0 font-bold resize-none overflow-hidden"
       />
