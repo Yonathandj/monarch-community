@@ -1,7 +1,6 @@
 "use client";
 
 import * as React from "react";
-import Image from "next/image";
 import { twMerge } from "tailwind-merge";
 import { useDropzone } from "react-dropzone";
 import { Cross2Icon, UploadIcon } from "@radix-ui/react-icons";
@@ -118,7 +117,7 @@ const SingleImageDropzone = React.forwardRef(
           <input ref={ref} {...getInputProps()} />
 
           {imageUrl ? (
-            <Image
+            <img
               src={imageUrl}
               alt={acceptedFiles[0]?.name}
               className="h-full w-full rounded-md object-cover"
@@ -126,10 +125,7 @@ const SingleImageDropzone = React.forwardRef(
           ) : (
             <div className="flex flex-col items-center justify-center text-xs text-gray-400">
               <UploadIcon className="mb-2 h-7 w-7" />
-              <div className="text-gray-400">drag & drop to upload</div>
-              <div className="mt-3">
-                <Button disabled={disabled}>select</Button>
-              </div>
+              <div className="text-gray-400">click / drag & drop to upload</div>
             </div>
           )}
 
