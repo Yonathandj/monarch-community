@@ -7,7 +7,7 @@ import { Textarea } from "@/components/ui/textarea";
 
 import { SingleImageDropzone } from "./single-image-dropzone";
 
-export default function WriteMode() {
+export default function WriteForm() {
   const { post, setPost } = useContext(PostContext);
 
   return (
