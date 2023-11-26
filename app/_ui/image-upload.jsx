@@ -18,6 +18,9 @@ export default function ImageUpload() {
         }}
         className="mx-auto"
       />
+      <p className="ml-4 font-bold tracking-wider text-xs text-red-600">
+        * Good to use landscape image
+      </p>
     </section>
   );
 }
