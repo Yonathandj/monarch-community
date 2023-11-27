@@ -16,20 +16,20 @@ export default function WriteForm({ unpublishedPost }) {
         height={250}
         className="mx-auto"
         onChange={(file) => {}}
-        value={unpublishedPost?.data?.headerImageURL || ""}
+        value={unpublishedPost?.data?.headerImageURL || null}
       />
       <TagsInput
         name="tags"
         separators={["Tab"]}
         onChange={(tags) => {}}
-        value={unpublishedPost?.data?.tags}
+        value={unpublishedPost?.data?.tags || []}
         placeHolder="Untagged post (press tab to add)"
       />
       <Textarea
         name="title"
         onChange={(e) => {}}
         placeholder="Untitled post"
-        value={unpublishedPost?.data?.title}
+        value={unpublishedPost?.data?.title || ""}
         className="mt-4 border-none shadow-none text-4xl focus-visible:ring-0 font-bold resize-none overflow-hidden p-0"
       />
       <Editor editable={true} content={unpublishedPost?.data?.content} />
