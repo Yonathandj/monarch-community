@@ -48,9 +48,12 @@
     --ring: 240 4.9% 83.9%;
   }
 }
-
+._bnEditor_12je0_3 {
+  padding-inline: 0px !important;
+}
 .rti--container {
   border: none !important;
+  padding: 0px !important;
 }
 .rti--container:focus-within {
   border: none !important;
@@ -58,7 +61,10 @@
 }
 input.rti--input {
   width: 100% !important;
-  font-size: smaller !important;
+  font-size: small !important;
+}
+.rti--tag span {
+  font-size: small !important;
 }
 
 @layer base {
