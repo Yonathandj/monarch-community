@@ -1,9 +1,7 @@
 import { cn } from "@/lib/utils";
 
 import { ClerkProvider } from "@clerk/nextjs";
-
 import { EdgeStoreProvider } from "./_lib/edgestore";
-import PostContextProvider from "./_provider/post-context-provider";
 
 import { Inter as FontSans } from "next/font/google";
 export const fontSans = FontSans({
@@ -35,9 +33,7 @@ export default function RootLayout({ children }) {
           )}
         >
           <div className="max-w-[1200px] mx-auto p-4">
-            <PostContextProvider>
-              <EdgeStoreProvider>{children}</EdgeStoreProvider>
-            </PostContextProvider>
+            <EdgeStoreProvider>{children}</EdgeStoreProvider>
           </div>
         </body>
       </html>

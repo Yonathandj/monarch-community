@@ -2,53 +2,37 @@
 
 import dynamic from "next/dynamic";
 
-import { useContext } from "react";
-import { PostContext } from "../_provider/post-context-provider";
-
 import { TagsInput } from "react-tag-input-component";
 
-import { SingleImageDropzone } from "./single-image-dropzone";
-
 import { Textarea } from "@/components/ui/textarea";
+import { SingleImageDropzone } from "@/components/ui/single-image-dropzone";
 const Editor = dynamic(() => import("@/components/ui/editor"), { ssr: false });
 
-export default function WriteForm() {
-  const { post, setPost } = useContext(PostContext);
-
+export default function WriteForm({ unpublishedPost }) {
   return (
     <form className="max-w-[800px] mx-auto flex flex-col gap-y-2 p-4">
-      <section>
-        <SingleImageDropzone
-          width={450}
-          height={250}
-          value={post.headerImage}
-          onChange={(file) => {
-            setPost({ ...post, headerImage: file });
-          }}
-          className="mx-auto"
-        />
-      </section>
-      <section>
-        <TagsInput
-          name="tags"
-          value={post.tags}
-          onChange={(tags) => setPost({ ...post, tags })}
-          separators={["Tab"]}
-          placeHolder="Untagged post (press tab to add)"
-        />
-      </section>
-      <section>
-        <Textarea
-          name="title"
-          placeholder="Untitled post"
-          value={post.title}
-          onChange={(e) => setPost({ ...post, title: e.target.value })}
-          className="mt-4 border-none shadow-none text-4xl focus-visible:ring-0 font-bold resize-none overflow-hidden p-0"
-        />
-      </section>
-      <section>
-        <Editor editable={true} />
-      </section>
+      <SingleImageDropzone
+        width={450}
+        height={250}
+        className="mx-auto"
+        onChange={(file) => {}}
+        value={unpublishedPost?.data?.headerImageURL || ""}
+      />
+      <TagsInput
+        name="tags"
+        separators={["Tab"]}
+        onChange={(tags) => {}}
+        value={unpublishedPost?.data?.tags}
+        placeHolder="Untagged post (press tab to add)"
+      />
+      <Textarea
+        name="title"
+        onChange={(e) => {}}
+        placeholder="Untitled post"
+        value={unpublishedPost?.data?.title}
+        className="mt-4 border-none shadow-none text-4xl focus-visible:ring-0 font-bold resize-none overflow-hidden p-0"
+      />
+      <Editor editable={true} content={unpublishedPost?.data?.content} />
     </form>
   );
 }
