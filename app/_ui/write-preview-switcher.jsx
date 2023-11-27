@@ -4,7 +4,8 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
-import { ActivityLogIcon } from "@radix-ui/react-icons";
+
+import { FileTextIcon } from "@radix-ui/react-icons";
 
 export default function WritePreviewSwitcher() {
   const pathname = usePathname();
@@ -25,7 +26,7 @@ export default function WritePreviewSwitcher() {
   return (
     <section className="flex gap-x-2 items-center">
       <Label htmlFor="preview-switcher">
-        <ActivityLogIcon className="w-6 h-6" />
+        <FileTextIcon className="w-6 h-6" />
       </Label>
       <Switch
         id="preview-switcher"
