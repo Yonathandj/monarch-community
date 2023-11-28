@@ -6,7 +6,7 @@ const postModelSchema = new mongoose.Schema({
     data: {
         tags: { type: Array, default: [] },
         title: { type: String, trim: true, default: '' },
-        content: { type: Array, trim: true, default: [] },
+        content: { type: String, trim: true, default: '[]' },
         headerImageURL: { type: String, trim: true, default: '' },
     },
     isPublished: { type: Boolean, default: false },
