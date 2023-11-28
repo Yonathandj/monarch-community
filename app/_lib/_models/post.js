@@ -4,9 +4,9 @@ const postModelSchema = new mongoose.Schema({
     _id: { type: String, trim: true },
     userId: { type: String, trim: true, ref: 'User' },
     data: {
-        tags: { type: String, default: [] },
+        tags: { type: Array, default: [] },
         title: { type: String, trim: true, default: '' },
-        content: { type: String, trim: true, default: '' },
+        content: { type: Array, trim: true, default: [] },
         headerImageURL: { type: String, trim: true, default: '' },
     },
     isPublished: { type: Boolean, default: false },

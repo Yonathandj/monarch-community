@@ -13,7 +13,7 @@ export default async function Page({ searchParams: { preview } }) {
       {preview ? (
         <h2>Test</h2>
       ) : (
-        <WriteForm unpublishedPost={unpublishedPost} />
+        <WriteForm unpublishedPost={unpublishedPost} userId={userId} />
       )}
     </main>
   );
