@@ -16,10 +16,7 @@ export default function WriteForm() {
   const { unpublishedPost, setUnpublishedPost } = useContext(PostContext);
 
   const debouncedOnChangeTextarea = useDebouncedCallback((title) => {
-    setUnpublishedPost({
-      startWriting: true,
-      data: { ...unpublishedPost.data, title },
-    });
+    setUnpublishedPost({ ...unpublishedPost, title });
   }, 1000);
 
   return (
@@ -28,24 +25,18 @@ export default function WriteForm() {
         width={450}
         height={250}
         className="mx-auto"
-        value={unpublishedPost.data.headerImageURL}
+        value={unpublishedPost.headerImageURL}
         onChange={(file) => {
-          setUnpublishedPost({
-            startWriting: true,
-            data: { ...unpublishedPost.data, headerImageURL: file },
-          });
+          setUnpublishedPost({ ...unpublishedPost, headerImageURL: file });
         }}
       />
 
       <TagsInput
         name="tags"
         separators={["Tab"]}
-        value={unpublishedPost.data.tags}
+        value={unpublishedPost.tags}
         onChange={(tags) => {
-          setUnpublishedPost({
-            startWriting: true,
-            data: { ...unpublishedPost.data, tags },
-          });
+          setUnpublishedPost({ ...unpublishedPost, tags });
         }}
         placeHolder="Untagged post (press tab to add)"
       />
@@ -53,7 +44,7 @@ export default function WriteForm() {
       <Textarea
         name="title"
         placeholder="Untitled post"
-        defaultValue={unpublishedPost.data.title}
+        defaultValue={unpublishedPost.title}
         onChange={(e) => {
           debouncedOnChangeTextarea(e.target.value);
         }}

@@ -9,27 +9,26 @@ export default function PostContextProvider({ children }) {
   const { userId } = useAuth();
 
   const [unpublishedPost, setUnpublishedPost] = useState({
-    startWriting: false,
-    data: {
-      tags: [],
-      title: "",
-      headerImageURL: "",
-      content: JSON.stringify([], null, 2),
-    },
+    tags: [],
+    title: "",
+    headerImageURL: "",
+    content: JSON.stringify([], null, 2),
   });
 
   useEffect(() => {
-    if (userId && unpublishedPost.startWriting) {
+    if (userId) {
       const addNewPost = setTimeout(() => {
         fetch("http://localhost:3000/api/posts", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ data: unpublishedPost.data, userId }),
+          body: JSON.stringify({ userId, unpublishedPost }),
         });
       }, 2000);
-      return () => clearTimeout(addNewPost);
+      return () => {
+        clearTimeout(addNewPost);
+      };
     }
   }, [userId, unpublishedPost]);
 

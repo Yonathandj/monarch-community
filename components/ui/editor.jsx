@@ -12,11 +12,8 @@ export default function Editor({
 }) {
   const onContentChange = useDebouncedCallback((topLevelBlocks) => {
     setUnpublishedPost({
-      startWriting: true,
-      data: {
-        ...unpublishedPost.data,
-        content: JSON.stringify(topLevelBlocks, null, 2),
-      },
+      ...unpublishedPost,
+      content: JSON.stringify(topLevelBlocks, null, 2),
     });
   }, 1000);
 
@@ -25,7 +22,7 @@ export default function Editor({
     onEditorContentChange: (editor) => {
       onContentChange(editor.topLevelBlocks);
     },
-    initialContent: JSON.parse(unpublishedPost.data.content),
+    initialContent: JSON.parse(unpublishedPost.content),
   });
 
   return <BlockNoteView editor={editor} />;

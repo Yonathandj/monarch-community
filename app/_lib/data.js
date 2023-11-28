@@ -3,7 +3,7 @@ import connectDB from "./connectDB"
 
 export const getUserById = async (userId) => {
     try {
-        connectDB()
+        await connectDB()
         const selectedUser = await user.findOne({ "clerk.userId": userId }).exec();
         return selectedUser;
     } catch (error) {
@@ -13,7 +13,7 @@ export const getUserById = async (userId) => {
 
 export const getTotalUsers = async () => {
     try {
-        connectDB()
+        await connectDB()
         const totalUsers = await user.find().estimatedDocumentCount().exec();
         return totalUsers;
     } catch (error) {
