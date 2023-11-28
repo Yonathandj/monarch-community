@@ -7,7 +7,7 @@ export const getUserById = async (userId) => {
         const selectedUser = await user.findOne({ "clerk.userId": userId }).exec();
         return selectedUser;
     } catch (error) {
-        throw new Error('Failed to fetch current user!');
+        throw new Error(`Failed to fetch current user! ${error}`);
     }
 }
 
@@ -17,6 +17,6 @@ export const getTotalUsers = async () => {
         const totalUsers = await user.find().estimatedDocumentCount().exec();
         return totalUsers;
     } catch (error) {
-        throw new Error('Failed to fetch current user!');
+        throw new Error(`Failed to fetch current user! ${error}`);
     }
 }

@@ -22,6 +22,7 @@ export default function Editor({
     onEditorContentChange: (editor) => {
       onContentChange(editor.topLevelBlocks);
     },
+    initialContent: JSON.parse(unpublishedPost.content),
   });
 
   return <BlockNoteView editor={editor} />;
