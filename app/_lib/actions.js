@@ -11,8 +11,7 @@ export async function handleUnpublishedPostAction({ userId, headerImageURL, titl
         connectDB();
         const unpublishedPost = await getUnpublishedPost(userId);
         if (!unpublishedPost) {
-            const response = await addUnpublishedPostService({ userId, headerImageURL, title, tags, content });
-            return response;
+            addUnpublishedPostService({ userId, headerImageURL, title, tags, content });
         }
     } catch (error) {
         throw new Error(`Something went wrong with the system. Try again! ${error}`)
