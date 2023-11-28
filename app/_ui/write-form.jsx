@@ -5,6 +5,7 @@ import dynamic from "next/dynamic";
 import { startTransition } from "react";
 
 import { useEdgeStore } from "../_lib/edgestore";
+import { useDebouncedCallback } from "use-debounce";
 import { handleUnpublishedPostAction } from "../_lib/actions";
 
 import { TagsInput } from "react-tag-input-component";
@@ -15,6 +16,10 @@ const Editor = dynamic(() => import("@/components/ui/editor"), { ssr: false });
 
 export default function WriteForm({ unpublishedPost, userId }) {
   const { edgestore } = useEdgeStore();
+
+  const handleChangeTextarea = useDebouncedCallback((title) => {
+    startTransition(() => handleUnpublishedPostAction({ userId, title }));
+  }, 1000);
 
   return (
     <form className="max-w-[800px] mx-auto flex flex-col gap-y-2 p-4">
@@ -51,9 +56,7 @@ export default function WriteForm({ unpublishedPost, userId }) {
         placeholder="Untitled post"
         value={unpublishedPost?.data?.title || ""}
         onChange={(e) => {
-          startTransition(() =>
-            handleUnpublishedPostAction({ userId, title: e.target.value })
-          );
+          handleChangeTextarea(e.target.value);
         }}
         className="mt-4 border-none shadow-none text-4xl focus-visible:ring-0 font-bold resize-none overflow-hidden p-0"
       />
