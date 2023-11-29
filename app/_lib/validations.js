@@ -6,3 +6,10 @@ export const userValidationSchema = z.object({
     email: z.string().trim().email(),
     profileImageURL: z.string().trim().url().optional(),
 })
+
+export const postValidationSchema = z.object({
+    userId: z.string().trim(),
+    content: z.string().trim(),
+    title: z.string().trim().optional(),
+    tags: z.array(z.string()).optional(),
+})
