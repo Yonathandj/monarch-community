@@ -9,8 +9,8 @@ export const userValidationSchema = z.object({
 
 export const postValidationSchema = z.object({
     userId: z.string().trim(),
-    content: z.string().trim(),
     headerImageURL: z.any().optional(),
     title: z.string().trim().optional(),
     tags: z.array(z.string()).optional(),
+    content: z.string().trim().optional(),
 })
