@@ -22,7 +22,13 @@ export const addNewUser = async ({ userId, fullName, email, profileImageURL }) =
 export const updateUnpublishedPost = async ({ userId, title, tags, content, headerImageURL }) => {
     try {
         connectDB();
-        const response = await post.updateOne({ "clerk.userId": userId, isPublished: false }, { data: { title, tags, content, headerImageURL } }).exec()
+        const data = {
+            "data.tags": tags,
+            "data.title": title,
+            "data.content": content,
+            "data.headerImageURL": headerImageURL
+        }
+        const response = await post.updateOne({ userId, isPublished: false }, data).exec()
         return response;
     } catch (error) {
         throw new Error(`Failed to update unpublished post! ${error}`)

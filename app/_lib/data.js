@@ -25,7 +25,7 @@ export const getTotalUsers = async () => {
 export const getUnpublishedPost = async (userId) => {
     try {
         await connectDB()
-        const unpublishedPost = await post.findOne({ "clerk.userId": userId, isPublished: false }).exec();
+        const unpublishedPost = await post.findOne({ userId, isPublished: false }).exec();
         return unpublishedPost;
     } catch (error) {
         throw new Error(`Failed to fetch unpublished post! ${error}`);

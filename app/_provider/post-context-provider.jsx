@@ -27,7 +27,7 @@ export default function PostContextProvider({ children }) {
             headers: {
               "Content-Type": "application/json",
             },
-            body: JSON.stringify({ userId, unpublishedPost }),
+            body: JSON.stringify({ userId, unpublishedPost }, null, 2),
           });
         }, 2000);
         return () => {
