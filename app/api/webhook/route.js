@@ -57,7 +57,7 @@ export async function POST(req) {
                     status: 400
                 });
             }
-            if (validation.success) {
+            if (validationResult.success) {
                 const { userId, fullName, email, profileImageURL } = validationResult.data;
                 const userAlreadyExist = await getUserById(userId);
                 if (userAlreadyExist) {
