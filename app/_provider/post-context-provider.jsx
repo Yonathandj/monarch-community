@@ -9,6 +9,8 @@ export default function PostContextProvider({ children }) {
   const { userId } = useAuth();
 
   const firstRender = useRef(true);
+
+  const [loading, setLoading] = useState(false);
   const [unpublishedPost, setUnpublishedPost] = useState({
     tags: [],
     title: "",
@@ -17,6 +19,7 @@ export default function PostContextProvider({ children }) {
   });
 
   useEffect(() => {
+    setLoading(true);
     const getUnpublishedPostData = async () => {
       const response = await fetch(
         `http://localhost:3000/api/posts/unpublished-post?by=${userId}`,
@@ -31,7 +34,9 @@ export default function PostContextProvider({ children }) {
       if (response.ok) {
         const { data } = await response.json();
         setUnpublishedPost(data);
+        setLoading(false);
       } else {
+        setLoading(false);
         return;
       }
     };
@@ -44,7 +49,7 @@ export default function PostContextProvider({ children }) {
     if (firstRender.current) {
       firstRender.current = false;
     } else {
-      if (userId) {
+      if (userId && !loading) {
         const addNewPost = setTimeout(() => {
           fetch("http://localhost:3000/api/posts/unpublished-post", {
             method: "POST",
@@ -59,11 +64,12 @@ export default function PostContextProvider({ children }) {
         };
       }
     }
-  }, [userId, unpublishedPost]);
+  }, [loading, userId, unpublishedPost]);
 
   return (
     <PostContext.Provider
       value={{
+        loading,
         unpublishedPost,
         setUnpublishedPost,
       }}
