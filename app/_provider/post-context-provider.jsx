@@ -53,7 +53,7 @@ export default function PostContextProvider({ children }) {
             },
             body: JSON.stringify({ userId, unpublishedPost }),
           });
-        }, 3000);
+        }, 2000);
         return () => {
           clearTimeout(addNewPost);
         };

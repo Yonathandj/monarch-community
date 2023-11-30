@@ -2,6 +2,7 @@
 
 import dynamic from "next/dynamic";
 import { useContext } from "react";
+import { useEdgeStore } from "../_lib/edgestore";
 import { useDebouncedCallback } from "use-debounce";
 
 import { TagsInput } from "react-tag-input-component";
@@ -13,6 +14,7 @@ import { SingleImageDropzone } from "@/components/ui/single-image-dropzone";
 const Editor = dynamic(() => import("@/components/ui/editor"), { ssr: false });
 
 export default function WriteForm() {
+  const { edgestore } = useEdgeStore();
   const { unpublishedPost, setUnpublishedPost } = useContext(PostContext);
 
   const debouncedOnChangeTextarea = useDebouncedCallback((title) => {
@@ -26,8 +28,41 @@ export default function WriteForm() {
         height={250}
         className="mx-auto"
         value={unpublishedPost.headerImageURL}
-        onChange={(file) => {
-          setUnpublishedPost({ ...unpublishedPost, headerImageURL: file });
+        onChange={async (file) => {
+          if (file) {
+            if (unpublishedPost.headerImageURL) {
+              const response = await edgestore.publicImages.upload({
+                file,
+                options: {
+                  replaceTargetUrl: unpublishedPost.headerImageURL,
+                },
+              });
+              setUnpublishedPost({
+                ...unpublishedPost,
+                headerImageURL: response.url,
+              });
+            } else {
+              const response = await edgestore.publicImages.upload({
+                file,
+              });
+              setUnpublishedPost({
+                ...unpublishedPost,
+                headerImageURL: response.url,
+              });
+            }
+          } else {
+            if (unpublishedPost.headerImageURL) {
+              await edgestore.publicImages.delete({
+                url: unpublishedPost.headerImageURL,
+              });
+              setUnpublishedPost({
+                ...unpublishedPost,
+                headerImageURL: "",
+              });
+            } else {
+              return;
+            }
+          }
         }}
       />
 
