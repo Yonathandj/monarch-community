@@ -9,11 +9,10 @@ export default function PostContextProvider({ children }) {
   const { userId } = useAuth();
 
   const firstRender = useRef(true);
-
-  const [headerImageURL, setHeaderImageURL] = useState("");
   const [unpublishedPost, setUnpublishedPost] = useState({
     tags: [],
     title: "",
+    headerImageURL: "",
     content: JSON.stringify([], null, 2),
   });
 
@@ -67,8 +66,6 @@ export default function PostContextProvider({ children }) {
       value={{
         unpublishedPost,
         setUnpublishedPost,
-        headerImageURL,
-        setHeaderImageURL,
       }}
     >
       {children}

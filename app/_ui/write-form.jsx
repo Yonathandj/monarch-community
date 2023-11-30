@@ -13,12 +13,7 @@ import { SingleImageDropzone } from "@/components/ui/single-image-dropzone";
 const Editor = dynamic(() => import("@/components/ui/editor"), { ssr: false });
 
 export default function WriteForm() {
-  const {
-    unpublishedPost,
-    setUnpublishedPost,
-    headerImageURL,
-    setHeaderImageURL,
-  } = useContext(PostContext);
+  const { unpublishedPost, setUnpublishedPost } = useContext(PostContext);
 
   const debouncedOnChangeTextarea = useDebouncedCallback((title) => {
     setUnpublishedPost({ ...unpublishedPost, title });
@@ -30,9 +25,9 @@ export default function WriteForm() {
         width={450}
         height={250}
         className="mx-auto"
-        value={headerImageURL}
+        value={unpublishedPost.headerImageURL}
         onChange={(file) => {
-          setHeaderImageURL(file);
+          setUnpublishedPost({ ...unpublishedPost, headerImageURL: file });
         }}
       />
 
