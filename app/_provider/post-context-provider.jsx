@@ -17,19 +17,42 @@ export default function PostContextProvider({ children }) {
   });
 
   useEffect(() => {
+    const getUnpublishedPostData = async () => {
+      const response = await fetch(
+        `http://localhost:3000/api/posts/unpublished-post?by=${userId}`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      if (response.ok) {
+        const { data } = await response.json();
+        setUnpublishedPost(data);
+      } else {
+        return;
+      }
+    };
+    if (userId) {
+      getUnpublishedPostData();
+    }
+  }, [userId]);
+
+  useEffect(() => {
     if (firstRender.current) {
       firstRender.current = false;
     } else {
       if (userId) {
         const addNewPost = setTimeout(() => {
-          fetch("http://localhost:3000/api/posts", {
+          fetch("http://localhost:3000/api/posts/unpublished-post", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
             },
-            body: JSON.stringify({ userId, unpublishedPost }, null, 2),
+            body: JSON.stringify({ userId, unpublishedPost }),
           });
-        }, 2000);
+        }, 3000);
         return () => {
           clearTimeout(addNewPost);
         };
