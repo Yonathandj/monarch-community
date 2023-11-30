@@ -9,10 +9,11 @@ export default function PostContextProvider({ children }) {
   const { userId } = useAuth();
 
   const firstRender = useRef(true);
+
+  const [headerImageURL, setHeaderImageURL] = useState("");
   const [unpublishedPost, setUnpublishedPost] = useState({
     tags: [],
     title: "",
-    headerImageURL: "",
     content: JSON.stringify([], null, 2),
   });
 
@@ -25,6 +26,7 @@ export default function PostContextProvider({ children }) {
           headers: {
             "Content-Type": "application/json",
           },
+          cache: "no-store",
         }
       );
       if (response.ok) {
@@ -61,7 +63,14 @@ export default function PostContextProvider({ children }) {
   }, [userId, unpublishedPost]);
 
   return (
-    <PostContext.Provider value={{ unpublishedPost, setUnpublishedPost }}>
+    <PostContext.Provider
+      value={{
+        unpublishedPost,
+        setUnpublishedPost,
+        headerImageURL,
+        setHeaderImageURL,
+      }}
+    >
       {children}
     </PostContext.Provider>
   );

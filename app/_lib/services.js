@@ -19,14 +19,13 @@ export const addNewUser = async ({ userId, fullName, email, profileImageURL }) =
     }
 }
 
-export const updateUnpublishedPost = async ({ userId, title, tags, content, headerImageURL }) => {
+export const updateUnpublishedPost = async ({ userId, title, tags, content }) => {
     try {
         connectDB();
         const data = {
             "data.tags": tags,
             "data.title": title,
             "data.content": content,
-            "data.headerImageURL": headerImageURL
         }
         const response = await post.updateOne({ userId, isPublished: false }, data).exec()
         return response;
@@ -35,12 +34,12 @@ export const updateUnpublishedPost = async ({ userId, title, tags, content, head
     }
 }
 
-export const addUnpublishedPost = async ({ userId, title, tags, content, headerImageURL }) => {
+export const addUnpublishedPost = async ({ userId, title, tags, content }) => {
     try {
         connectDB();
         const _id = `post-${nanoid(16)}`;
         const newUnpublishedPost = new post({
-            _id, userId, data: { title, tags, content, headerImageURL }, isPublished: false
+            _id, userId, data: { title, tags, content }
         })
         const response = await newUnpublishedPost.save();
         return response;
