@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import Loading from "@/app/_ui/loading";
 import { twMerge } from "tailwind-merge";
 import { useDropzone } from "react-dropzone";
 import { Cross1Icon, UploadIcon } from "@radix-ui/react-icons";
@@ -105,7 +106,8 @@ const SingleImageDropzone = React.forwardRef(
     }, [fileRejections, dropzoneOptions]);
 
     return (
-      <div>
+      <div className="relative">
+        {disabled ? <Loading /> : null}
         <div
           {...getRootProps({
             className: dropZoneClassName,

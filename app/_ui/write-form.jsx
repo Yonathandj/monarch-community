@@ -17,8 +17,13 @@ const Editor = dynamic(() => import("@/components/ui/editor"), { ssr: false });
 
 export default function WriteForm() {
   const { edgestore } = useEdgeStore();
-  const { loading, unpublishedPost, setUnpublishedPost } =
-    useContext(PostContext);
+  const {
+    loadingPostUnpublishedPost,
+    unpublishedPost,
+    setUnpublishedPost,
+    loadingPostHeaderImageURL,
+    setLoadingPostHeaderImageURL,
+  } = useContext(PostContext);
 
   const debouncedOnChangeTextarea = useDebouncedCallback((title) => {
     setUnpublishedPost({ ...unpublishedPost, title });
@@ -26,14 +31,16 @@ export default function WriteForm() {
 
   return (
     <section className="relative">
-      {loading ? <Loading /> : null}
+      {loadingPostUnpublishedPost ? <Loading /> : null}
       <form className="max-w-[800px] mx-auto flex flex-col gap-y-2 p-4">
         <SingleImageDropzone
           width={450}
           height={250}
           className="mx-auto"
+          disabled={loadingPostHeaderImageURL}
           value={unpublishedPost.headerImageURL}
           onChange={async (file) => {
+            setLoadingPostHeaderImageURL(true);
             if (file) {
               if (unpublishedPost.headerImageURL) {
                 const response = await edgestore.publicImages.upload({
@@ -46,6 +53,7 @@ export default function WriteForm() {
                   ...unpublishedPost,
                   headerImageURL: response.url,
                 });
+                setLoadingPostHeaderImageURL(false);
               } else {
                 const response = await edgestore.publicImages.upload({
                   file,
@@ -54,6 +62,7 @@ export default function WriteForm() {
                   ...unpublishedPost,
                   headerImageURL: response.url,
                 });
+                setLoadingPostHeaderImageURL(false);
               }
             } else {
               if (unpublishedPost.headerImageURL) {
@@ -64,7 +73,9 @@ export default function WriteForm() {
                   ...unpublishedPost,
                   headerImageURL: "",
                 });
+                setLoadingPostHeaderImageURL(false);
               } else {
+                setLoadingPostHeaderImageURL(false);
                 return;
               }
             }
