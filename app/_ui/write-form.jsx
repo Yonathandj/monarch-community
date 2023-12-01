@@ -7,11 +7,10 @@ import { useDebouncedCallback } from "use-debounce";
 
 import Loading from "./loading";
 
-import { TagsInput } from "react-tag-input-component";
-
 import { PostContext } from "../_provider/post-context-provider";
 
 import { Textarea } from "@/components/ui/textarea";
+import { TagsInput } from "react-tag-input-component";
 import { SingleImageDropzone } from "@/components/ui/single-image-dropzone";
 const Editor = dynamic(() => import("@/components/ui/editor"), { ssr: false });
 
