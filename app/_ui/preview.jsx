@@ -32,7 +32,7 @@ export default function Preview() {
             ))
           : null}
       </section>
-      <h2 className="text-4xl font-bold mt-2">{unpublishedPost.title}</h2>
+      <h2 className="text-4xl font-bold mt-2 text-center">{unpublishedPost.title}</h2>
       <section className="mt-2">
         <Editor editable={false} unpublishedPost={unpublishedPost} />
       </section>
