@@ -1,20 +1,20 @@
 "use client";
 
 import Image from "next/image";
-// import dynamic from "next/dynamic";
+import dynamic from "next/dynamic";
 import { useContext } from "react";
 
 import { PostContext } from "../_provider/post-context-provider";
 
-// const Editor = dynamic(() => import("@/components/ui/editor"), { ssr: false });
+const Editor = dynamic(() => import("@/components/ui/editor"), { ssr: false });
 
 export default function Preview() {
   const { unpublishedPost } = useContext(PostContext);
   return (
     <section className="mx-auto max-w-[800px] p-4 flex flex-col justify-center items-center">
       <Image
-        width={400}
-        height={400}
+        width={500}
+        height={500}
         src={unpublishedPost.headerImageURL || "/no-image.avif"}
         alt={
           `${unpublishedPost.title} Header Image` || "No Image Available Yet"
@@ -33,7 +33,9 @@ export default function Preview() {
           : null}
       </section>
       <h2 className="text-4xl font-bold mt-2">{unpublishedPost.title}</h2>
-      {/* <Editor unpublishedPost={unpublishedPost}/> */}
+      <section className="mt-2">
+        <Editor editable={false} unpublishedPost={unpublishedPost} />
+      </section>
     </section>
   );
 }
