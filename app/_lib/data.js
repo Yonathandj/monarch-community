@@ -1,8 +1,12 @@
 import post from "./_models/post";
 import user from "./_models/user";
+
 import connectDB from "./connectDB";
 
+import { unstable_noStore as noStore } from "next/cache";
+
 export const getUserById = async (userId) => {
+    noStore()
     try {
         await connectDB()
         const selectedUser = await user.findOne({ "clerk.userId": userId }).exec();
@@ -13,6 +17,7 @@ export const getUserById = async (userId) => {
 }
 
 export const getTotalUsers = async () => {
+    noStore()
     try {
         await connectDB()
         const totalUsers = await user.find().estimatedDocumentCount().exec();
@@ -23,11 +28,23 @@ export const getTotalUsers = async () => {
 }
 
 export const getUnpublishedPost = async (userId) => {
+    noStore()
     try {
         await connectDB()
         const unpublishedPost = await post.findOne({ userId, isPublished: false }).exec();
         return unpublishedPost;
     } catch (error) {
         throw new Error(`Failed to fetch unpublished post! ${error}`);
+    }
+}
+
+export const getPublishedPosts = async () => {
+    noStore()
+    try {
+        await connectDB()
+        const publishedPosts = await post.find({}).exec();
+        return publishedPosts;
+    } catch (error) {
+        throw new Error(`Failed to fetch published posts! ${error}`);
     }
 }

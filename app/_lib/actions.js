@@ -22,7 +22,13 @@ export async function publishPostAction(userId, prevState, formData) {
                 errorNoUnpublishedPost: 'No unpublished post are created Please create first!'
             }
         } else {
-            await publishPostService(userId);
+            if (!unpublishedPost.data.title) {
+                return {
+                    errorNoTitle: 'No title found. Please provide a suitable title first!'
+                }
+            } else {
+                await publishPostService(userId);
+            }
         }
     } catch (error) {
         return {

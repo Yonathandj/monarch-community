@@ -59,6 +59,12 @@ export default function WriteForm() {
         description: state?.errorSystem,
       });
     }
+    if (state?.errorNoTitle) {
+      toast({
+        title: "Something went wrong",
+        description: state?.errorNoTitle,
+      });
+    }
   }, [state, toast]);
 
   return (
