@@ -29,7 +29,7 @@ export default function Preview() {
                 key={tag}
                 className="text-sm bg-[#edf2f7] px-2 rounded-full"
               >
-                {tag}
+                #{tag}
               </span>
             ))
           : null}

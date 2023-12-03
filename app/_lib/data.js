@@ -42,7 +42,7 @@ export const getPublishedPosts = async () => {
     noStore()
     try {
         await connectDB()
-        const publishedPosts = await post.find({}).exec();
+        const publishedPosts = await post.find({ isPublished: true }).populate('userId', { clerk: 1, profile: 1, createdAt: 1 }).exec();
         return publishedPosts;
     } catch (error) {
         throw new Error(`Failed to fetch published posts! ${error}`);
