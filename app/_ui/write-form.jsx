@@ -1,21 +1,19 @@
 "use client";
 
-import Loading from "./loading";
+import dynamic from "next/dynamic";
 
 import { publishPostAction } from "../_lib/actions";
 
-import { ArrowTopRightIcon } from "@radix-ui/react-icons";
-
 import { PostContext } from "../_provider/post-context-provider";
 
-import dynamic from "next/dynamic";
+import Loading from "./loading";
+import PublishButton from "./publish-button";
 
 import { useFormState } from "react-dom";
 import { useContext, useEffect } from "react";
 import { useEdgeStore } from "../_lib/edgestore";
 import { useDebouncedCallback } from "use-debounce";
 
-import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/components/ui/use-toast";
 import { TagsInput } from "react-tag-input-component";
@@ -142,11 +140,8 @@ export default function WriteForm() {
           setUnpublishedPost={setUnpublishedPost}
         />
 
-        <section>
-          <Button formAction={dispatch} className="rounded-2xl mt-16">
-            <ArrowTopRightIcon className="w-4 h-4 mr-2" />
-            Publish
-          </Button>
+        <section className="mt-16">
+          <PublishButton dispatch={dispatch} />
         </section>
       </form>
     </section>

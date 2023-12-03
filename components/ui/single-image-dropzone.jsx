@@ -106,17 +106,17 @@ const SingleImageDropzone = React.forwardRef(
     }, [fileRejections, dropzoneOptions]);
 
     return (
-      <div className="relative">
-        {disabled ? <Loading /> : null}
+      <div>
         <div
           {...getRootProps({
-            className: dropZoneClassName,
+            className: `${dropZoneClassName} relative`,
             style: {
               width,
               height,
             },
           })}
         >
+          {disabled ? <Loading /> : null}
           <input ref={ref} {...getInputProps()} />
 
           {imageUrl ? (
