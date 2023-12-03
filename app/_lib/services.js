@@ -48,3 +48,13 @@ export const addUnpublishedPost = async ({ userId, title, tags, content, headerI
         throw new Error(`Failed to add new unpublished post! ${error}`)
     }
 }
+
+export const publishPostService = async (userId) => {
+    try {
+        connectDB();
+        const response = await post.updateOne({ userId }, { isPublished: true }).exec()
+        return response;
+    } catch (error) {
+        throw new Error(`Failed to add new unpublished post! ${error}`)
+    }
+}

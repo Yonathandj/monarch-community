@@ -61,7 +61,7 @@ export default function PostContextProvider({ children }) {
             },
             body: JSON.stringify({ userId, unpublishedPost }),
           });
-        }, 2000);
+        }, 1500);
         return () => {
           clearTimeout(addNewPost);
         };
@@ -72,6 +72,7 @@ export default function PostContextProvider({ children }) {
   return (
     <PostContext.Provider
       value={{
+        userId,
         loadingPostUnpublishedPost,
         unpublishedPost,
         setUnpublishedPost,

@@ -1,5 +1,7 @@
 import { cn } from "@/lib/utils";
 
+import { Toaster } from "@/components/ui/toaster";
+
 import { ClerkProvider } from "@clerk/nextjs";
 import { EdgeStoreProvider } from "./_lib/edgestore";
 
@@ -34,6 +36,7 @@ export default function RootLayout({ children }) {
         >
           <div className="max-w-[1200px] mx-auto p-4">
             <EdgeStoreProvider>{children}</EdgeStoreProvider>
+            <Toaster />
           </div>
         </body>
       </html>

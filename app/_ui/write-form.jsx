@@ -1,22 +1,30 @@
 "use client";
 
-import dynamic from "next/dynamic";
-import { useContext } from "react";
-import { useEdgeStore } from "../_lib/edgestore";
-import { useDebouncedCallback } from "use-debounce";
-
 import Loading from "./loading";
+
+import { publishPostAction } from "../_lib/actions";
+
+import { ArrowTopRightIcon } from "@radix-ui/react-icons";
 
 import { PostContext } from "../_provider/post-context-provider";
 
+import dynamic from "next/dynamic";
+
+import { useFormState } from "react-dom";
+import { useContext, useEffect } from "react";
+import { useEdgeStore } from "../_lib/edgestore";
+import { useDebouncedCallback } from "use-debounce";
+
+import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
+import { useToast } from "@/components/ui/use-toast";
 import { TagsInput } from "react-tag-input-component";
 import { SingleImageDropzone } from "@/components/ui/single-image-dropzone";
 const Editor = dynamic(() => import("@/components/ui/editor"), { ssr: false });
 
 export default function WriteForm() {
-  const { edgestore } = useEdgeStore();
   const {
+    userId,
     loadingPostUnpublishedPost,
     unpublishedPost,
     setUnpublishedPost,
@@ -24,9 +32,36 @@ export default function WriteForm() {
     setLoadingPostHeaderImageURL,
   } = useContext(PostContext);
 
+  const updatePublishPostActionWithId = publishPostAction.bind(null, userId);
+
+  const { toast } = useToast();
+  const { edgestore } = useEdgeStore();
+  const [state, dispatch] = useFormState(updatePublishPostActionWithId, null);
+
   const debouncedOnChangeTextarea = useDebouncedCallback((title) => {
     setUnpublishedPost({ ...unpublishedPost, title });
   }, 1000);
+
+  useEffect(() => {
+    if (state?.errorValidation?.userId) {
+      toast({
+        title: "Something went wrong",
+        description: state?.errorValidation?.userId[0],
+      });
+    }
+    if (state?.errorNoUnpublishedPost) {
+      toast({
+        title: "Something went wrong",
+        description: state?.errorNoUnpublishedPost,
+      });
+    }
+    if (state?.errorSystem) {
+      toast({
+        title: "Something went wrong",
+        description: state?.errorSystem,
+      });
+    }
+  }, [state, toast]);
 
   return (
     <section className="relative">
@@ -106,6 +141,13 @@ export default function WriteForm() {
           unpublishedPost={unpublishedPost}
           setUnpublishedPost={setUnpublishedPost}
         />
+
+        <section>
+          <Button formAction={dispatch} className="rounded-2xl mt-16">
+            <ArrowTopRightIcon className="w-4 h-4 mr-2" />
+            Publish
+          </Button>
+        </section>
       </form>
     </section>
   );
