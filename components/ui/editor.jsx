@@ -7,6 +7,8 @@ import { BlockNoteView, useBlockNote } from "@blocknote/react";
 
 export default function Editor({
   editable,
+  publishedPost,
+  fromPostDetail,
   unpublishedPost,
   setUnpublishedPost,
 }) {
@@ -22,7 +24,9 @@ export default function Editor({
     onEditorContentChange: (editor) => {
       onContentChange(editor.topLevelBlocks);
     },
-    initialContent: JSON.parse(unpublishedPost.content),
+    initialContent: fromPostDetail
+      ? JSON.parse(publishedPost)
+      : JSON.parse(unpublishedPost.content),
   });
 
   return <BlockNoteView editor={editor} />;

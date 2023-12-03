@@ -11,7 +11,7 @@ import {
 
 import { getPublishedPosts } from "../_lib/data";
 
-export default async function PostCard() {
+export default async function PostsCard() {
   const publishedPosts = await getPublishedPosts();
 
   return (

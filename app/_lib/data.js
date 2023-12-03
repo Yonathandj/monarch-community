@@ -48,3 +48,14 @@ export const getPublishedPosts = async () => {
         throw new Error(`Failed to fetch published posts! ${error}`);
     }
 }
+
+export const getPublishedPostById = async (postId) => {
+    noStore()
+    try {
+        await connectDB()
+        const publishedPost = await post.findOne({ _id: postId }).exec();
+        return publishedPost;
+    } catch (error) {
+        throw new Error(`Failed to fetch published posts! ${error}`);
+    }
+}
