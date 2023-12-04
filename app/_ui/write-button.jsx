@@ -6,7 +6,7 @@ import { Pencil2Icon } from "@radix-ui/react-icons";
 
 export default function WriteButton() {
   return (
-    <Button asChild className="rounded-2xl">
+    <Button asChild className="w-full rounded-2xl">
       <Link href={"/posts/write"}>
         <Pencil2Icon className="mr-2 h-4 w-4" />
         Write Now

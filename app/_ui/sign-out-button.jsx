@@ -7,7 +7,7 @@ import { ScissorsIcon } from "@radix-ui/react-icons";
 export default function SignOutButton() {
   return (
     <SignOutButtonClerk>
-      <Button variant="secondary" className="rounded-2xl">
+      <Button variant="secondary" className="w-full rounded-2xl">
         <ScissorsIcon className="mr-2 h-4 w-4" />
         Sign Out
       </Button>
