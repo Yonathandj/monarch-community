@@ -9,7 +9,7 @@ import { BookmarkFilledIcon, BookmarkIcon } from "@radix-ui/react-icons";
 import { bookmarkAction } from "../_lib/actions";
 
 export default async function PostBookmarkButton({ userId, postId }) {
-  const totalBookmarks = await getTotalBookmarks();
+  const totalBookmarks = await getTotalBookmarks(postId);
   const bookmarkSelectedUser = await getBookmarkById(userId, postId);
 
   const updateBookmarkActionWithId = bookmarkAction.bind(null, userId, postId);

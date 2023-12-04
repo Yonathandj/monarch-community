@@ -73,11 +73,11 @@ export const getLikeById = async (userId, postId) => {
     }
 }
 
-export const getTotalLikes = async () => {
+export const getTotalLikes = async (postId) => {
     noStore()
     try {
         await connectDB()
-        const likes = await like.find().estimatedDocumentCount().exec();
+        const likes = await like.find({ postId }).estimatedDocumentCount().exec();
         return likes;
     } catch (error) {
         throw new Error(`Failed to fetch likes! ${error}`);
@@ -95,11 +95,11 @@ export const getBookmarkById = async (userId, postId) => {
     }
 }
 
-export const getTotalBookmarks = async () => {
+export const getTotalBookmarks = async (postId) => {
     noStore()
     try {
         await connectDB()
-        const bookmarks = await bookmark.find().estimatedDocumentCount().exec();
+        const bookmarks = await bookmark.find({ postId }).estimatedDocumentCount().exec();
         return bookmarks;
     } catch (error) {
         throw new Error(`Failed to fetch bookmarks! ${error}`);
