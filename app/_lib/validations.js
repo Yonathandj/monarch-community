@@ -14,3 +14,8 @@ export const postValidationSchema = z.object({
     tags: z.array(z.string()).optional(),
     content: z.string().trim().optional(),
 })
+
+export const likeValidationSchema = z.object({
+    userId: z.string().trim(),
+    postId: z.string().trim(),
+})

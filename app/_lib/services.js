@@ -1,5 +1,6 @@
 import { nanoid } from "nanoid";
 
+import like from "./_models/like";
 import post from "./_models/post";
 import user from "./_models/user";
 
@@ -52,7 +53,29 @@ export const addUnpublishedPost = async ({ userId, title, tags, content, headerI
 export const publishPostService = async (userId) => {
     try {
         connectDB();
-        await post.updateOne({ userId, isPublished: false  }, { isPublished: true }).exec()
+        await post.updateOne({ userId, isPublished: false }, { isPublished: true }).exec()
+    } catch (error) {
+        throw new Error(`Failed to add new unpublished post! ${error}`)
+    }
+}
+
+export const addLikeService = async (userId, postId) => {
+    try {
+        connectDB();
+        const _id = `like-${nanoid(16)}`;
+        const newLike = new like({ _id, userId, postId })
+        const response = await newLike.save();
+        return response;
+    } catch (error) {
+        throw new Error(`Failed to add new unpublished post! ${error}`)
+    }
+}
+
+export const deleteLikeService = async (userId, postId) => {
+    try {
+        connectDB();
+        const response = await like.deleteOne({ userId, postId });
+        return response;
     } catch (error) {
         throw new Error(`Failed to add new unpublished post! ${error}`)
     }

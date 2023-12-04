@@ -3,9 +3,10 @@
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 
-import { getUnpublishedPost } from "./data";
-import { publishPostService } from "./services";
-import { postValidationSchema } from "./validations"
+import { likeValidationSchema, postValidationSchema } from "./validations"
+
+import { getLikeById, getPublishedPostById, getUnpublishedPost } from "./data";
+import { addLikeService, deleteLikeService, publishPostService } from "./services";
 
 export async function publishPostAction(userId, prevState, formData) {
     const validationResult = postValidationSchema.safeParse({ userId })
@@ -19,7 +20,7 @@ export async function publishPostAction(userId, prevState, formData) {
         const unpublishedPost = await getUnpublishedPost(userId);
         if (!unpublishedPost) {
             return {
-                errorNoUnpublishedPost: 'No unpublished post are created Please create first!'
+                errorNoUnpublishedPost: 'No unpublished post is created. Please create first!'
             }
         } else {
             if (!unpublishedPost.data.title) {
@@ -37,4 +38,34 @@ export async function publishPostAction(userId, prevState, formData) {
     }
     revalidatePath('/')
     redirect('/')
+}
+
+export async function likeAction(userId, postId, formData) {
+    const validationResult = likeValidationSchema.safeParse({ userId, postId });
+    if (!validationResult.success) {
+        return {
+            errorValidation: validationResult.error.flatten().fieldErrors
+        }
+    }
+    try {
+        const { userId, postId } = validationResult.data
+        const publishedPost = await getPublishedPostById(postId)
+        if (!publishedPost) {
+            return {
+                errorNoPublishedPost: 'No published post is created. Please create first!'
+            }
+        } else {
+            const isLiked = await getLikeById(userId, postId);
+            if (isLiked) {
+                await deleteLikeService(userId, postId);
+            } else {
+                await addLikeService(userId, postId)
+            }
+        }
+    } catch (error) {
+        return {
+            errorSystem: 'Something went wrong with the system. Try again!'
+        }
+    }
+    revalidatePath('/posts/[id]', 'page')
 }

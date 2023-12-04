@@ -1,3 +1,4 @@
+import like from "./_models/like";
 import post from "./_models/post";
 import user from "./_models/user";
 
@@ -56,6 +57,28 @@ export const getPublishedPostById = async (postId) => {
         const publishedPost = await post.findOne({ _id: postId }).exec();
         return publishedPost;
     } catch (error) {
-        throw new Error(`Failed to fetch published posts! ${error}`);
+        throw new Error(`Failed to fetch published post! ${error}`);
+    }
+}
+
+export const getLikeById = async (userId, postId) => {
+    noStore()
+    try {
+        await connectDB()
+        const likeSelectedUser = await like.findOne({ userId, postId }).exec();
+        return likeSelectedUser;
+    } catch (error) {
+        throw new Error(`Failed to fetch like! ${error}`);
+    }
+}
+
+export const getTotalLikes = async () => {
+    noStore()
+    try {
+        await connectDB()
+        const likes = await like.find().estimatedDocumentCount().exec();
+        return likes;
+    } catch (error) {
+        throw new Error(`Failed to fetch likes! ${error}`);
     }
 }

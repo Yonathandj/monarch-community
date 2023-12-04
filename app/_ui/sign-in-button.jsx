@@ -2,7 +2,7 @@ import { SignInButton as SignInButtonClerk } from "@clerk/nextjs";
 
 import { Button } from "@/components/ui/button";
 
-import { RocketIcon } from "@radix-ui/react-icons";
+import { HeartIcon, RocketIcon } from "@radix-ui/react-icons";
 
 export default function SignInButton() {
   return (
@@ -21,6 +21,17 @@ export function SignInButtonUserAvatar() {
       <Button>
         Sign In
         <RocketIcon className="w-4 h-4" />
+      </Button>
+    </SignInButtonClerk>
+  );
+}
+
+export function SignInButtonUserInteraction({ totalLikes }) {
+  return (
+    <SignInButtonClerk mode="modal">
+      <Button variant="outline">
+        <HeartIcon className="w-5 h-5 mr-2" />
+        <span>{totalLikes ? totalLikes : 0}</span>
       </Button>
     </SignInButtonClerk>
   );
