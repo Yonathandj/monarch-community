@@ -23,9 +23,9 @@ export default async function PostBookmarkButton({ userId, postId }) {
         <form action={updateBookmarkActionWithId}>
           <Button variant="outline">
             {bookmarkSelectedUser ? (
-              <BookmarkFilledIcon className="w-5 h-5 text-sky-600 mr-2" />
+              <BookmarkFilledIcon className="mr-2 h-5 w-5 text-sky-600" />
             ) : (
-              <BookmarkIcon className="w-5 h-5 mr-2" />
+              <BookmarkIcon className="mr-2 h-5 w-5" />
             )}
             <span>{totalBookmarks ? totalBookmarks : 0}</span>
           </Button>

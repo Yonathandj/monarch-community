@@ -8,7 +8,7 @@ export default function ProfileButton() {
   return (
     <Button asChild className="rounded-2xl">
       <Link href={"/users/profile"}>
-        <PersonIcon className="w-4 h-4 mr-2" />
+        <PersonIcon className="mr-2 h-4 w-4" />
         Profile
       </Link>
     </Button>
@@ -19,10 +19,10 @@ export function ProfileButtonUserAvatar() {
   return (
     <Link
       href={"/users/profile"}
-      className="flex justify-between items-center w-full"
+      className="flex w-full items-center justify-between"
     >
       Profile
-      <PersonIcon className="w-4 h-4" />
+      <PersonIcon className="h-4 w-4" />
     </Link>
   );
 }

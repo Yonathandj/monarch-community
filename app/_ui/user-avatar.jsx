@@ -26,7 +26,7 @@ export default async function SignedInUserAvatar() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
-        <Avatar className="w-10 h-10">
+        <Avatar className="h-10 w-10">
           <AvatarImage
             src={selectedUser?.clerk?.profileImageURL}
             alt={`${selectedUser?.clerk?.fullName} Profile Image`}
@@ -70,7 +70,7 @@ export function SignedOutUserAvatar() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
-        <Avatar className="w-10 h-10">
+        <Avatar className="h-10 w-10">
           <AvatarImage
             src={"/no-user.png"}
             alt={`No Signed In User Profile Image`}

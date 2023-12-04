@@ -2,7 +2,7 @@ import { SignUp } from "@clerk/nextjs";
 
 export default function Page({ searchParams: { redirect_url } }) {
   return (
-    <main className="flex justify-center items-center mt-5">
+    <main className="mt-5 flex items-center justify-center">
       <SignUp afterSignUpUrl={redirect_url || "/"} />
     </main>
   );

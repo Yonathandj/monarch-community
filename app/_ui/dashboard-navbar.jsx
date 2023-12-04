@@ -9,14 +9,14 @@ export default function DashboardNavbar() {
   return (
     <header>
       <nav className="flex items-center justify-between p-2">
-        <section className="flex gap-x-4 items-center">
+        <section className="flex items-center gap-x-4">
           <section className="hidden sm:block">
             <Logo />
           </section>
           <Search />
         </section>
-        <section className="block md:hidden mt-2">
-          <section className="flex gap-x-4 items-center">
+        <section className="mt-2 block md:hidden">
+          <section className="flex items-center gap-x-4">
             <section>
               <SignedIn>
                 <SignedInUserAvatar />

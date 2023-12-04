@@ -17,8 +17,8 @@ export default async function UsersCard() {
     <Card>
       <CardHeader>
         <CardTitle className="text-lg font-bold">
-          Monarch Community is a community of <span className="text-purple-600">{totalUsers}</span> amazing
-          bloggers
+          Monarch Community is a community of{" "}
+          <span className="text-purple-600">{totalUsers}</span> amazing bloggers
         </CardTitle>
         <CardDescription>
           Place where bloggers share, stay up-to-date and grow their careers.

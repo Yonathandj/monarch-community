@@ -8,7 +8,7 @@ export default function SignUpButton() {
   return (
     <SignUpButtonClerk>
       <Button variant="secondary" className="rounded-2xl">
-        <LightningBoltIcon className="w-4 h-4 mr-2" />
+        <LightningBoltIcon className="mr-2 h-4 w-4" />
         Sign Up
       </Button>
     </SignUpButtonClerk>
@@ -17,10 +17,10 @@ export default function SignUpButton() {
 
 export function SignUpButtonUserAvatar() {
   return (
-    <SignUpButtonClerk className="w-full flex justify-between items-center">
+    <SignUpButtonClerk className="flex w-full items-center justify-between">
       <Button>
         Sign Up
-        <LightningBoltIcon className="w-4 h-4" />
+        <LightningBoltIcon className="h-4 w-4" />
       </Button>
     </SignUpButtonClerk>
   );

@@ -11,8 +11,8 @@ const Editor = dynamic(() => import("@/components/ui/editor"), { ssr: false });
 export default function Preview() {
   const { unpublishedPost } = useContext(PostContext);
   return (
-    <section className="mx-auto max-w-[800px] p-4 flex flex-col justify-center items-center">
-      <section className="relative w-full h-72 overflow-hidden rounded-xl">
+    <section className="mx-auto flex max-w-[800px] flex-col items-center justify-center p-4">
+      <section className="relative h-72 w-full overflow-hidden rounded-xl">
         <Image
           fill={true}
           className="object-cover"
@@ -27,14 +27,14 @@ export default function Preview() {
           ? unpublishedPost.tags.map((tag) => (
               <span
                 key={tag}
-                className="text-sm bg-[#edf2f7] px-2 rounded-full"
+                className="rounded-full bg-[#edf2f7] px-2 text-sm"
               >
                 #{tag}
               </span>
             ))
           : null}
       </section>
-      <h2 className="text-4xl font-bold mt-4 text-center">
+      <h2 className="mt-4 text-center text-4xl font-bold">
         {unpublishedPost.title}
       </h2>
       <section className="mt-2">

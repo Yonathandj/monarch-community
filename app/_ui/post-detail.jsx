@@ -9,8 +9,8 @@ export default async function PostDetail({ postId }) {
   const publishedPost = await getPublishedPostById(postId);
 
   return (
-    <section className="mx-auto max-w-[800px] p-4 flex flex-col justify-center items-center">
-      <section className="relative w-full h-72 overflow-hidden rounded-xl">
+    <section className="mx-auto flex max-w-[800px] flex-col items-center justify-center p-4">
+      <section className="relative h-72 w-full overflow-hidden rounded-xl">
         <Image
           fill={true}
           className="object-cover"
@@ -26,14 +26,14 @@ export default async function PostDetail({ postId }) {
           ? publishedPost.data.tags.map((tag) => (
               <span
                 key={tag}
-                className="text-sm bg-[#edf2f7] px-2 rounded-full"
+                className="rounded-full bg-[#edf2f7] px-2 text-sm"
               >
                 #{tag}
               </span>
             ))
           : null}
       </section>
-      <h2 className="text-4xl font-bold mt-4 text-center">
+      <h2 className="mt-4 text-center text-4xl font-bold">
         {publishedPost.data.title}
       </h2>
       <section className="mt-2">

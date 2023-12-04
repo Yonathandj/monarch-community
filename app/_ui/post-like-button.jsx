@@ -23,9 +23,9 @@ export default async function PostLikeButton({ userId, postId }) {
         <form action={updateLikeActionWithId}>
           <Button variant="outline">
             {likeSelectedUser ? (
-              <HeartFilledIcon className="w-5 h-5 text-red-600 mr-2" />
+              <HeartFilledIcon className="mr-2 h-5 w-5 text-red-600" />
             ) : (
-              <HeartIcon className="w-5 h-5 mr-2" />
+              <HeartIcon className="mr-2 h-5 w-5" />
             )}
             <span>{totalLikes ? totalLikes : 0}</span>
           </Button>

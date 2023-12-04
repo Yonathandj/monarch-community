@@ -8,7 +8,7 @@ export default function SignOutButton() {
   return (
     <SignOutButtonClerk>
       <Button variant="secondary" className="rounded-2xl">
-        <ScissorsIcon className="w-4 h-4 mr-2" />
+        <ScissorsIcon className="mr-2 h-4 w-4" />
         Sign Out
       </Button>
     </SignOutButtonClerk>
@@ -17,10 +17,10 @@ export default function SignOutButton() {
 
 export function SignOutButtonUserAvatar() {
   return (
-    <SignOutButtonClerk className="w-full flex justify-between items-center">
+    <SignOutButtonClerk className="flex w-full items-center justify-between">
       <Button>
         Sign Out
-        <ScissorsIcon className="w-4 h-4" />
+        <ScissorsIcon className="h-4 w-4" />
       </Button>
     </SignOutButtonClerk>
   );

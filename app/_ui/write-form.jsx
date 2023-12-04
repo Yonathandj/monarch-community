@@ -70,7 +70,7 @@ export default function WriteForm() {
   return (
     <section className="relative">
       {loadingPostUnpublishedPost ? <Loading /> : null}
-      <form className="max-w-[800px] mx-auto flex flex-col gap-y-2 p-4">
+      <form className="mx-auto flex max-w-[800px] flex-col gap-y-2 p-4">
         <SingleImageDropzone
           width={450}
           height={250}
@@ -137,7 +137,7 @@ export default function WriteForm() {
           onChange={(e) => {
             debouncedOnChangeTextarea(e.target.value);
           }}
-          className="mt-4 border-none shadow-none text-4xl focus-visible:ring-0 font-bold resize-none overflow-hidden p-0"
+          className="mt-4 resize-none overflow-hidden border-none p-0 text-4xl font-bold shadow-none focus-visible:ring-0"
         />
 
         <Editor

@@ -5,7 +5,7 @@ export default function PostCommentButton({ userId, postId }) {
   return (
     <form>
       <Button variant="outline">
-        <ChatBubbleIcon className="w-5 h-5" />
+        <ChatBubbleIcon className="h-5 w-5" />
       </Button>
     </form>
   );

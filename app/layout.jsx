@@ -31,10 +31,10 @@ export default function RootLayout({ children }) {
         <body
           className={cn(
             "min-h-screen font-sans antialiased",
-            fontSans.variable
+            fontSans.variable,
           )}
         >
-          <div className="max-w-[1200px] mx-auto p-4">
+          <div className="mx-auto max-w-[1200px] p-4">
             <EdgeStoreProvider>{children}</EdgeStoreProvider>
             <Toaster />
           </div>

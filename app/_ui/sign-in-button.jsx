@@ -8,7 +8,7 @@ export default function SignInButton() {
   return (
     <SignInButtonClerk>
       <Button variant="outline" className="rounded-2xl">
-        <RocketIcon className="w-4 h-4 mr-2" />
+        <RocketIcon className="mr-2 h-4 w-4" />
         Sign In
       </Button>
     </SignInButtonClerk>
@@ -17,10 +17,10 @@ export default function SignInButton() {
 
 export function SignInButtonUserAvatar() {
   return (
-    <SignInButtonClerk className="w-full flex justify-between items-center">
+    <SignInButtonClerk className="flex w-full items-center justify-between">
       <Button>
         Sign In
-        <RocketIcon className="w-4 h-4" />
+        <RocketIcon className="h-4 w-4" />
       </Button>
     </SignInButtonClerk>
   );
@@ -30,7 +30,7 @@ export function SignInButtonUserInteractionLike({ totalLikes }) {
   return (
     <SignInButtonClerk mode="modal">
       <Button variant="outline">
-        <HeartIcon className="w-5 h-5 mr-2" />
+        <HeartIcon className="mr-2 h-5 w-5" />
         <span>{totalLikes ? totalLikes : 0}</span>
       </Button>
     </SignInButtonClerk>
@@ -41,7 +41,7 @@ export function SignInButtonUserInteractionBookmark({ totalBookmarks }) {
   return (
     <SignInButtonClerk mode="modal">
       <Button variant="outline">
-        <BookmarkIcon className="w-5 h-5 mr-2" />
+        <BookmarkIcon className="mr-2 h-5 w-5" />
         <span>{totalBookmarks ? totalBookmarks : 0}</span>
       </Button>
     </SignInButtonClerk>

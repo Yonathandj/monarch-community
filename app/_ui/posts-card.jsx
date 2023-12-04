@@ -27,7 +27,7 @@ export default async function PostsCard() {
                 ? publishedPost.data.tags.map((tag) => (
                     <span
                       key={tag}
-                      className="text-sm bg-[#edf2f7] px-2 rounded-full"
+                      className="rounded-full bg-[#edf2f7] px-2 text-sm"
                     >
                       #{tag}
                     </span>

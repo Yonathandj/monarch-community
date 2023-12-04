@@ -24,9 +24,9 @@ export default function WritePreviewSwitcher() {
   };
 
   return (
-    <section className="flex gap-x-2 items-center">
+    <section className="flex items-center gap-x-2">
       <Label htmlFor="preview-switcher">
-        <FileTextIcon className="w-6 h-6" />
+        <FileTextIcon className="h-6 w-6" />
       </Label>
       <Switch
         id="preview-switcher"
@@ -34,8 +34,8 @@ export default function WritePreviewSwitcher() {
           searchParams.get("preview")?.toString() === undefined
             ? false
             : searchParams.get("preview")?.toString() === "false"
-            ? false
-            : true
+              ? false
+              : true
         }
         onCheckedChange={handleCheckedChange}
       />

@@ -20,7 +20,7 @@ export default async function HamburgerMenu() {
     <section className="mt-1">
       <Sheet>
         <SheetTrigger>
-          <HamburgerMenuIcon className="w-6 h-6" />
+          <HamburgerMenuIcon className="h-6 w-6" />
         </SheetTrigger>
         <SheetContent>
           <SheetHeader>

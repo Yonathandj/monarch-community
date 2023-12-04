@@ -31,7 +31,7 @@ export default async function SignedInCard() {
           Share your thoughts and ideas now for everyone around the world
         </CardDescription>
       </CardHeader>
-      <CardFooter className="flex gap-y-4 sm:gap-x-4 flex-col sm:flex-row">
+      <CardFooter className="flex flex-col gap-y-4 sm:flex-row sm:gap-x-4">
         <WriteButton />
         <SignOutButton />
       </CardFooter>
