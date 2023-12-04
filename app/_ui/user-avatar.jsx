@@ -14,7 +14,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 
 import { WriteButtonUserAvatar } from "./write-button";
-import { ProfileButtonUserAvatar } from "./profile-button";
+import { SettingButtonUserAvatar } from "./setting-button";
 import { SignOutButtonUserAvatar } from "./sign-out-button";
 import { SignInButtonUserAvatar } from "./sign-in-button";
 import { SignUpButtonUserAvatar } from "./sign-up-button";
@@ -52,7 +52,7 @@ export default async function SignedInUserAvatar() {
             <WriteButtonUserAvatar />
           </DropdownMenuItem>
           <DropdownMenuItem>
-            <ProfileButtonUserAvatar />
+            <SettingButtonUserAvatar />
           </DropdownMenuItem>
         </DropdownMenuGroup>
 
