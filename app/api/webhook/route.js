@@ -2,7 +2,7 @@ import { Webhook } from 'svix'
 import { headers } from 'next/headers'
 
 import { getUserById } from '@/app/_lib/data';
-import { addNewUser } from '@/app/_lib/services';
+import { addNewUserService } from '@/app/_lib/services';
 import { userValidationSchema } from '@/app/_lib/validations';
 
 export async function POST(req) {
@@ -65,7 +65,7 @@ export async function POST(req) {
                         status: 400
                     });
                 } else {
-                    const response = await addNewUser({ userId, fullName, email, profileImageURL });
+                    const response = await addNewUserService({ userId, fullName, email, profileImageURL });
                     if (response) {
                         return new Response('New user successfully created', {
                             status: 200

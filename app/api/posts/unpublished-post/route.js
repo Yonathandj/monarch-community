@@ -1,6 +1,6 @@
 import { getUnpublishedPost } from "@/app/_lib/data";
 
-import { addUnpublishedPost, updateUnpublishedPost } from "@/app/_lib/services";
+import { addUnpublishedPostService, updateUnpublishedPostService } from "@/app/_lib/services";
 
 import { postValidationSchema } from "@/app/_lib/validations";
 
@@ -18,12 +18,12 @@ export async function POST(request) {
             const unpublishedPostInDatabase = await getUnpublishedPost(userId);
 
             if (unpublishedPostInDatabase) {
-                const response = await updateUnpublishedPost({ userId, title, tags, content, headerImageURL });
+                const response = await updateUnpublishedPostService({ userId, title, tags, content, headerImageURL });
                 if (response) {
                     return new Response('unpublished post successfully updated', { status: 200 });
                 }
             } else {
-                const response = await addUnpublishedPost({ userId, title, tags, content, headerImageURL })
+                const response = await addUnpublishedPostService({ userId, title, tags, content, headerImageURL })
                 if (response) {
                     return new Response('New unpublished post successfully added', { status: 200 });
                 }

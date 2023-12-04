@@ -7,7 +7,7 @@ import bookmark from "./_models/bookmark";
 
 import connectDB from "./connectDB"
 
-export const addNewUser = async ({ userId, fullName, email, profileImageURL }) => {
+export const addNewUserService = async ({ userId, fullName, email, profileImageURL }) => {
     try {
         connectDB();
         const _id = `monarchUserId-${nanoid(16)}`;
@@ -21,7 +21,7 @@ export const addNewUser = async ({ userId, fullName, email, profileImageURL }) =
     }
 }
 
-export const updateUnpublishedPost = async ({ userId, title, tags, content, headerImageURL }) => {
+export const updateUnpublishedPostService = async ({ userId, title, tags, content, headerImageURL }) => {
     try {
         connectDB();
         const data = {
@@ -37,7 +37,7 @@ export const updateUnpublishedPost = async ({ userId, title, tags, content, head
     }
 }
 
-export const addUnpublishedPost = async ({ userId, title, tags, content, headerImageURL }) => {
+export const addUnpublishedPostService = async ({ userId, title, tags, content, headerImageURL }) => {
     try {
         connectDB();
         const _id = `post-${nanoid(16)}`;
