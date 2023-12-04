@@ -64,19 +64,17 @@ export const addLikeService = async (userId, postId) => {
         connectDB();
         const _id = `like-${nanoid(16)}`;
         const newLike = new like({ _id, userId, postId })
-        const response = await newLike.save();
-        return response;
+        await newLike.save();
     } catch (error) {
-        throw new Error(`Failed to add new unpublished post! ${error}`)
+        throw new Error(`Failed to add like! ${error}`)
     }
 }
 
 export const deleteLikeService = async (userId, postId) => {
     try {
         connectDB();
-        const response = await like.deleteOne({ userId, postId });
-        return response;
+        await like.deleteOne({ userId, postId });
     } catch (error) {
-        throw new Error(`Failed to add new unpublished post! ${error}`)
+        throw new Error(`Failed to delete like! ${error}`)
     }
 }

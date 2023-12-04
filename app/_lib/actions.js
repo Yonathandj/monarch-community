@@ -43,29 +43,23 @@ export async function publishPostAction(userId, prevState, formData) {
 export async function likeAction(userId, postId, formData) {
     const validationResult = likeValidationSchema.safeParse({ userId, postId });
     if (!validationResult.success) {
-        return {
-            errorValidation: validationResult.error.flatten().fieldErrors
-        }
+        return;
     }
     try {
         const { userId, postId } = validationResult.data
         const publishedPost = await getPublishedPostById(postId)
         if (!publishedPost) {
-            return {
-                errorNoPublishedPost: 'No published post is created. Please create first!'
-            }
+            return;
         } else {
-            const isLiked = await getLikeById(userId, postId);
-            if (isLiked) {
+            const likedAlready = await getLikeById(userId, postId);
+            if (likedAlready) {
                 await deleteLikeService(userId, postId);
             } else {
                 await addLikeService(userId, postId)
             }
         }
     } catch (error) {
-        return {
-            errorSystem: 'Something went wrong with the system. Try again!'
-        }
+        throw new Error(`Something went wrong with the system. Try again! ${error}`)
     }
     revalidatePath('/posts/[id]', 'page')
 }
