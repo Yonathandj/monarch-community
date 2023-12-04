@@ -15,7 +15,7 @@ export default async function PostsCard() {
   const publishedPosts = await getPublishedPosts();
 
   return (
-    <section className="max-w-[600px]">
+    <section className="flex max-w-[600px] flex-col gap-y-4">
       {publishedPosts.map((publishedPost) => (
         <Card key={publishedPost._id} className="p-4">
           <CardContent>
