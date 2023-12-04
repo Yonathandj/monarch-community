@@ -3,10 +3,9 @@
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 
-import { likeValidationSchema, postValidationSchema } from "./validations"
-
-import { getLikeById, getPublishedPostById, getUnpublishedPost } from "./data";
-import { addLikeService, deleteLikeService, publishPostService } from "./services";
+import { getBookmarkById, getLikeById, getPublishedPostById, getUnpublishedPost } from "./data";
+import { bookmarkValidationSchema, likeValidationSchema, postValidationSchema } from "./validations"
+import { addBookmarkService, addLikeService, deleteBookmarkService, deleteLikeService, publishPostService } from "./services";
 
 export async function publishPostAction(userId, prevState, formData) {
     const validationResult = postValidationSchema.safeParse({ userId })
@@ -56,6 +55,30 @@ export async function likeAction(userId, postId, formData) {
                 await deleteLikeService(userId, postId);
             } else {
                 await addLikeService(userId, postId)
+            }
+        }
+    } catch (error) {
+        throw new Error(`Something went wrong with the system. Try again! ${error}`)
+    }
+    revalidatePath('/posts/[id]', 'page')
+}
+
+export async function bookmarkAction(userId, postId, formData) {
+    const validationResult = bookmarkValidationSchema.safeParse({ userId, postId });
+    if (!validationResult.success) {
+        return;
+    }
+    try {
+        const { userId, postId } = validationResult.data
+        const publishedPost = await getPublishedPostById(postId)
+        if (!publishedPost) {
+            return;
+        } else {
+            const bookmarkAlready = await getBookmarkById(userId, postId);
+            if (bookmarkAlready) {
+                await deleteBookmarkService(userId, postId);
+            } else {
+                await addBookmarkService(userId, postId)
             }
         }
     } catch (error) {

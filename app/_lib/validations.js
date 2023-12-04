@@ -19,3 +19,8 @@ export const likeValidationSchema = z.object({
     userId: z.string().trim(),
     postId: z.string().trim(),
 })
+
+export const bookmarkValidationSchema = z.object({
+    userId: z.string().trim(),
+    postId: z.string().trim(),
+})

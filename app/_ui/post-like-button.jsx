@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 
 import { SignedIn, SignedOut } from "@clerk/nextjs";
-import { SignInButtonUserInteraction } from "./sign-in-button";
+import { SignInButtonUserInteractionLike } from "./sign-in-button";
 
 import { likeAction } from "../_lib/actions";
 import { getLikeById, getTotalLikes } from "../_lib/data";
@@ -16,7 +16,7 @@ export default async function PostLikeButton({ userId, postId }) {
   return (
     <>
       <SignedOut>
-        <SignInButtonUserInteraction totalLikes={totalLikes} />
+        <SignInButtonUserInteractionLike totalLikes={totalLikes} />
       </SignedOut>
 
       <SignedIn>

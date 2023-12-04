@@ -1,8 +1,8 @@
-import { SignInButton as SignInButtonClerk } from "@clerk/nextjs";
-
 import { Button } from "@/components/ui/button";
 
-import { HeartIcon, RocketIcon } from "@radix-ui/react-icons";
+import { SignInButton as SignInButtonClerk } from "@clerk/nextjs";
+
+import { BookmarkIcon, HeartIcon, RocketIcon } from "@radix-ui/react-icons";
 
 export default function SignInButton() {
   return (
@@ -26,12 +26,23 @@ export function SignInButtonUserAvatar() {
   );
 }
 
-export function SignInButtonUserInteraction({ totalLikes }) {
+export function SignInButtonUserInteractionLike({ totalLikes }) {
   return (
     <SignInButtonClerk mode="modal">
       <Button variant="outline">
         <HeartIcon className="w-5 h-5 mr-2" />
         <span>{totalLikes ? totalLikes : 0}</span>
+      </Button>
+    </SignInButtonClerk>
+  );
+}
+
+export function SignInButtonUserInteractionBookmark({ totalBookmarks }) {
+  return (
+    <SignInButtonClerk mode="modal">
+      <Button variant="outline">
+        <BookmarkIcon className="w-5 h-5 mr-2" />
+        <span>{totalBookmarks ? totalBookmarks : 0}</span>
       </Button>
     </SignInButtonClerk>
   );

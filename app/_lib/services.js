@@ -3,6 +3,7 @@ import { nanoid } from "nanoid";
 import like from "./_models/like";
 import post from "./_models/post";
 import user from "./_models/user";
+import bookmark from "./_models/bookmark";
 
 import connectDB from "./connectDB"
 
@@ -76,5 +77,25 @@ export const deleteLikeService = async (userId, postId) => {
         await like.deleteOne({ userId, postId });
     } catch (error) {
         throw new Error(`Failed to delete like! ${error}`)
+    }
+}
+
+export const addBookmarkService = async (userId, postId) => {
+    try {
+        connectDB();
+        const _id = `bookmark-${nanoid(16)}`;
+        const newBookmark = new bookmark({ _id, userId, postId })
+        await newBookmark.save();
+    } catch (error) {
+        throw new Error(`Failed to add bookmark! ${error}`)
+    }
+}
+
+export const deleteBookmarkService = async (userId, postId) => {
+    try {
+        connectDB();
+        await bookmark.deleteOne({ userId, postId });
+    } catch (error) {
+        throw new Error(`Failed to delete bookmark! ${error}`)
     }
 }

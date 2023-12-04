@@ -1,6 +1,7 @@
 import like from "./_models/like";
 import post from "./_models/post";
 import user from "./_models/user";
+import bookmark from "./_models/bookmark";
 
 import connectDB from "./connectDB";
 
@@ -80,5 +81,27 @@ export const getTotalLikes = async () => {
         return likes;
     } catch (error) {
         throw new Error(`Failed to fetch likes! ${error}`);
+    }
+}
+
+export const getBookmarkById = async (userId, postId) => {
+    noStore()
+    try {
+        await connectDB()
+        const bookmarkSelectedUser = await bookmark.findOne({ userId, postId }).exec();
+        return bookmarkSelectedUser;
+    } catch (error) {
+        throw new Error(`Failed to fetch bookmark! ${error}`);
+    }
+}
+
+export const getTotalBookmarks = async () => {
+    noStore()
+    try {
+        await connectDB()
+        const bookmarks = await bookmark.find().estimatedDocumentCount().exec();
+        return bookmarks;
+    } catch (error) {
+        throw new Error(`Failed to fetch bookmarks! ${error}`);
     }
 }
