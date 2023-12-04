@@ -8,7 +8,7 @@ import { getLikeById, getTotalLikes } from "../_lib/data";
 
 import { HeartFilledIcon, HeartIcon } from "@radix-ui/react-icons";
 
-export default async function LikeButton({ userId, postId }) {
+export default async function PostLikeButton({ userId, postId }) {
   const totalLikes = await getTotalLikes();
   const likeSelectedUser = await getLikeById(userId, postId);
 

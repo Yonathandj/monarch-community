@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { BookmarkIcon } from "@radix-ui/react-icons";
 
-export default function BookmarkButton({ userId, postId }) {
+export default function PostBookmarkButton({ userId, postId }) {
   return (
     <form>
       <Button variant="outline">

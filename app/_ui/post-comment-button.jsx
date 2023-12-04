@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { ChatBubbleIcon } from "@radix-ui/react-icons";
 
-export default function CommentButton({ userId, postId }) {
+export default function PostCommentButton({ userId, postId }) {
   return (
     <form>
       <Button variant="outline">
