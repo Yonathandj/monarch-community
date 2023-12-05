@@ -1,4 +1,4 @@
-import MainNavbar from "../_ui/main-navbar";
+import MainNavbar from "@/app/_ui/main-navbar";
 
 export default function Layout({ children }) {
   return (

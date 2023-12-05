@@ -5,7 +5,7 @@ import Search from "./search";
 import HamburgerMenu from "./hamburger-menu";
 import SignedInUserAvatar, { SignedOutUserAvatar } from "./user-avatar";
 
-export default function DashboardNavbar() {
+export default function MainNavbar() {
   return (
     <header>
       <nav className="flex items-center justify-between p-2">
