@@ -86,3 +86,7 @@ export async function bookmarkAction(userId, postId, formData) {
     }
     revalidatePath('/posts/[id]', 'page')
 }
+
+export async function userProfileAction(userId, formData) {
+    console.log(userId, formData);
+}

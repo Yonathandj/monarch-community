@@ -1,6 +1,7 @@
 "use client";
 
 import { cn } from "@/lib/utils";
+
 import {
   Select,
   SelectContent,
@@ -11,7 +12,8 @@ import {
 import { buttonVariants } from "@/components/ui/button";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { useState } from "react";
+import { usePathname, useRouter } from "next/navigation";
 
 import { ImageIcon, PersonIcon } from "@radix-ui/react-icons";
 const settingNavbarItems = [
@@ -53,9 +55,17 @@ export function SettingNavbarMediumViewport() {
 }
 
 export function SettingNavbarSmallViewport() {
+  const [valueSelect, setValueSelect] = useState("");
+  const { push } = useRouter();
   return (
     <nav>
-      <Select>
+      <Select
+        value={valueSelect}
+        onValueChange={(value) => {
+          setValueSelect(value);
+          push(value);
+        }}
+      >
         <SelectTrigger className="w-[200px]">
           <SelectValue placeholder="Select navigation" />
         </SelectTrigger>
@@ -64,15 +74,12 @@ export function SettingNavbarSmallViewport() {
           {settingNavbarItems.map((settingNavbarItem) => (
             <SelectItem
               key={settingNavbarItem.href}
-              value={settingNavbarItem.title}
+              value={settingNavbarItem.href}
             >
-              <Link
-                href={settingNavbarItem.href}
-                className="flex w-full items-center justify-between"
-              >
+              <section className="flex gap-x-1">
                 {settingNavbarItem.icon}
                 {settingNavbarItem.title}
-              </Link>
+              </section>
             </SelectItem>
           ))}
         </SelectContent>
