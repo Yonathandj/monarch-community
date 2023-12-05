@@ -19,7 +19,7 @@ import {
 } from "@/components/ui/card";
 
 export default function ProfileForm({ selectedUser }) {
-  const [profileImageURL, setProfileImageURL] = useState("");
+  const [profileImageURL, setProfileImageURL] = useState();
 
   return (
     <form className="flex max-w-[500px] flex-col gap-y-4">
@@ -67,6 +67,7 @@ export default function ProfileForm({ selectedUser }) {
               <section>
                 <Input
                   type="file"
+                  accept="image/*"
                   id="profileImage"
                   name="profileImageURL"
                   value={profileImageURL}
@@ -105,9 +106,10 @@ export default function ProfileForm({ selectedUser }) {
                 <InstagramLogoIcon className="h-5 w-5 text-red-600" />
               </Label>
               <Input
-                type="text"
+                type="url"
                 id="instagram"
                 name="instagram"
+                autoComplete="off"
                 placeholder="Enter your Instagram link"
                 defaultValue={selectedUser.profile.socialMedia.instagram}
               />
@@ -122,9 +124,10 @@ export default function ProfileForm({ selectedUser }) {
                 />
               </Label>
               <Input
-                type="text"
+                type="url"
                 id="facebook"
                 name="facebook"
+                autoComplete="off"
                 placeholder="Enter your Facebook link"
                 defaultValue={selectedUser.profile.socialMedia.facebook}
               />
@@ -134,9 +137,10 @@ export default function ProfileForm({ selectedUser }) {
                 <TwitterLogoIcon className="h-5 w-5 text-sky-600" />
               </Label>
               <Input
-                type="text"
+                type="url"
                 id="twitter"
                 name="twitter"
+                autoComplete="off"
                 placeholder="Enter your Twitter link"
                 defaultValue={selectedUser.profile.socialMedia.twitter}
               />
@@ -151,9 +155,10 @@ export default function ProfileForm({ selectedUser }) {
                 />
               </Label>
               <Input
-                type="text"
+                type="url"
                 id="tiktok"
                 name="tiktok"
+                autoComplete="off"
                 placeholder="Enter your Tiktok link"
                 defaultValue={selectedUser.profile.socialMedia.tiktok}
               />

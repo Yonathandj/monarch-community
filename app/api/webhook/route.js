@@ -3,7 +3,7 @@ import { headers } from 'next/headers'
 
 import { getUserById } from '@/app/_lib/data';
 import { addNewUserService } from '@/app/_lib/services';
-import { userValidationSchema } from '@/app/_lib/validations';
+import { addUserValidationSchema } from '@/app/_lib/validations';
 
 export async function POST(req) {
     try {
@@ -46,7 +46,7 @@ export async function POST(req) {
         }
 
         if (event.type === 'user.created') {
-            const validationResult = userValidationSchema.safeParse({
+            const validationResult = addUserValidationSchema.safeParse({
                 userId: event.data.id,
                 fullName: event.data?.first_name || event.data?.last_name ? `${event.data?.first_name || ''} ${event.data?.last_name || ''}` : event.data.email_addresses[0].email_address.split('@')[0],
                 email: event.data.email_addresses[0].email_address,
