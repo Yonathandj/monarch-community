@@ -8,7 +8,7 @@ import { BlockNoteView, useBlockNote } from "@blocknote/react";
 export default function Editor({
   editable,
   publishedPost,
-  fromPostDetail,
+  fromPostDetail = false,
   unpublishedPost,
   setUnpublishedPost,
 }) {

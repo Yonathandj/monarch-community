@@ -10,9 +10,9 @@ import Loading from "./loading";
 import PublishButton from "./publish-button";
 
 import { useFormState } from "react-dom";
-import { useContext, useEffect } from "react";
 import { useEdgeStore } from "../_lib/edgestore";
 import { useDebouncedCallback } from "use-debounce";
+import { useContext, useEffect, useState } from "react";
 
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/components/ui/use-toast";
@@ -23,10 +23,10 @@ const Editor = dynamic(() => import("@/components/ui/editor"), { ssr: false });
 export default function WriteForm() {
   const {
     userId,
-    loadingPostUnpublishedPost,
     unpublishedPost,
     setUnpublishedPost,
     loadingPostHeaderImageURL,
+    loadingPostUnpublishedPost,
     setLoadingPostHeaderImageURL,
   } = useContext(PostContext);
 
@@ -34,6 +34,7 @@ export default function WriteForm() {
 
   const { toast } = useToast();
   const { edgestore } = useEdgeStore();
+  const [showEditor, setShowEditor] = useState(false);
   const [state, dispatch] = useFormState(updatePublishPostActionWithId, null);
 
   const debouncedOnChangeTextarea = useDebouncedCallback((title) => {
@@ -60,6 +61,10 @@ export default function WriteForm() {
       });
     }
   }, [state, toast]);
+
+  setTimeout(() => {
+    setShowEditor(true);
+  }, 1000);
 
   return (
     <section className="relative">
@@ -113,7 +118,6 @@ export default function WriteForm() {
             }
           }}
         />
-
         <TagsInput
           name="tags"
           separators={["Tab"]}
@@ -123,7 +127,6 @@ export default function WriteForm() {
           }}
           placeHolder="Untagged post (press tab to add)"
         />
-
         <Textarea
           name="title"
           placeholder="Untitled post"
@@ -134,11 +137,13 @@ export default function WriteForm() {
           className="mt-4 resize-none overflow-hidden border-none p-0 text-4xl font-bold shadow-none focus-visible:ring-0"
         />
 
-        <Editor
-          editable={true}
-          unpublishedPost={unpublishedPost}
-          setUnpublishedPost={setUnpublishedPost}
-        />
+        {showEditor ? (
+          <Editor
+            editable={true}
+            unpublishedPost={unpublishedPost}
+            setUnpublishedPost={setUnpublishedPost}
+          />
+        ) : null}
 
         <section className="mt-16">
           <PublishButton dispatch={dispatch} />
