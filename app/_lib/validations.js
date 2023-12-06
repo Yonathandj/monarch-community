@@ -1,10 +1,15 @@
 import { z } from 'zod';
 
-export const addUserValidationSchema = z.object({
+export const userValidationSchema = z.object({
     userId: z.string().trim(),
-    fullName: z.string().trim(),
-    email: z.string().trim().email(),
+    fullName: z.string().trim().min(3),
     profileImageURL: z.string().trim().url(),
+    email: z.string().trim().email().endsWith('.com').min(13),
+    tiktok: z.string().trim().optional(),
+    twitter: z.string().trim().optional(),
+    facebook: z.string().trim().optional(),
+    instagram: z.string().trim().optional(),
+    description: z.string().trim().optional(),
 })
 
 export const postValidationSchema = z.object({

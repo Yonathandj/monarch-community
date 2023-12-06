@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
 
 import { InstagramLogoIcon, TwitterLogoIcon } from "@radix-ui/react-icons";
 
@@ -19,8 +18,6 @@ import {
 } from "@/components/ui/card";
 
 export default function ProfileForm({ selectedUser }) {
-  const [profileImageURL, setProfileImageURL] = useState();
-
   return (
     <form className="flex max-w-[500px] flex-col gap-y-4">
       <Card>
@@ -70,10 +67,6 @@ export default function ProfileForm({ selectedUser }) {
                   accept="image/*"
                   id="profileImage"
                   name="profileImageURL"
-                  value={profileImageURL}
-                  onChange={(e) => {
-                    setProfileImageURL(e.target.files?.[0]);
-                  }}
                 />
               </section>
             </section>
@@ -167,10 +160,7 @@ export default function ProfileForm({ selectedUser }) {
         </CardContent>
       </Card>
 
-      <UpdateProfileButton
-        profileImageURL={profileImageURL}
-        userId={selectedUser.clerk.userId}
-      />
+      <UpdateProfileButton userId={selectedUser.clerk.userId} />
     </form>
   );
 }

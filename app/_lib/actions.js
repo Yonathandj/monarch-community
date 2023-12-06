@@ -3,9 +3,9 @@
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 
-import { getBookmarkById, getLikeById, getPublishedPostById, getUnpublishedPost } from "./data";
-import { bookmarkValidationSchema, likeValidationSchema, postValidationSchema } from "./validations"
-import { addBookmarkService, addLikeService, deleteBookmarkService, deleteLikeService, publishPostService } from "./services";
+import { getBookmarkById, getLikeById, getPublishedPostById, getUnpublishedPost, getUserById } from "./data";
+import { bookmarkValidationSchema, likeValidationSchema, postValidationSchema, userValidationSchema } from "./validations"
+import { addBookmarkService, addLikeService, deleteBookmarkService, deleteLikeService, publishPostService, updateUserService } from "./services";
 
 export async function publishPostAction(userId, prevState, formData) {
     const validationResult = postValidationSchema.safeParse({ userId })
@@ -87,6 +87,41 @@ export async function bookmarkAction(userId, postId, formData) {
     revalidatePath('/posts/[id]', 'page')
 }
 
-export async function userProfileAction(userId, formData) {
-    console.log(userId, formData);
+export async function userProfileAction(userId, prevState, formData) {
+    const validUserValidationSchema = formData.get("profileImageURL")?.size === 0 && formData.get("profileImageURL")?.name === 'undefined' ? userValidationSchema.omit({ profileImageURL: true }) : userValidationSchema;
+
+    const validationResult = validUserValidationSchema.safeParse({
+        userId,
+        email: formData.get("email"),
+        tiktok: formData.get("tiktok"),
+        twitter: formData.get("twitter"),
+        fullName: formData.get("fullName"),
+        facebook: formData.get("facebook"),
+        instagram: formData.get("instagram"),
+        description: formData.get("description"),
+        profileImageURL: formData.get("profileImageURL"),
+    })
+    if (!validationResult.success) {
+        return {
+            errorValidation: validationResult.error.flatten().fieldErrors
+        }
+    }
+    try {
+        const { userId, email, fullName, profileImageURL, description, instagram, facebook, twitter, tiktok } = validationResult.data;
+        const selectedUser = await getUserById(userId);
+        if (!selectedUser) {
+            return {
+                errorNoUser: `User with username ${fullName} not found. Please try again or sign up with another account!`
+            }
+        }
+        const response = await updateUserService({ userId, email, fullName, profileImageURL, description, instagram, facebook, twitter, tiktok })
+    } catch (error) {
+        return {
+            errorSystem: 'Something went wrong with the system. Try again!'
+        }
+    }
+    revalidatePath('/setting/profile', 'layout')
+    return {
+        successMessage: `Profile user successfully updated`
+    }
 }

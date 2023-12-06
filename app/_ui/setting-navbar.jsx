@@ -55,8 +55,9 @@ export function SettingNavbarMediumViewport() {
 }
 
 export function SettingNavbarSmallViewport() {
-  const [valueSelect, setValueSelect] = useState("");
   const { push } = useRouter();
+  const pathname = usePathname();
+  const [valueSelect, setValueSelect] = useState("");
   return (
     <nav>
       <Select
@@ -67,7 +68,13 @@ export function SettingNavbarSmallViewport() {
         }}
       >
         <SelectTrigger className="w-[200px]">
-          <SelectValue placeholder="Select navigation" />
+          <SelectValue
+            placeholder={settingNavbarItems.map((settingNavbarItem) =>
+              pathname === settingNavbarItem.href
+                ? settingNavbarItem.title
+                : null,
+            )}
+          />
         </SelectTrigger>
 
         <SelectContent>

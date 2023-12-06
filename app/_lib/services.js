@@ -99,3 +99,31 @@ export const deleteBookmarkService = async (userId, postId) => {
         throw new Error(`Failed to delete bookmark! ${error}`)
     }
 }
+
+export const updateUserService = async ({ userId, email, fullName, profileImageURL, description, instagram, facebook, twitter, tiktok }) => {
+    try {
+        connectDB();
+        const data = profileImageURL ? {
+            'clerk.email': email,
+            'clerk.fullName': fullName,
+            'clerk.profileImageURL': profileImageURL,
+            'profile.description': description,
+            'profile.socialMedia.tiktok': tiktok,
+            'profile.socialMedia.twitter': twitter,
+            'profile.socialMedia.facebook': facebook,
+            'profile.socialMedia.instagram': instagram,
+        } : {
+            'clerk.email': email,
+            'clerk.fullName': fullName,
+            'profile.description': description,
+            'profile.socialMedia.tiktok': tiktok,
+            'profile.socialMedia.twitter': twitter,
+            'profile.socialMedia.facebook': facebook,
+            'profile.socialMedia.instagram': instagram,
+        }
+        const response = await user.updateOne({ 'clerk.userId': userId }, data);
+        return response;
+    } catch (error) {
+        throw new Error(`Failed to delete bookmark! ${error}`)
+    }
+}
