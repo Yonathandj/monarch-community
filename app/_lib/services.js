@@ -121,8 +121,7 @@ export const updateUserService = async ({ userId, email, fullName, profileImageU
             'profile.socialMedia.facebook': facebook,
             'profile.socialMedia.instagram': instagram,
         }
-        const response = await user.updateOne({ 'clerk.userId': userId }, data);
-        return response;
+        await user.updateOne({ 'clerk.userId': userId }, data);
     } catch (error) {
         throw new Error(`Failed to delete bookmark! ${error}`)
     }

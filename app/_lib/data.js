@@ -73,7 +73,7 @@ export const getLikeById = async (userId, postId) => {
     }
 }
 
-export const getTotalLikes = async (postId) => {
+export const getTotalLikesByPostId = async (postId) => {
     noStore()
     try {
         await connectDB()
@@ -95,7 +95,7 @@ export const getBookmarkById = async (userId, postId) => {
     }
 }
 
-export const getTotalBookmarks = async (postId) => {
+export const getTotalBookmarksByPostId = async (postId) => {
     noStore()
     try {
         await connectDB()

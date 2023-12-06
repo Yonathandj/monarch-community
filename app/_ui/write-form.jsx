@@ -44,19 +44,19 @@ export default function WriteForm() {
     if (state?.errorValidation?.userId) {
       toast({
         title: "Something went wrong",
-        description: state?.errorValidation?.userId[0],
+        description: state.errorValidation.userId[0],
       });
     }
-    if (state?.errorNoUnpublishedPost) {
+    if (state?.errorUnpublishedPost) {
       toast({
         title: "Something went wrong",
-        description: state?.errorNoUnpublishedPost,
+        description: state.errorUnpublishedPost,
       });
     }
-    if (state?.errorNoTitle) {
+    if (state?.errorTitle) {
       toast({
         title: "Something went wrong",
-        description: state?.errorNoTitle,
+        description: state.errorTitle,
       });
     }
   }, [state, toast]);

@@ -3,13 +3,13 @@ import { Button } from "@/components/ui/button";
 import { SignedIn, SignedOut } from "@clerk/nextjs";
 import { SignInButtonUserInteractionBookmark } from "./sign-in-button";
 
-import { getBookmarkById, getTotalBookmarks } from "../_lib/data";
+import { getBookmarkById, getTotalBookmarksByPostId } from "../_lib/data";
 
 import { BookmarkFilledIcon, BookmarkIcon } from "@radix-ui/react-icons";
 import { bookmarkAction } from "../_lib/actions";
 
 export default async function PostBookmarkButton({ userId, postId }) {
-  const totalBookmarks = await getTotalBookmarks(postId);
+  const totalBookmarks = await getTotalBookmarksByPostId(postId);
   const bookmarkSelectedUser = await getBookmarkById(userId, postId);
 
   const updateBookmarkActionWithId = bookmarkAction.bind(null, userId, postId);

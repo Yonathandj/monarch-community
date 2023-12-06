@@ -19,12 +19,12 @@ export async function publishPostAction(userId, prevState, formData) {
         const unpublishedPost = await getUnpublishedPost(userId);
         if (!unpublishedPost) {
             return {
-                errorNoUnpublishedPost: 'No unpublished post is created. Please create first!'
+                errorUnpublishedPost: 'No unpublished post is created. Please create first!'
             }
         } else {
             if (!unpublishedPost.data.title) {
                 return {
-                    errorNoTitle: 'No title found. Please provide a suitable title first!'
+                    errorTitle: 'No title found. Please provide a suitable title first!'
                 }
             } else {
                 await publishPostService(userId);
@@ -33,7 +33,6 @@ export async function publishPostAction(userId, prevState, formData) {
     } catch (error) {
         throw new Error(`Something went wrong with the system. Try again! ${error}`)
     }
-    revalidatePath('/')
     redirect('/')
 }
 
@@ -110,7 +109,7 @@ export async function userProfileAction(userId, prevState, formData) {
         if (!selectedUser) {
             throw new Error(`You are not sign up. Please sign up first! ${error}`)
         }
-        const response = await updateUserService({ userId, email, fullName, profileImageURL, description, instagram, facebook, twitter, tiktok })
+        await updateUserService({ userId, email, fullName, profileImageURL, description, instagram, facebook, twitter, tiktok })
     } catch (error) {
         throw new Error(`Something went wrong with the system. Try again! ${error}`)
     }
