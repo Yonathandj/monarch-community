@@ -21,7 +21,7 @@ export default async function PostBookmarkButton({ userId, postId }) {
 
       <SignedIn>
         <form action={updateBookmarkActionWithId}>
-          <Button variant="outline">
+          <Button variant="ghost">
             {bookmarkSelectedUser ? (
               <BookmarkFilledIcon className="mr-2 h-5 w-5 text-sky-600" />
             ) : (

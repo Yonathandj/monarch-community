@@ -21,7 +21,7 @@ export default async function PostLikeButton({ userId, postId }) {
 
       <SignedIn>
         <form action={updateLikeActionWithId}>
-          <Button variant="outline">
+          <Button variant="ghost">
             {likeSelectedUser ? (
               <HeartFilledIcon className="mr-2 h-5 w-5 text-red-600" />
             ) : (

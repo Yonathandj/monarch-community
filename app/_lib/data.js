@@ -22,7 +22,7 @@ export const getTotalUsers = async () => {
     noStore()
     try {
         await connectDB()
-        const totalUsers = await user.find().estimatedDocumentCount().exec();
+        const totalUsers = await user.countDocuments({}).exec();
         return totalUsers;
     } catch (error) {
         throw new Error(`Failed to fetch current user! ${error}`);
@@ -66,7 +66,7 @@ export const getLikeById = async (userId, postId) => {
     noStore()
     try {
         await connectDB()
-        const likeSelectedUser = await like.findOne({ userId, postId }).exec();
+        const likeSelectedUser = await like.countDocuments({ userId, postId }).exec();
         return likeSelectedUser;
     } catch (error) {
         throw new Error(`Failed to fetch like! ${error}`);
@@ -77,7 +77,7 @@ export const getTotalLikesByPostId = async (postId) => {
     noStore()
     try {
         await connectDB()
-        const likes = await like.find({ postId }).estimatedDocumentCount().exec();
+        const likes = await like.countDocuments({ postId }).exec();
         return likes;
     } catch (error) {
         throw new Error(`Failed to fetch likes! ${error}`);
@@ -88,7 +88,7 @@ export const getBookmarkById = async (userId, postId) => {
     noStore()
     try {
         await connectDB()
-        const bookmarkSelectedUser = await bookmark.findOne({ userId, postId }).exec();
+        const bookmarkSelectedUser = await bookmark.countDocuments({ userId, postId }).exec();
         return bookmarkSelectedUser;
     } catch (error) {
         throw new Error(`Failed to fetch bookmark! ${error}`);
@@ -99,7 +99,7 @@ export const getTotalBookmarksByPostId = async (postId) => {
     noStore()
     try {
         await connectDB()
-        const bookmarks = await bookmark.find({ postId }).estimatedDocumentCount().exec();
+        const bookmarks = await bookmark.countDocuments({ postId }).exec();
         return bookmarks;
     } catch (error) {
         throw new Error(`Failed to fetch bookmarks! ${error}`);
