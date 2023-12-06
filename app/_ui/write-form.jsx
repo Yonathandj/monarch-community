@@ -53,12 +53,6 @@ export default function WriteForm() {
         description: state?.errorNoUnpublishedPost,
       });
     }
-    if (state?.errorSystem) {
-      toast({
-        title: "Something went wrong",
-        description: state?.errorSystem,
-      });
-    }
     if (state?.errorNoTitle) {
       toast({
         title: "Something went wrong",

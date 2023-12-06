@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/use-toast";
 import { GearIcon, PersonIcon } from "@radix-ui/react-icons";
 
-export default function UpdateProfileButton({ userId }) {
+export default function UpdateProfileButton({ profileImageURL, userId }) {
   const updateUserProfileActionWithId = userProfileAction.bind(null, userId);
 
   const { toast } = useToast();
@@ -46,10 +46,20 @@ export default function UpdateProfileButton({ userId }) {
           formData.get("profileImageURL").size > 0 &&
           formData.get("profileImageURL").name !== "undefined"
         ) {
-          const response = await edgestore.publicImages.upload({
-            file: formData.get("profileImageURL"),
-          });
-          formData.set("profileImageURL", response.url);
+          if (profileImageURL.includes("https://files.edgestore.dev")) {
+            const response = await edgestore.publicImages.upload({
+              file: formData.get("profileImageURL"),
+              options: {
+                replaceTargetUrl: profileImageURL,
+              },
+            });
+            formData.set("profileImageURL", response.url);
+          } else {
+            const response = await edgestore.publicImages.upload({
+              file: formData.get("profileImageURL"),
+            });
+            formData.set("profileImageURL", response.url);
+          }
         }
         dispatch(formData);
       }}

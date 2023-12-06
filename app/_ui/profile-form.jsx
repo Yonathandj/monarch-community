@@ -160,7 +160,10 @@ export default function ProfileForm({ selectedUser }) {
         </CardContent>
       </Card>
 
-      <UpdateProfileButton userId={selectedUser.clerk.userId} />
+      <UpdateProfileButton
+        userId={selectedUser.clerk.userId}
+        profileImageURL={selectedUser.clerk.profileImageURL}
+      />
     </form>
   );
 }

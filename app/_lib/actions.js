@@ -31,9 +31,7 @@ export async function publishPostAction(userId, prevState, formData) {
             }
         }
     } catch (error) {
-        return {
-            errorSystem: 'Something went wrong with the system. Try again!'
-        }
+        throw new Error(`Something went wrong with the system. Try again! ${error}`)
     }
     revalidatePath('/')
     redirect('/')
@@ -110,17 +108,13 @@ export async function userProfileAction(userId, prevState, formData) {
         const { userId, email, fullName, profileImageURL, description, instagram, facebook, twitter, tiktok } = validationResult.data;
         const selectedUser = await getUserById(userId);
         if (!selectedUser) {
-            return {
-                errorNoUser: `User with username ${fullName} not found. Please try again or sign up with another account!`
-            }
+            throw new Error(`You are not sign up. Please sign up first! ${error}`)
         }
         const response = await updateUserService({ userId, email, fullName, profileImageURL, description, instagram, facebook, twitter, tiktok })
     } catch (error) {
-        return {
-            errorSystem: 'Something went wrong with the system. Try again!'
-        }
+        throw new Error(`Something went wrong with the system. Try again! ${error}`)
     }
-    revalidatePath('/setting/profile', 'layout')
+    revalidatePath('/setting/profile')
     return {
         successMessage: `Profile user successfully updated`
     }
