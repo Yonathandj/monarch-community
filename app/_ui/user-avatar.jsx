@@ -99,7 +99,8 @@ export function SignedOutUserAvatar() {
   );
 }
 
-export function UserAvatar({ selectedUser }) {
+export async function UserAvatar({ userId }) {
+  const selectedUser = await getUserById(userId);
   return (
     <Avatar className="h-8 w-8">
       <AvatarImage

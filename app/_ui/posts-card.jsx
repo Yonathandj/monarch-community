@@ -16,15 +16,16 @@ export default async function PostsCard({ userId }) {
         <Card key={publishedPost._id} className="p-4">
           <CardHeader>
             <CardTitle className="flex items-center gap-x-2">
-              <UserAvatar />
+              <UserAvatar userId={userId} />
               <section className="group relative">
                 <h2 className="font-bold">{selectedUser.clerk.fullName}</h2>
                 <p className="text-sm">
                   {publishedPost.createdAt.toISOString().split("T")[0] || "-"}
                 </p>
-                <section className="absolute z-10 hidden h-[300px] w-[300px] group-hover:block">
-                  <UserCard userId={userId} />
-                </section>
+                <UserCard
+                  userId={userId}
+                  className="absolute z-10 hidden group-hover:block"
+                />
               </section>
             </CardTitle>
           </CardHeader>

@@ -9,14 +9,16 @@ import { UserAvatar } from "./user-avatar";
 
 import { getUserById } from "../_lib/data";
 
-export default async function UserCard({ userId }) {
+export default async function UserCard({ userId, className }) {
   const selectedUser = await getUserById(userId);
 
   return (
-    <Card className="mx-auto max-h-[350px] max-w-[400px] md:ml-4 lg:ml-0 lg:mt-4">
+    <Card
+      className={`${className} mx-auto max-h-[300px] max-w-[400px] md:ml-4 lg:ml-0 lg:mt-4`}
+    >
       <CardHeader>
         <CardTitle className="flex items-center gap-x-2">
-          <UserAvatar selectedUser={selectedUser} />
+          <UserAvatar userId={userId} />
           <h2 className="text-lg font-semibold">
             {selectedUser.clerk.fullName}
           </h2>
