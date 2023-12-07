@@ -10,7 +10,7 @@ import { bookmarkAction } from "../_lib/actions";
 
 export default async function PostBookmarkButton({ userId, postId }) {
   const totalBookmarks = await getTotalBookmarksByPostId(postId);
-  const bookmarkSelectedUser = await getBookmarkById(userId, postId);
+  const bookmarkCurrentUser = await getBookmarkById(userId, postId);
 
   const updateBookmarkActionWithId = bookmarkAction.bind(null, userId, postId);
   return (
@@ -22,7 +22,7 @@ export default async function PostBookmarkButton({ userId, postId }) {
       <SignedIn>
         <form action={updateBookmarkActionWithId}>
           <Button variant="ghost">
-            {bookmarkSelectedUser ? (
+            {bookmarkCurrentUser ? (
               <BookmarkFilledIcon className="mr-2 h-5 w-5 text-sky-600" />
             ) : (
               <BookmarkIcon className="mr-2 h-5 w-5" />

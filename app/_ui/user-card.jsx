@@ -7,37 +7,34 @@ import {
 } from "@/components/ui/card";
 import { UserAvatar } from "./user-avatar";
 
-import { getPublishedPostById } from "../_lib/data";
-
-export default async function UserCard({ postId }) {
-  const { userId: selectedUser } = await getPublishedPostById(postId);
+export default async function UserCard({ currentUser }) {
   return (
     <Card
       className={`${className} mx-auto max-h-[300px] max-w-[400px] md:ml-4 lg:ml-0 lg:mt-4`}
     >
       <CardHeader>
         <CardTitle className="flex items-center gap-x-2">
-          <UserAvatar selectedUser={selectedUser} />
+          <UserAvatar currentUser={currentUser} />
           <h2 className="text-lg font-semibold">
-            {selectedUser.clerk.fullName}
+            {currentUser.clerk.fullName}
           </h2>
         </CardTitle>
-        <CardDescription>{selectedUser.profile.description}</CardDescription>
+        <CardDescription>{currentUser.profile.description}</CardDescription>
       </CardHeader>
 
       <CardContent className="flex flex-col gap-y-2">
         <section>
           <h4 className="font-semibold">Work</h4>
-          <p className="text-sm">{selectedUser.profile.work || "-"}</p>
+          <p className="text-sm">{currentUser.profile.work || "-"}</p>
         </section>
         <section>
           <h4 className="font-semibold">Location</h4>
-          <p className="text-sm">{selectedUser.profile.location || "-"}</p>
+          <p className="text-sm">{currentUser.profile.location || "-"}</p>
         </section>
         <section>
           <h4 className="font-semibold">Joined at</h4>
           <p className="text-sm">
-            {selectedUser.createdAt.toISOString().split("T")[0] || "-"}
+            {currentUser.createdAt.toISOString().split("T")[0] || "-"}
           </p>
         </section>
       </CardContent>

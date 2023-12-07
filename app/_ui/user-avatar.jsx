@@ -20,19 +20,19 @@ import { SignInButtonUserAvatar } from "./sign-in-button";
 import { SignUpButtonUserAvatar } from "./sign-up-button";
 
 export default async function SignedInUserAvatar() {
-  const { userId } = auth();
-  const selectedUser = await getUserById(userId);
+  const { userId: _id } = auth();
+  const currentUser = await getUserById(_id);
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
         <Avatar className="h-10 w-10">
           <AvatarImage
-            src={selectedUser?.clerk?.profileImageURL}
-            alt={`${selectedUser?.clerk?.fullName} Profile Image`}
+            src={currentUser?.clerk?.profileImageURL}
+            alt={`${currentUser?.clerk?.fullName} profile picture`}
           />
           <AvatarFallback>
-            {selectedUser?.clerk?.fullName.charAt(0)}
+            {currentUser?.clerk?.fullName.charAt(0)}
           </AvatarFallback>
         </Avatar>
       </DropdownMenuTrigger>
@@ -40,9 +40,9 @@ export default async function SignedInUserAvatar() {
       <DropdownMenuContent className="w-60" align="end" forceMount>
         <DropdownMenuLabel>
           <h2 className="text-sm font-bold">
-            {selectedUser?.clerk?.fullName || ""}
+            {currentUser?.clerk?.fullName || ""}
           </h2>
-          <p className="text-xs">{selectedUser?.clerk?.email || ""}</p>
+          <p className="text-xs">{currentUser?.clerk?.email || ""}</p>
         </DropdownMenuLabel>
 
         <DropdownMenuSeparator />

@@ -22,6 +22,7 @@ export default async function HamburgerMenu() {
         <SheetTrigger>
           <HamburgerMenuIcon className="h-6 w-6" />
         </SheetTrigger>
+
         <SheetContent>
           <SheetHeader>
             <SheetTitle>Monarch Community</SheetTitle>

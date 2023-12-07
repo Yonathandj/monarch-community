@@ -62,7 +62,7 @@ export const publishPostService = async (userId) => {
 export const addLikeService = async (userId, postId) => {
     try {
         connectDB();
-        const _id = `like-${nanoid(16)}`;
+        const _id = `like_${nanoid(16)}`;
         const newLike = new like({ _id, userId, postId })
         await newLike.save();
     } catch (error) {
@@ -82,7 +82,7 @@ export const deleteLikeService = async (userId, postId) => {
 export const addBookmarkService = async (userId, postId) => {
     try {
         connectDB();
-        const _id = `bookmark-${nanoid(16)}`;
+        const _id = `bookmark_${nanoid(16)}`;
         const newBookmark = new bookmark({ _id, userId, postId })
         await newBookmark.save();
     } catch (error) {

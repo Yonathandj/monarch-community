@@ -66,8 +66,8 @@ export const getLikeById = async (userId, postId) => {
     noStore()
     try {
         await connectDB()
-        const likeSelectedUser = await like.countDocuments({ userId, postId }).exec();
-        return likeSelectedUser;
+        const likeCurrentUser = await like.countDocuments({ userId, postId }).exec();
+        return likeCurrentUser;
     } catch (error) {
         throw new Error(`Failed to fetch like! ${error}`);
     }
@@ -88,8 +88,8 @@ export const getBookmarkById = async (userId, postId) => {
     noStore()
     try {
         await connectDB()
-        const bookmarkSelectedUser = await bookmark.countDocuments({ userId, postId }).exec();
-        return bookmarkSelectedUser;
+        const bookmarkCurrentUser = await bookmark.countDocuments({ userId, postId }).exec();
+        return bookmarkCurrentUser;
     } catch (error) {
         throw new Error(`Failed to fetch bookmark! ${error}`);
     }

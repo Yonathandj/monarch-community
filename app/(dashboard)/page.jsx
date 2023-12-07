@@ -1,5 +1,3 @@
-import { auth } from "@clerk/nextjs";
-
 import PostsCard from "../_ui/posts-card";
 
 export default function Page() {

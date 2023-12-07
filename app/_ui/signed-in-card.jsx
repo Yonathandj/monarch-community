@@ -7,15 +7,14 @@ import {
 } from "@/components/ui/card";
 
 import { auth } from "@clerk/nextjs";
-
 import { getUserById } from "../_lib/data";
 
 import WriteButton from "./write-button";
 import SignOutButton from "./sign-out-button";
 
 export default async function SignedInCard() {
-  const { userId } = auth();
-  const selectedUser = await getUserById(userId);
+  const { userId: _id } = auth();
+  const currentUser = await getUserById(_id);
 
   return (
     <Card>
@@ -23,7 +22,7 @@ export default async function SignedInCard() {
         <CardTitle className="text-lg font-bold">
           Welcome{" "}
           <span className="text-purple-600">
-            {selectedUser?.clerk?.fullName}
+            {currentUser?.clerk?.fullName}
           </span>{" "}
           to Monarch Community
         </CardTitle>

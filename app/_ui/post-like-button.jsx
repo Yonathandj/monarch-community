@@ -10,7 +10,7 @@ import { HeartFilledIcon, HeartIcon } from "@radix-ui/react-icons";
 
 export default async function PostLikeButton({ userId, postId }) {
   const totalLikes = await getTotalLikesByPostId(postId);
-  const likeSelectedUser = await getLikeById(userId, postId);
+  const likeCurrentUser = await getLikeById(userId, postId);
 
   const updateLikeActionWithId = likeAction.bind(null, userId, postId);
   return (
@@ -22,7 +22,7 @@ export default async function PostLikeButton({ userId, postId }) {
       <SignedIn>
         <form action={updateLikeActionWithId}>
           <Button variant="ghost">
-            {likeSelectedUser ? (
+            {likeCurrentUser ? (
               <HeartFilledIcon className="mr-2 h-5 w-5 text-red-600" />
             ) : (
               <HeartIcon className="mr-2 h-5 w-5" />

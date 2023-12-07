@@ -8,7 +8,6 @@ import { getPublishedPosts } from "../_lib/data";
 
 export default async function PostsCard() {
   const publishedPosts = await getPublishedPosts();
-  console.log(publishedPosts);
 
   return (
     <section className="mx-auto flex max-w-[600px] flex-col gap-y-4">
@@ -16,16 +15,16 @@ export default async function PostsCard() {
         <Card key={publishedPost._id} className="p-4">
           <CardHeader>
             <CardTitle className="flex items-center gap-x-2">
-              <UserAvatar selectedUser={publishedPosts.userId} />
+              <UserAvatar currentUser={publishedPost.userId} />
               <section className="group relative">
                 <h2 className="font-bold">
-                  {publishedPosts.userId.clerk.fullName}
+                  {publishedPost.userId.clerk.fullName}
                 </h2>
                 <p className="text-sm">
                   {publishedPost.createdAt.toISOString().split("T")[0] || "-"}
                 </p>
                 <UserCard
-                  selectedUser={publishedPosts.userId}
+                  currentUser={publishedPost.userId}
                   className="absolute z-10 hidden group-hover:block"
                 />
               </section>
