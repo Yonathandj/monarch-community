@@ -98,3 +98,15 @@ export function SignedOutUserAvatar() {
     </DropdownMenu>
   );
 }
+
+export function UserAvatar({ selectedUser }) {
+  return (
+    <Avatar className="h-8 w-8">
+      <AvatarImage
+        alt={selectedUser.clerk.fullName}
+        src={selectedUser.clerk.profileImageURL}
+      />
+      <AvatarFallback>{selectedUser.clerk.fullName.charAt(0)}</AvatarFallback>
+    </Avatar>
+  );
+}
