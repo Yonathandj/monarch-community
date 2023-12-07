@@ -46,8 +46,8 @@ export default function UpdateProfileButton({ _id, profileImageURL }) {
       disabled={pending}
       formAction={async (formData) => {
         if (
-          formData.get("profileImageURL").size > 0 &&
-          formData.get("profileImageURL").name !== "undefined"
+          formData.get("profileImageURL")?.size > 0 &&
+          formData.get("profileImageURL")?.name !== "undefined"
         ) {
           if (profileImageURL.includes("https://files.edgestore.dev")) {
             const response = await edgestore.publicImages.upload({
