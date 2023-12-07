@@ -99,15 +99,14 @@ export function SignedOutUserAvatar() {
   );
 }
 
-export async function UserAvatar({ userId }) {
-  const selectedUser = await getUserById(userId);
+export async function UserAvatar({ currentUser }) {
   return (
-    <Avatar className="h-8 w-8">
+    <Avatar className="h-12 w-12">
       <AvatarImage
-        alt={selectedUser.clerk.fullName}
-        src={selectedUser.clerk.profileImageURL}
+        alt={currentUser.clerk.fullName}
+        src={currentUser.clerk.profileImageURL}
       />
-      <AvatarFallback>{selectedUser.clerk.fullName.charAt(0)}</AvatarFallback>
+      <AvatarFallback>{currentUser.clerk.fullName.charAt(0)}</AvatarFallback>
     </Avatar>
   );
 }

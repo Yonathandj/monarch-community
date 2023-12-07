@@ -14,9 +14,7 @@ export async function POST(request) {
         }
         if (validationResult.success) {
             const { userId, title, tags, content, headerImageURL } = validationResult.data;
-
             const unpublishedPostInDatabase = await getUnpublishedPost(userId);
-
             if (unpublishedPostInDatabase) {
                 const response = await updateUnpublishedPostService({ userId, title, tags, content, headerImageURL });
                 if (response) {

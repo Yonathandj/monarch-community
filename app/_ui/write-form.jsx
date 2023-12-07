@@ -25,29 +25,29 @@ export default function WriteForm() {
     userId,
     unpublishedPost,
     setUnpublishedPost,
+    setLoadingPostHeaderImageURL,
     loadingPostHeaderImageURL,
     loadingPostUnpublishedPost,
-    setLoadingPostHeaderImageURL,
   } = useContext(PostContext);
 
-  const updatePublishPostActionWithId = publishPostAction.bind(null, userId);
+  const updatePublishPostActionWithUserId = publishPostAction.bind(
+    null,
+    userId,
+  );
 
   const { toast } = useToast();
   const { edgestore } = useEdgeStore();
   const [showEditor, setShowEditor] = useState(false);
-  const [state, dispatch] = useFormState(updatePublishPostActionWithId, null);
+  const [state, dispatch] = useFormState(
+    updatePublishPostActionWithUserId,
+    null,
+  );
 
   const debouncedOnChangeTextarea = useDebouncedCallback((title) => {
     setUnpublishedPost({ ...unpublishedPost, title });
   }, 1000);
 
   useEffect(() => {
-    if (state?.errorValidation?.userId) {
-      toast({
-        title: "Something went wrong",
-        description: state.errorValidation.userId[0],
-      });
-    }
     if (state?.errorUnpublishedPost) {
       toast({
         title: "Something went wrong",

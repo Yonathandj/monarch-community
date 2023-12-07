@@ -7,12 +7,11 @@ import bookmark from "./_models/bookmark";
 
 import connectDB from "./connectDB"
 
-export const addNewUserService = async ({ userId, fullName, email, profileImageURL }) => {
+export const addNewUserService = async ({ _id, email, fullName, profileImageURL }) => {
     try {
         connectDB();
-        const _id = `monarchUserId-${nanoid(16)}`;
         const newUser = new user({
-            _id, clerk: { userId, fullName, email, profileImageURL }
+            _id, clerk: { email, fullName, profileImageURL }
         })
         const response = await newUser.save();
         return response;
@@ -40,7 +39,7 @@ export const updateUnpublishedPostService = async ({ userId, title, tags, conten
 export const addUnpublishedPostService = async ({ userId, title, tags, content, headerImageURL }) => {
     try {
         connectDB();
-        const _id = `post-${nanoid(16)}`;
+        const _id = `post_${nanoid(16)}`;
         const newUnpublishedPost = new post({
             _id, userId, data: { title, tags, content, headerImageURL }
         })
@@ -100,7 +99,7 @@ export const deleteBookmarkService = async (userId, postId) => {
     }
 }
 
-export const updateUserService = async ({ userId, email, fullName, profileImageURL, description, instagram, facebook, twitter, tiktok, work, location }) => {
+export const updateUserService = async ({ _id, email, fullName, profileImageURL, work, location, instagram, facebook, twitter, tiktok, description }) => {
     try {
         connectDB();
         const data = profileImageURL ? {
@@ -125,7 +124,7 @@ export const updateUserService = async ({ userId, email, fullName, profileImageU
             'profile.socialMedia.facebook': facebook,
             'profile.socialMedia.instagram': instagram,
         }
-        await user.updateOne({ 'clerk.userId': userId }, data);
+        await user.updateOne({ _id }, data);
     } catch (error) {
         throw new Error(`Failed to delete bookmark! ${error}`)
     }

@@ -3,10 +3,9 @@ import mongoose from 'mongoose';
 const userModelSchema = new mongoose.Schema({
     _id: { type: String, trim: true },
     clerk: {
-        userId: { type: String, trim: true, required: true },
-        fullName: { type: String, trim: true, required: true },
         email: { type: String, trim: true, required: true },
-        profileImageURL: { type: String, trim: true, default: '' },
+        fullName: { type: String, trim: true, required: true },
+        profileImageURL: { type: String, trim: true, required: true },
     },
     profile: {
         work: { type: String, trim: true, default: '' },

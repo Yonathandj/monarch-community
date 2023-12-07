@@ -4,11 +4,11 @@ import UserCard from "./user-card";
 import { UserAvatar } from "./user-avatar";
 import { CardContent, CardHeader, CardTitle, Card } from "@/components/ui/card";
 
-import { getPublishedPosts, getUserById } from "../_lib/data";
+import { getPublishedPosts } from "../_lib/data";
 
-export default async function PostsCard({ userId }) {
-  const selectedUser = await getUserById(userId);
+export default async function PostsCard() {
   const publishedPosts = await getPublishedPosts();
+  console.log(publishedPosts);
 
   return (
     <section className="mx-auto flex max-w-[600px] flex-col gap-y-4">
@@ -16,14 +16,16 @@ export default async function PostsCard({ userId }) {
         <Card key={publishedPost._id} className="p-4">
           <CardHeader>
             <CardTitle className="flex items-center gap-x-2">
-              <UserAvatar userId={userId} />
+              <UserAvatar selectedUser={publishedPosts.userId} />
               <section className="group relative">
-                <h2 className="font-bold">{selectedUser.clerk.fullName}</h2>
+                <h2 className="font-bold">
+                  {publishedPosts.userId.clerk.fullName}
+                </h2>
                 <p className="text-sm">
                   {publishedPost.createdAt.toISOString().split("T")[0] || "-"}
                 </p>
                 <UserCard
-                  userId={userId}
+                  selectedUser={publishedPosts.userId}
                   className="absolute z-10 hidden group-hover:block"
                 />
               </section>

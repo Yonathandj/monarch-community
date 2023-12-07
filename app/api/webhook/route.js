@@ -47,7 +47,7 @@ export async function POST(req) {
 
         if (event.type === 'user.created') {
             const validationResult = userValidationSchema.safeParse({
-                userId: event.data.id,
+                _id: event.data.id,
                 fullName: event.data?.first_name || event.data?.last_name ? `${event.data?.first_name || ''} ${event.data?.last_name || ''}` : event.data.email_addresses[0].email_address.split('@')[0],
                 email: event.data.email_addresses[0].email_address,
                 profileImageURL: event.data.image_url,
@@ -58,14 +58,14 @@ export async function POST(req) {
                 });
             }
             if (validationResult.success) {
-                const { userId, fullName, email, profileImageURL } = validationResult.data;
-                const userAlreadyExist = await getUserById(userId);
+                const { _id, fullName, email, profileImageURL } = validationResult.data;
+                const userAlreadyExist = await getUserById(_id);
                 if (userAlreadyExist) {
                     return new Response('User already exist', {
                         status: 400
                     });
                 } else {
-                    const response = await addNewUserService({ userId, fullName, email, profileImageURL });
+                    const response = await addNewUserService({ _id, fullName, email, profileImageURL });
                     if (response) {
                         return new Response('New user successfully created', {
                             status: 200

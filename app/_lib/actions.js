@@ -84,21 +84,21 @@ export async function bookmarkAction(userId, postId, formData) {
     revalidatePath('/posts/[id]', 'page')
 }
 
-export async function userProfileAction(userId, prevState, formData) {
+export async function userProfileAction(_id, prevState, formData) {
     const validUserValidationSchema = formData.get("profileImageURL")?.size === 0 && formData.get("profileImageURL")?.name === 'undefined' ? userValidationSchema.omit({ profileImageURL: true }) : userValidationSchema;
 
     const validationResult = validUserValidationSchema.safeParse({
-        userId,
-        work: formData.get("work"),
+        _id,
         email: formData.get("email"),
+        fullName: formData.get("fullName"),
+        profileImageURL: formData.get("profileImageURL"),
+        work: formData.get("work"),
+        location: formData.get("location"),
         tiktok: formData.get("tiktok"),
         twitter: formData.get("twitter"),
-        location: formData.get("location"),
-        fullName: formData.get("fullName"),
         facebook: formData.get("facebook"),
         instagram: formData.get("instagram"),
         description: formData.get("description"),
-        profileImageURL: formData.get("profileImageURL"),
     })
     if (!validationResult.success) {
         return {
@@ -106,12 +106,12 @@ export async function userProfileAction(userId, prevState, formData) {
         }
     }
     try {
-        const { userId, email, fullName, profileImageURL, description, instagram, facebook, twitter, tiktok, work, location } = validationResult.data;
-        const selectedUser = await getUserById(userId);
-        if (!selectedUser) {
+        const { _id, email, fullName, profileImageURL, work, location, instagram, facebook, twitter, tiktok, description } = validationResult.data;
+        const currentUser = await getUserById(_id);
+        if (!currentUser) {
             throw new Error(`You are not sign up. Please sign up first! ${error}`)
         }
-        await updateUserService({ userId, email, fullName, profileImageURL, description, instagram, facebook, twitter, tiktok, work, location })
+        await updateUserService({ _id, email, fullName, profileImageURL, work, location, instagram, facebook, twitter, tiktok, description })
     } catch (error) {
         throw new Error(`Something went wrong with the system. Try again! ${error}`)
     }

@@ -10,8 +10,8 @@ export default function Page({ params: { id } }) {
     <main className="mt-6 flex">
       <UserInteraction userId={userId} postId={id} />
       <section className="flex flex-col-reverse lg:flex-row">
-        <PostDetail userId={userId} postId={id} />
-        <UserCard userId={userId} postId={id} />
+        <PostDetail postId={id} />
+        <UserCard postId={id} />
       </section>
     </main>
   );

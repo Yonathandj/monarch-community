@@ -32,7 +32,7 @@ export default function PostContextProvider({ children }) {
             "Content-Type": "application/json",
           },
           cache: "no-store",
-        }
+        },
       );
       if (response.ok) {
         const { data } = await response.json();
@@ -67,17 +67,17 @@ export default function PostContextProvider({ children }) {
         };
       }
     }
-  }, [loadingPostUnpublishedPost, userId, unpublishedPost]);
+  }, [userId, unpublishedPost, loadingPostUnpublishedPost]);
 
   return (
     <PostContext.Provider
       value={{
         userId,
-        loadingPostUnpublishedPost,
         unpublishedPost,
         setUnpublishedPost,
-        loadingPostHeaderImageURL,
         setLoadingPostHeaderImageURL,
+        loadingPostHeaderImageURL,
+        loadingPostUnpublishedPost,
       }}
     >
       {children}

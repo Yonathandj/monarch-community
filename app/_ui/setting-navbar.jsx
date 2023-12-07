@@ -43,7 +43,7 @@ export function SettingNavbarMediumViewport() {
             pathname === settingNavbarItem.href
               ? "bg-muted hover:bg-muted"
               : "hover:bg-transparent hover:underline",
-            "justify-start",
+            "justify-between",
           )}
         >
           {settingNavbarItem.icon}
@@ -83,7 +83,7 @@ export function SettingNavbarSmallViewport() {
               key={settingNavbarItem.href}
               value={settingNavbarItem.href}
             >
-              <section className="flex gap-x-1">
+              <section className="flex gap-x-2">
                 {settingNavbarItem.icon}
                 {settingNavbarItem.title}
               </section>

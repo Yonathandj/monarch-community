@@ -7,18 +7,17 @@ import {
 } from "@/components/ui/card";
 import { UserAvatar } from "./user-avatar";
 
-import { getUserById } from "../_lib/data";
+import { getPublishedPostById } from "../_lib/data";
 
-export default async function UserCard({ userId, className }) {
-  const selectedUser = await getUserById(userId);
-
+export default async function UserCard({ postId }) {
+  const { userId: selectedUser } = await getPublishedPostById(postId);
   return (
     <Card
       className={`${className} mx-auto max-h-[300px] max-w-[400px] md:ml-4 lg:ml-0 lg:mt-4`}
     >
       <CardHeader>
         <CardTitle className="flex items-center gap-x-2">
-          <UserAvatar userId={userId} />
+          <UserAvatar selectedUser={selectedUser} />
           <h2 className="text-lg font-semibold">
             {selectedUser.clerk.fullName}
           </h2>

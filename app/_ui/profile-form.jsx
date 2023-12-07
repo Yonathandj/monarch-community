@@ -16,8 +16,9 @@ import {
   CardContent,
   CardDescription,
 } from "@/components/ui/card";
+import { UserAvatar } from "./user-avatar";
 
-export default function ProfileForm({ selectedUser }) {
+export default function ProfileForm({ currentUser }) {
   return (
     <form className="flex max-w-[500px] flex-col gap-y-4">
       <Card>
@@ -37,7 +38,7 @@ export default function ProfileForm({ selectedUser }) {
               id="fullname"
               name="fullName"
               placeholder="Enter your full name"
-              defaultValue={selectedUser.clerk.fullName}
+              defaultValue={currentUser.clerk.fullName}
             />
           </section>
           <section>
@@ -47,19 +48,14 @@ export default function ProfileForm({ selectedUser }) {
               type="email"
               name="email"
               placeholder="Enter your email"
-              defaultValue={selectedUser.clerk.email}
+              defaultValue={currentUser.clerk.email}
             />
           </section>
           <section>
             <Label htmlFor="profileImage">Profile Image</Label>
             <section className="mt-2 flex items-center gap-x-2">
               <section>
-                <Avatar className="h-12 w-12">
-                  <AvatarImage src={selectedUser.clerk.profileImageURL} />
-                  <AvatarFallback>
-                    {selectedUser.clerk.fullName.charAt(0)}
-                  </AvatarFallback>
-                </Avatar>
+                <UserAvatar currentUser={currentUser} />
               </section>
               <section>
                 <Input
@@ -90,7 +86,7 @@ export default function ProfileForm({ selectedUser }) {
               id="description"
               name="description"
               placeholder="Enter your description"
-              defaultValue={selectedUser.profile.description}
+              defaultValue={currentUser.profile.description}
             />
           </section>
           <section>
@@ -100,7 +96,7 @@ export default function ProfileForm({ selectedUser }) {
               type="text"
               name="work"
               placeholder="Fullstack at Google/Student at Harvard"
-              defaultValue={selectedUser.profile.work}
+              defaultValue={currentUser.profile.work}
             />
           </section>
           <section>
@@ -110,7 +106,7 @@ export default function ProfileForm({ selectedUser }) {
               type="text"
               name="location"
               placeholder="London, England"
-              defaultValue={selectedUser.profile.location}
+              defaultValue={currentUser.profile.location}
             />
           </section>
 
@@ -125,7 +121,7 @@ export default function ProfileForm({ selectedUser }) {
                 name="instagram"
                 autoComplete="off"
                 placeholder="Enter your Instagram link"
-                defaultValue={selectedUser.profile.socialMedia.instagram}
+                defaultValue={currentUser.profile.socialMedia.instagram}
               />
             </section>
             <section className="flex flex-col gap-y-2">
@@ -143,7 +139,7 @@ export default function ProfileForm({ selectedUser }) {
                 name="facebook"
                 autoComplete="off"
                 placeholder="Enter your Facebook link"
-                defaultValue={selectedUser.profile.socialMedia.facebook}
+                defaultValue={currentUser.profile.socialMedia.facebook}
               />
             </section>
             <section className="flex flex-col gap-y-2">
@@ -156,7 +152,7 @@ export default function ProfileForm({ selectedUser }) {
                 name="twitter"
                 autoComplete="off"
                 placeholder="Enter your Twitter link"
-                defaultValue={selectedUser.profile.socialMedia.twitter}
+                defaultValue={currentUser.profile.socialMedia.twitter}
               />
             </section>
             <section className="flex flex-col gap-y-2">
@@ -174,7 +170,7 @@ export default function ProfileForm({ selectedUser }) {
                 name="tiktok"
                 autoComplete="off"
                 placeholder="Enter your Tiktok link"
-                defaultValue={selectedUser.profile.socialMedia.tiktok}
+                defaultValue={currentUser.profile.socialMedia.tiktok}
               />
             </section>
           </section>
@@ -182,8 +178,8 @@ export default function ProfileForm({ selectedUser }) {
       </Card>
 
       <UpdateProfileButton
-        userId={selectedUser.clerk.userId}
-        profileImageURL={selectedUser.clerk.profileImageURL}
+        _id={currentUser._id}
+        profileImageURL={currentUser.clerk.profileImageURL}
       />
     </form>
   );

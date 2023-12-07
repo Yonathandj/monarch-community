@@ -9,13 +9,16 @@ import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/use-toast";
 import { GearIcon, PersonIcon } from "@radix-ui/react-icons";
 
-export default function UpdateProfileButton({ profileImageURL, userId }) {
-  const updateUserProfileActionWithId = userProfileAction.bind(null, userId);
+export default function UpdateProfileButton({ _id, profileImageURL }) {
+  const updateUserProfileActionWithUserId = userProfileAction.bind(null, _id);
 
   const { toast } = useToast();
   const { pending } = useFormStatus();
   const { edgestore } = useEdgeStore();
-  const [state, dispatch] = useFormState(updateUserProfileActionWithId, null);
+  const [state, dispatch] = useFormState(
+    updateUserProfileActionWithUserId,
+    null,
+  );
 
   useEffect(() => {
     if (state?.errorValidation?.fullName) {

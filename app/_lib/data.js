@@ -7,12 +7,12 @@ import connectDB from "./connectDB";
 
 import { unstable_noStore as noStore } from "next/cache";
 
-export const getUserById = async (userId) => {
+export const getUserById = async (_id) => {
     noStore()
     try {
         await connectDB()
-        const selectedUser = await user.findOne({ "clerk.userId": userId }).exec();
-        return selectedUser;
+        const currentUser = await user.findOne({ _id }).exec();
+        return currentUser;
     } catch (error) {
         throw new Error(`Failed to fetch current user! ${error}`);
     }
@@ -44,7 +44,7 @@ export const getPublishedPosts = async () => {
     noStore()
     try {
         await connectDB()
-        const publishedPosts = await post.find({ isPublished: true }).populate('userId', { clerk: 1, profile: 1, createdAt: 1 }).exec();
+        const publishedPosts = await post.find({ isPublished: true }).populate('userId').exec();
         return publishedPosts;
     } catch (error) {
         throw new Error(`Failed to fetch published posts! ${error}`);
@@ -55,7 +55,7 @@ export const getPublishedPostById = async (postId) => {
     noStore()
     try {
         await connectDB()
-        const publishedPost = await post.findOne({ _id: postId }).exec();
+        const publishedPost = await post.findOne({ _id: postId }).populate('userId').exec();
         return publishedPost;
     } catch (error) {
         throw new Error(`Failed to fetch published post! ${error}`);
