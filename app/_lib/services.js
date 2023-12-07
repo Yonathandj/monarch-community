@@ -100,13 +100,15 @@ export const deleteBookmarkService = async (userId, postId) => {
     }
 }
 
-export const updateUserService = async ({ userId, email, fullName, profileImageURL, description, instagram, facebook, twitter, tiktok }) => {
+export const updateUserService = async ({ userId, email, fullName, profileImageURL, description, instagram, facebook, twitter, tiktok, work, location }) => {
     try {
         connectDB();
         const data = profileImageURL ? {
             'clerk.email': email,
             'clerk.fullName': fullName,
             'clerk.profileImageURL': profileImageURL,
+            'profile.work': work,
+            'profile.location': location,
             'profile.description': description,
             'profile.socialMedia.tiktok': tiktok,
             'profile.socialMedia.twitter': twitter,
@@ -115,6 +117,8 @@ export const updateUserService = async ({ userId, email, fullName, profileImageU
         } : {
             'clerk.email': email,
             'clerk.fullName': fullName,
+            'profile.work': work,
+            'profile.location': location,
             'profile.description': description,
             'profile.socialMedia.tiktok': tiktok,
             'profile.socialMedia.twitter': twitter,

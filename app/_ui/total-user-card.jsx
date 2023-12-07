@@ -1,8 +1,8 @@
 import {
   Card,
+  CardTitle,
   CardFooter,
   CardHeader,
-  CardTitle,
   CardDescription,
 } from "@/components/ui/card";
 
@@ -11,7 +11,7 @@ import { getTotalUsers } from "../_lib/data";
 import SignInButton from "./sign-in-button";
 import SignUpButton from "./sign-up-button";
 
-export default async function UsersCard() {
+export default async function TotalUserCard() {
   const totalUsers = await getTotalUsers();
   return (
     <Card>

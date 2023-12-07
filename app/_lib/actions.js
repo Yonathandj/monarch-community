@@ -89,9 +89,11 @@ export async function userProfileAction(userId, prevState, formData) {
 
     const validationResult = validUserValidationSchema.safeParse({
         userId,
+        work: formData.get("work"),
         email: formData.get("email"),
         tiktok: formData.get("tiktok"),
         twitter: formData.get("twitter"),
+        location: formData.get("location"),
         fullName: formData.get("fullName"),
         facebook: formData.get("facebook"),
         instagram: formData.get("instagram"),
@@ -104,12 +106,12 @@ export async function userProfileAction(userId, prevState, formData) {
         }
     }
     try {
-        const { userId, email, fullName, profileImageURL, description, instagram, facebook, twitter, tiktok } = validationResult.data;
+        const { userId, email, fullName, profileImageURL, description, instagram, facebook, twitter, tiktok, work, location } = validationResult.data;
         const selectedUser = await getUserById(userId);
         if (!selectedUser) {
             throw new Error(`You are not sign up. Please sign up first! ${error}`)
         }
-        await updateUserService({ userId, email, fullName, profileImageURL, description, instagram, facebook, twitter, tiktok })
+        await updateUserService({ userId, email, fullName, profileImageURL, description, instagram, facebook, twitter, tiktok, work, location })
     } catch (error) {
         throw new Error(`Something went wrong with the system. Try again! ${error}`)
     }

@@ -93,6 +93,27 @@ export default function ProfileForm({ selectedUser }) {
               defaultValue={selectedUser.profile.description}
             />
           </section>
+          <section>
+            <Label htmlFor="work">Work</Label>
+            <Input
+              id="work"
+              type="text"
+              name="work"
+              placeholder="Fullstack at Google/Student at Harvard"
+              defaultValue={selectedUser.profile.work}
+            />
+          </section>
+          <section>
+            <Label htmlFor="location">Location</Label>
+            <Input
+              id="location"
+              type="text"
+              name="location"
+              placeholder="London, England"
+              defaultValue={selectedUser.profile.location}
+            />
+          </section>
+
           <section className="flex flex-col gap-y-2">
             <section className="flex flex-col gap-y-2">
               <Label htmlFor="instagram">

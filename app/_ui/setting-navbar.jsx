@@ -4,10 +4,10 @@ import { cn } from "@/lib/utils";
 
 import {
   Select,
-  SelectContent,
   SelectItem,
-  SelectTrigger,
   SelectValue,
+  SelectTrigger,
+  SelectContent,
 } from "@/components/ui/select";
 import { buttonVariants } from "@/components/ui/button";
 

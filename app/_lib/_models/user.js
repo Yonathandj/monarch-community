@@ -9,6 +9,8 @@ const userModelSchema = new mongoose.Schema({
         profileImageURL: { type: String, trim: true, default: '' },
     },
     profile: {
+        work: { type: String, trim: true, default: '' },
+        location: { type: String, trim: true, default: '' },
         description: { type: String, trim: true, default: '' },
         socialMedia: {
             instagram: { type: String, trim: true, default: '' },
