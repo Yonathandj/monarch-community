@@ -64,7 +64,7 @@ export default function WriteForm() {
 
   setTimeout(() => {
     setShowEditor(true);
-  }, 1000);
+  }, 3000);
 
   return (
     <section className="relative">

@@ -1,6 +1,5 @@
 import Link from "next/link";
 
-import UserCard from "./user-card";
 import { UserAvatar } from "./user-avatar";
 import { CardContent, CardHeader, CardTitle, Card } from "@/components/ui/card";
 
@@ -15,7 +14,7 @@ export default async function PostsCard() {
         <Card key={publishedPost._id} className="p-4">
           <CardHeader>
             <CardTitle className="flex items-center gap-x-2">
-              <UserAvatar currentUser={publishedPost.userId} />
+              <UserAvatar user={publishedPost.userId} />
               <section className="group relative">
                 <h2 className="font-bold">
                   {publishedPost.userId.clerk.fullName}
@@ -23,10 +22,6 @@ export default async function PostsCard() {
                 <p className="text-sm">
                   {publishedPost.createdAt.toISOString().split("T")[0] || "-"}
                 </p>
-                <UserCard
-                  currentUser={publishedPost.userId}
-                  className="absolute z-10 hidden group-hover:block"
-                />
               </section>
             </CardTitle>
           </CardHeader>

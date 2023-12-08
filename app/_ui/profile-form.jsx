@@ -54,7 +54,7 @@ export default function ProfileForm({ currentUser }) {
             <Label htmlFor="profileImage">Profile Image</Label>
             <section className="mt-2 flex items-center gap-x-2">
               <section>
-                <UserAvatar currentUser={currentUser} />
+                <UserAvatar user={currentUser} />
               </section>
               <section>
                 <Input

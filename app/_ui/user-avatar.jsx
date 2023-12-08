@@ -99,14 +99,11 @@ export function SignedOutUserAvatar() {
   );
 }
 
-export async function UserAvatar({ currentUser }) {
+export async function UserAvatar({ user }) {
   return (
     <Avatar className="h-12 w-12">
-      <AvatarImage
-        alt={currentUser.clerk.fullName}
-        src={currentUser.clerk.profileImageURL}
-      />
-      <AvatarFallback>{currentUser.clerk.fullName.charAt(0)}</AvatarFallback>
+      <AvatarImage alt={user.clerk.fullName} src={user.clerk.profileImageURL} />
+      <AvatarFallback>{user.clerk.fullName.charAt(0)}</AvatarFallback>
     </Avatar>
   );
 }
