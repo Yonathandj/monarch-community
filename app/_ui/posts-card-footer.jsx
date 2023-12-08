@@ -1,5 +1,6 @@
 import { auth } from "@clerk/nextjs";
 import {
+  getLikeById,
   getBookmarkById,
   getTotalLikesByPostId,
   getTotalBookmarksByPostId,
@@ -21,14 +22,14 @@ export default async function PostsCardFooter({ postId }) {
   const totalBookmarks = await getTotalBookmarksByPostId(postId);
   const bookmarkCurrentUser = await getBookmarkById(userId, postId);
   return (
-    <section className="flex gap-x-4">
-      <span className="flex gap-x-2">
+    <section className="flex gap-x-6">
+      <span className="flex items-center">
         {likeCurrentUser ? (
           <HeartFilledIcon className="mr-2 h-5 w-5 text-red-600" />
         ) : (
           <HeartIcon className="mr-2 h-5 w-5" />
         )}
-        <span>
+        <span className="text-sm">
           {!totalLikes
             ? `0 like and be the first`
             : totalLikes > 1
@@ -37,13 +38,13 @@ export default async function PostsCardFooter({ postId }) {
         </span>
       </span>
 
-      <span className="flex gap-x-2">
+      <span className="flex items-center">
         {bookmarkCurrentUser ? (
-          <BookmarkFilledIcon className="mr-2 h-5 w-5 text-red-600" />
+          <BookmarkFilledIcon className="mr-2 h-5 w-5 text-sky-600" />
         ) : (
           <BookmarkIcon className="mr-2 h-5 w-5" />
         )}
-        <span>
+        <span className="text-sm">
           {!totalBookmarks
             ? `0 bookmark and be the first`
             : totalBookmarks > 1

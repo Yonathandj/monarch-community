@@ -129,3 +129,30 @@ export const updateUserService = async ({ _id, email, fullName, profileImageURL,
         throw new Error(`Failed to delete bookmark! ${error}`)
     }
 }
+
+export const deleteAllBookmarkByPostId = async (postId) => {
+    try {
+        connectDB();
+        await bookmark.deleteMany({ postId });
+    } catch (error) {
+        throw new Error(`Failed to delete bookmark! ${error}`)
+    }
+}
+
+export const deleteAllLikeByPostId = async (postId) => {
+    try {
+        connectDB();
+        await like.deleteMany({ postId });
+    } catch (error) {
+        throw new Error(`Failed to delete bookmark! ${error}`)
+    }
+}
+
+export const deletePostByPostId = async (postId) => {
+    try {
+        connectDB();
+        await post.deleteOne({ _id: postId });
+    } catch (error) {
+        throw new Error(`Failed to delete bookmark! ${error}`)
+    }
+}

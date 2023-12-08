@@ -3,9 +3,9 @@
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 
-import { getBookmarkById, getLikeById, getPublishedPostById, getUnpublishedPost, getUserById } from "./data";
+import { getBookmarkById, getLikeById, getPostById, getPublishedPostById, getUnpublishedPost, getUserById } from "./data";
 import { bookmarkValidationSchema, likeValidationSchema, postValidationSchema, userValidationSchema } from "./validations"
-import { addBookmarkService, addLikeService, deleteBookmarkService, deleteLikeService, publishPostService, updateUserService } from "./services";
+import { addBookmarkService, addLikeService, deleteAllBookmarkByPostId, deleteAllLikeByPostId, deleteBookmarkService, deleteLikeService, deletePostByPostId, publishPostService, updateUserService } from "./services";
 
 export async function publishPostAction(userId, prevState, formData) {
     const validationResult = postValidationSchema.safeParse({ userId })
@@ -120,4 +120,23 @@ export async function userProfileAction(_id, prevState, formData) {
     return {
         successMessage: `Profile user successfully updated`
     }
+}
+
+export async function deletePostAction(postId, prevState, formData) {
+    if (!postId) {
+        return;
+    }
+    try {
+        const postExistence = await getPostById(postId);
+        if (!postExistence) {
+            return {
+                errorPost: 'Post you are going to delete not found! Please try again!'
+            }
+        } else {
+            await Promise.all([deleteAllLikeByPostId(postId), deleteAllBookmarkByPostId(postId), deletePostByPostId(postId)])
+        }
+    } catch (error) {
+        throw new Error(`Something went wrong with the system. Try again! ${error}`)
+    }
+    revalidatePath('/setting/posts')
 }

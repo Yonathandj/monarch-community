@@ -40,6 +40,28 @@ export const getUnpublishedPost = async (userId) => {
     }
 }
 
+export const getAllPostByUserId = async (userId) => {
+    noStore()
+    try {
+        await connectDB()
+        const allPost = await post.find({ userId }).exec();
+        return allPost;
+    } catch (error) {
+        throw new Error(`Failed to fetch unpublished post! ${error}`);
+    }
+}
+
+export const getPostById = async (postId) => {
+    noStore()
+    try {
+        await connectDB()
+        const selectedPost = await post.findOne({ _id: postId }).exec();
+        return selectedPost;
+    } catch (error) {
+        throw new Error(`Failed to fetch unpublished post! ${error}`);
+    }
+}
+
 export const getPublishedPosts = async () => {
     noStore()
     try {

@@ -69,7 +69,7 @@ export default function WriteForm() {
   return (
     <section className="relative">
       {loadingPostUnpublishedPost ? <Loading /> : null}
-      <form className="mx-auto flex max-w-[800px] flex-col gap-y-2 p-4">
+      <form className="mx-auto flex max-w-[800px] flex-col gap-y-2 p-6">
         <SingleImageDropzone
           width={450}
           height={250}

@@ -15,7 +15,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 
-import { ImageIcon, PersonIcon } from "@radix-ui/react-icons";
+import { IdCardIcon, ImageIcon, PersonIcon } from "@radix-ui/react-icons";
 const settingNavbarItems = [
   {
     title: "Preview",
@@ -26,6 +26,11 @@ const settingNavbarItems = [
     title: "Profile",
     href: "/setting/profile",
     icon: <PersonIcon className="mr-2 h-4 w-4" />,
+  },
+  {
+    title: "Post(s)",
+    href: "/setting/posts",
+    icon: <IdCardIcon className="mr-2 h-4 w-4" />,
   },
 ];
 
@@ -43,7 +48,7 @@ export function SettingNavbarMediumViewport() {
             pathname === settingNavbarItem.href
               ? "bg-muted hover:bg-muted"
               : "hover:bg-transparent hover:underline",
-            "justify-between",
+            "justify-start",
           )}
         >
           {settingNavbarItem.icon}
@@ -83,7 +88,7 @@ export function SettingNavbarSmallViewport() {
               key={settingNavbarItem.href}
               value={settingNavbarItem.href}
             >
-              <section className="flex gap-x-2">
+              <section className="flex items-center gap-x-2">
                 {settingNavbarItem.icon}
                 {settingNavbarItem.title}
               </section>

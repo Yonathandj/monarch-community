@@ -18,7 +18,7 @@ export default async function PostsCard() {
   return (
     <section className="mx-auto flex max-w-[600px] flex-col gap-y-4">
       {publishedPosts.map((publishedPost) => (
-        <Card key={publishedPost._id} className="p-4">
+        <Card key={publishedPost._id} className="p-2">
           <CardHeader>
             <CardTitle className="flex items-center gap-x-2">
               <UserAvatar user={publishedPost.userId} />
