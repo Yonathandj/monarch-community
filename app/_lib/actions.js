@@ -43,8 +43,8 @@ export async function likeAction(userId, postId, formData) {
     }
     try {
         const { userId, postId } = validationResult.data
-        const publishedPost = await getPublishedPostById(postId)
-        if (!publishedPost) {
+        const publishedPostExistence = await getPublishedPostById(postId)
+        if (!publishedPostExistence) {
             return;
         } else {
             const likedAlready = await getLikeById(userId, postId);
@@ -67,12 +67,12 @@ export async function bookmarkAction(userId, postId, formData) {
     }
     try {
         const { userId, postId } = validationResult.data
-        const publishedPost = await getPublishedPostById(postId)
-        if (!publishedPost) {
+        const publishedPostExistence = await getPublishedPostById(postId)
+        if (!publishedPostExistence) {
             return;
         } else {
-            const bookmarkAlready = await getBookmarkById(userId, postId);
-            if (bookmarkAlready) {
+            const bookmarkedAlready = await getBookmarkById(userId, postId);
+            if (bookmarkedAlready) {
                 await deleteBookmarkService(userId, postId);
             } else {
                 await addBookmarkService(userId, postId)
@@ -107,8 +107,9 @@ export async function userProfileAction(_id, prevState, formData) {
     }
     try {
         const { _id, email, fullName, profileImageURL, work, location, instagram, facebook, twitter, tiktok, description } = validationResult.data;
-        const currentUser = await getUserById(_id);
-        if (!currentUser) {
+
+        const userExistence = await getUserById(_id);
+        if (!userExistence) {
             throw new Error(`You are not sign up. Please sign up first! ${error}`)
         }
         await updateUserService({ _id, email, fullName, profileImageURL, work, location, instagram, facebook, twitter, tiktok, description })
