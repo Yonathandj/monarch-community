@@ -1,7 +1,14 @@
 import Link from "next/link";
 
 import { UserAvatar } from "./user-avatar";
-import { CardContent, CardHeader, CardTitle, Card } from "@/components/ui/card";
+import PostsCardFooter from "./posts-card-footer";
+import {
+  CardContent,
+  CardHeader,
+  CardFooter,
+  CardTitle,
+  Card,
+} from "@/components/ui/card";
 
 import { getPublishedPosts } from "../_lib/data";
 
@@ -43,6 +50,9 @@ export default async function PostsCard() {
                 : null}
             </section>
           </CardContent>
+          <CardFooter>
+            <PostsCardFooter postId={publishedPost._id} />
+          </CardFooter>
         </Card>
       ))}
     </section>

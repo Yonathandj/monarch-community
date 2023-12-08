@@ -15,9 +15,8 @@ import {
   CardContent,
   CardDescription,
 } from "@/components/ui/card";
-import { UserAvatar } from "./user-avatar";
 
-export default function ProfileForm({ currentUser }) {
+export default function ProfileForm({ currentUser, children }) {
   return (
     <form className="flex max-w-[500px] flex-col gap-y-4">
       <Card>
@@ -53,9 +52,7 @@ export default function ProfileForm({ currentUser }) {
           <section>
             <Label htmlFor="profileImage">Profile Image</Label>
             <section className="mt-2 flex items-center gap-x-2">
-              <section>
-                <UserAvatar user={currentUser} />
-              </section>
+              <section>{children}</section>
               <section>
                 <Input
                   type="file"

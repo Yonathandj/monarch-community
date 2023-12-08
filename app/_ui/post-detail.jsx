@@ -33,9 +33,9 @@ export default async function PostDetail({ postId }) {
             ))
           : null}
       </section>
-      <h2 className="mt-4 text-center text-4xl font-bold">
+      <h1 className="mt-4 text-center text-4xl font-bold">
         {publishedPost.data.title}
-      </h2>
+      </h1>
       <section className="mt-2">
         <Editor
           editable={false}
