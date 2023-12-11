@@ -8,7 +8,7 @@ import { PostContext } from "../_provider/post-context-provider";
 
 const Editor = dynamic(() => import("@/components/ui/editor"), { ssr: false });
 
-export default function Preview() {
+export default function PostPreview() {
   const { unpublishedPost } = useContext(PostContext);
   return (
     <section className="mx-auto flex max-w-[800px] flex-col items-center justify-center p-4">

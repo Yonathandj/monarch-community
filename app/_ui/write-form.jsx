@@ -7,7 +7,7 @@ import { publishPostAction } from "../_lib/actions";
 import { PostContext } from "../_provider/post-context-provider";
 
 import Loading from "./loading";
-import PublishButton from "./publish-button";
+import PostPublishButton from "./post-publish-button";
 
 import { useFormState } from "react-dom";
 import { useEdgeStore } from "../_lib/edgestore";
@@ -146,7 +146,7 @@ export default function WriteForm() {
         ) : null}
 
         <section className="mt-16">
-          <PublishButton dispatch={dispatch} />
+          <PostPublishButton dispatch={dispatch} />
         </section>
       </form>
     </section>

@@ -1,6 +1,8 @@
-import Preview from "@/app/_ui/preview";
 import WriteForm from "@/app/_ui/write-form";
+import PostPreview from "@/app/_ui/post-preview";
 
 export default async function Page({ searchParams: { preview } }) {
-  return <main className="mt-6">{preview ? <Preview /> : <WriteForm />}</main>;
+  return (
+    <main className="mt-6">{preview ? <PostPreview /> : <WriteForm />}</main>
+  );
 }
