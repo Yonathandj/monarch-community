@@ -124,13 +124,13 @@ export async function userProfileAction(_id, prevState, formData) {
 
 export async function deletePostAction(postId, prevState, formData) {
     if (!postId) {
-        return;
+        return revalidatePath('/setting/posts');
     }
     try {
         const postExistence = await getPostById(postId);
         if (!postExistence) {
             return {
-                errorPost: 'Post you are going to delete not found! Please try again!'
+                errorPostExistence: 'Post you are going to delete not found! Please try again!'
             }
         } else {
             await Promise.all([deleteAllLikeByPostId(postId), deleteAllBookmarkByPostId(postId), deletePostByPostId(postId)])
@@ -138,5 +138,5 @@ export async function deletePostAction(postId, prevState, formData) {
     } catch (error) {
         throw new Error(`Something went wrong with the system. Try again! ${error}`)
     }
-    revalidatePath('/setting/posts')
+    revalidatePath('/setting/posts');
 }

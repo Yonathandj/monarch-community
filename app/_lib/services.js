@@ -135,7 +135,7 @@ export const deleteAllBookmarkByPostId = async (postId) => {
         connectDB();
         await bookmark.deleteMany({ postId });
     } catch (error) {
-        throw new Error(`Failed to delete bookmark! ${error}`)
+        throw new Error(`Failed to delete bookmark(s)! ${error}`)
     }
 }
 
@@ -144,7 +144,7 @@ export const deleteAllLikeByPostId = async (postId) => {
         connectDB();
         await like.deleteMany({ postId });
     } catch (error) {
-        throw new Error(`Failed to delete bookmark! ${error}`)
+        throw new Error(`Failed to delete like(s)! ${error}`)
     }
 }
 
@@ -153,6 +153,6 @@ export const deletePostByPostId = async (postId) => {
         connectDB();
         await post.deleteOne({ _id: postId });
     } catch (error) {
-        throw new Error(`Failed to delete bookmark! ${error}`)
+        throw new Error(`Failed to delete post! ${error}`)
     }
 }

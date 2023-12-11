@@ -42,6 +42,7 @@ export default async function PostsTable({ userId }) {
                 <TableRow key={post._id}>
                   <TableCell className="font-medium">
                     <Link
+                      className="hover:underline"
                       href={
                         post.isPublished ? `/posts/${post._id}` : "/posts/write"
                       }
@@ -53,21 +54,18 @@ export default async function PostsTable({ userId }) {
                     {post.isPublished ? `Published post` : "Unpublished post"}
                   </TableCell>
                   <TableCell>
-                    {post.isPublished ? (
-                      <Button asChild className="rounded-2xl bg-yellow-400">
-                        <Link href={`/posts/${post._id}/update`}>
-                          <Pencil1Icon className="mr-2 h-4 w-4" />
-                          Update
-                        </Link>
-                      </Button>
-                    ) : (
-                      <Button asChild className="rounded-2xl bg-yellow-400">
-                        <Link href="/posts/write">
-                          <Pencil1Icon className="mr-2 h-4 w-4" />
-                          Update
-                        </Link>
-                      </Button>
-                    )}
+                    <Button asChild className="rounded-2xl bg-yellow-400">
+                      <Link
+                        href={
+                          post.isPublished
+                            ? `/posts/${post._id}/update`
+                            : "/posts/write"
+                        }
+                      >
+                        <Pencil1Icon className="mr-2 h-4 w-4" />
+                        Update
+                      </Link>
+                    </Button>
                   </TableCell>
                   <TableCell>
                     <form className="w-full">
@@ -104,6 +102,7 @@ export default async function PostsTable({ userId }) {
                 <TableRow key={post._id}>
                   <TableCell className="font-medium">
                     <Link
+                      className="hover:underline"
                       href={
                         post.isPublished ? `/posts/${post._id}` : "/posts/write"
                       }
@@ -115,22 +114,19 @@ export default async function PostsTable({ userId }) {
                     {post.isPublished ? `Published post` : "Unpublished post"}
                   </TableCell>
                   <TableCell className="flex flex-col gap-y-2">
-                    {post.isPublished ? (
-                      <Button asChild className="rounded-2xl bg-yellow-400">
-                        <Link href={`/posts/${post._id}/update`}>
-                          <Pencil1Icon className="mr-2 h-4 w-4" />
-                          Update
-                        </Link>
-                      </Button>
-                    ) : (
-                      <Button asChild className="rounded-2xl bg-yellow-400">
-                        <Link href="/posts/write">
-                          <Pencil1Icon className="mr-2 h-4 w-4" />
-                          Update
-                        </Link>
-                      </Button>
-                    )}
-                    <form>
+                    <Button asChild className="rounded-2xl bg-yellow-400">
+                      <Link
+                        href={
+                          post.isPublished
+                            ? `/posts/${post._id}/update`
+                            : "/posts/write"
+                        }
+                      >
+                        <Pencil1Icon className="mr-2 h-4 w-4" />
+                        Update
+                      </Link>
+                    </Button>
+                    <form className="w-full">
                       <DeletePostButton
                         postId={post._id}
                         profileImageURL={post.data.profileImageURL}

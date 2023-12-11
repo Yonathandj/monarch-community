@@ -29,6 +29,8 @@ export default function DeletePostButton({ postId, profileImageURL }) {
 
   return (
     <Button
+      disabled={pending}
+      className="w-full rounded-2xl"
       formAction={async (formData) => {
         if (profileImageURL) {
           await edgestore.publicImages.delete({
@@ -37,8 +39,6 @@ export default function DeletePostButton({ postId, profileImageURL }) {
         }
         dispatch(formData);
       }}
-      disabled={pending}
-      className="w-full rounded-2xl"
     >
       {pending ? (
         <GearIcon className="mr-2 h-4 w-4 animate-spin" />
