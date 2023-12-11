@@ -16,7 +16,7 @@ import {
   CardDescription,
 } from "@/components/ui/card";
 
-export default function ProfileForm({ currentUser, children }) {
+export default function UpdateProfileForm({ currentUser, children }) {
   return (
     <form className="flex max-w-[500px] flex-col gap-y-4">
       <Card>
