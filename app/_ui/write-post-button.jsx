@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 
 import { Pencil2Icon } from "@radix-ui/react-icons";
 
-export default function WriteButton() {
+export default function WritePostButton() {
   return (
     <Button asChild className="w-full rounded-2xl">
       <Link href={"/posts/write"}>
@@ -15,7 +15,7 @@ export default function WriteButton() {
   );
 }
 
-export function WriteButtonUserAvatar() {
+export function WritePostButtonUserAvatar() {
   return (
     <Link
       href={"/posts/write"}

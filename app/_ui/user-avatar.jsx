@@ -13,11 +13,11 @@ import {
   DropdownMenuSeparator,
 } from "@/components/ui/dropdown-menu";
 
-import { WriteButtonUserAvatar } from "./write-button";
-import { SettingButtonUserAvatar } from "./setting-button";
-import { SignOutButtonUserAvatar } from "./sign-out-button";
 import { SignInButtonUserAvatar } from "./sign-in-button";
 import { SignUpButtonUserAvatar } from "./sign-up-button";
+import { SettingButtonUserAvatar } from "./setting-button";
+import { SignOutButtonUserAvatar } from "./sign-out-button";
+import { WritePostButtonUserAvatar } from "./write-post-button";
 
 export default async function SignedInUserAvatar() {
   const { userId: _id } = auth();
@@ -49,7 +49,7 @@ export default async function SignedInUserAvatar() {
 
         <DropdownMenuGroup>
           <DropdownMenuItem>
-            <WriteButtonUserAvatar />
+            <WritePostButtonUserAvatar />
           </DropdownMenuItem>
           <DropdownMenuItem>
             <SettingButtonUserAvatar />

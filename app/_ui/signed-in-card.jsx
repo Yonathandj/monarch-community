@@ -9,8 +9,8 @@ import {
 import { auth } from "@clerk/nextjs";
 import { getUserById } from "../_lib/data";
 
-import WriteButton from "./write-button";
 import SignOutButton from "./sign-out-button";
+import WritePostButton from "./write-post-button";
 
 export default async function SignedInCard() {
   const { userId: _id } = auth();
@@ -31,7 +31,7 @@ export default async function SignedInCard() {
         </CardDescription>
       </CardHeader>
       <CardFooter className="flex flex-col gap-y-4 sm:flex-row sm:gap-x-4">
-        <WriteButton />
+        <WritePostButton />
         <SignOutButton />
       </CardFooter>
     </Card>

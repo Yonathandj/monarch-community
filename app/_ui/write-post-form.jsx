@@ -20,7 +20,7 @@ import { TagsInput } from "react-tag-input-component";
 import { SingleImageDropzone } from "@/components/ui/single-image-dropzone";
 const Editor = dynamic(() => import("@/components/ui/editor"), { ssr: false });
 
-export default function WriteForm() {
+export default function WritePostForm() {
   const {
     userId,
     unpublishedPost,

@@ -1,7 +1,7 @@
 import Logo from "./logo";
 import WritePreviewSwitcher from "./write-preview-switcher";
 
-export default function WriteNavbar() {
+export default function WritePostNavbar() {
   return (
     <header>
       <nav className="flex items-center justify-between px-4 py-2">
