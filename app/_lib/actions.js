@@ -140,3 +140,8 @@ export async function deletePostAction(postId, prevState, formData) {
     }
     revalidatePath('/setting/posts');
 }
+
+export async function updatePostAction(postId, updatedPublishedPost, prevState, formData) {
+    console.log(postId)
+    console.log(updatedPublishedPost)
+}

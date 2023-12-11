@@ -39,7 +39,6 @@ export default async function PostDetail({ postId }) {
       <section className="mt-2">
         <Editor
           editable={false}
-          fromPostDetail={true}
           publishedPost={publishedPost.data.content}
         />
       </section>

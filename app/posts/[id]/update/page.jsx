@@ -14,7 +14,7 @@ export default async function Page({ params: { id: postId } }) {
 
   return (
     <main className="mt-6">
-      <UpdatePostForm publishedPost={publishedPost} />
+      <UpdatePostForm publishedPost={publishedPost} postId={postId} />
     </main>
   );
 }
