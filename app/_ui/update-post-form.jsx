@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import dynamic from "next/dynamic";
 import { useDebouncedCallback } from "use-debounce";
 
 import { Textarea } from "@/components/ui/textarea";

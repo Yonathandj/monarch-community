@@ -54,7 +54,11 @@ export default async function PostsTable({ userId }) {
                     {post.isPublished ? `Published post` : "Unpublished post"}
                   </TableCell>
                   <TableCell>
-                    <Button asChild className="rounded-2xl bg-yellow-400">
+                    <Button
+                      asChild
+                      variant="secondary"
+                      className="rounded-2xl bg-yellow-400"
+                    >
                       <Link
                         href={
                           post.isPublished
@@ -114,7 +118,11 @@ export default async function PostsTable({ userId }) {
                     {post.isPublished ? `Published post` : "Unpublished post"}
                   </TableCell>
                   <TableCell className="flex flex-col gap-y-2">
-                    <Button asChild className="rounded-2xl bg-yellow-400">
+                    <Button
+                      asChild
+                      variant="secondary"
+                      className="rounded-2xl bg-yellow-400"
+                    >
                       <Link
                         href={
                           post.isPublished
