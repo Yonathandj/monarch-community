@@ -6,12 +6,12 @@ import "@blocknote/core/style.css";
 import { BlockNoteView, useBlockNote } from "@blocknote/react";
 
 export default function Editor({
-  editable,
-  publishedPost,
-  unpublishedPost,
-  setUnpublishedPost,
-  updatedPublishedPost,
-  setUpdatedPublishedPost,
+  editable = false,
+  publishedPost = null,
+  unpublishedPost = null,
+  setUnpublishedPost = null,
+  updatedPublishedPost = null,
+  setUpdatedPublishedPost = null,
 }) {
   const onContentChange = useDebouncedCallback((topLevelBlocks) => {
     updatedPublishedPost

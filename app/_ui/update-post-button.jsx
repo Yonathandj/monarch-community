@@ -13,11 +13,7 @@ export default function UpdatePostButton({
   updatedPublishedPost,
   setUpdatedPublishedPost,
 }) {
-  const updatePostActionWithId = updatePostAction.bind(
-    null,
-    postId,
-    updatedPublishedPost,
-  );
+  const updatePostActionWithId = updatePostAction.bind(null, postId);
 
   const { pending } = useFormStatus();
   const { edgestore } = useEdgeStore();
@@ -26,7 +22,8 @@ export default function UpdatePostButton({
   return (
     <Button
       disabled={pending}
-      className="rounded-2xl bg-yellow-600"
+      variant="secondary"
+      className="rounded-2xl bg-yellow-400"
       formAction={async (formData) => {
         if (!initialHeaderImageURL && updatedPublishedPost.headerImageURL) {
           const response = await edgestore.publicImages.upload({
