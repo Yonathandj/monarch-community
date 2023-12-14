@@ -70,9 +70,8 @@ export default function UpdatePostForm({ publishedPost, postId }) {
       <section className="mt-16">
         <UpdatePostButton
           postId={postId}
-          initialHeaderImageURL={initialHeaderImageURL}
           updatedPublishedPost={updatedPublishedPost}
-          setUpdatedPublishedPost={setUpdatedPublishedPost}
+          initialHeaderImageURL={initialHeaderImageURL}
         />
       </section>
     </form>

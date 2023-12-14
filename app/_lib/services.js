@@ -156,3 +156,18 @@ export const deletePostByPostId = async (postId) => {
         throw new Error(`Failed to delete post! ${error}`)
     }
 }
+
+export const updatePostByPostId = async ({ postId, title, tags, content, headerImageURL }) => {
+    try {
+        connectDB();
+        const data = {
+            'data.tags': tags,
+            'data.title': title,
+            'data.content': content,
+            'data.headerImageURL': headerImageURL,
+        }
+        await post.updateOne({ _id: postId }, data);
+    } catch (error) {
+        throw new Error(`Failed to delete post! ${error}`)
+    }
+}

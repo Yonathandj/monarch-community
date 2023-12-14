@@ -5,7 +5,7 @@ import { revalidatePath } from "next/cache";
 
 import { getBookmarkById, getLikeById, getPostById, getPublishedPostById, getUnpublishedPost, getUserById } from "./data";
 import { bookmarkValidationSchema, likeValidationSchema, postValidationSchema, userValidationSchema } from "./validations"
-import { addBookmarkService, addLikeService, deleteAllBookmarkByPostId, deleteAllLikeByPostId, deleteBookmarkService, deleteLikeService, deletePostByPostId, publishPostService, updateUserService } from "./services";
+import { addBookmarkService, addLikeService, deleteAllBookmarkByPostId, deleteAllLikeByPostId, deleteBookmarkService, deleteLikeService, deletePostByPostId, publishPostService, updatePostByPostId, updateUserService } from "./services";
 
 export async function publishPostAction(userId, prevState, formData) {
     const validationResult = postValidationSchema.safeParse({ userId })
@@ -141,7 +141,29 @@ export async function deletePostAction(postId, prevState, formData) {
     revalidatePath('/setting/posts');
 }
 
-export async function updatePostAction(postId, prevState, formData) {
-    console.log(postId)
-    console.log(formData)
+export async function updatePostAction(postId, updatedPublishedPost, prevState, formData) {
+    const parsedUpdatedPublishedPost = JSON.parse(updatedPublishedPost);
+    const headerImageURL = formData.get("validHeaderImageURL");
+
+    if (!postId) {
+        return revalidatePath('/setting/posts');
+    }
+    if (parsedUpdatedPublishedPost.title === "") {
+        return {
+            errorTitle: 'No title found. Please provide a suitable title first!'
+        }
+    }
+    try {
+        const postExistence = await getPostById(postId);
+        if (!postExistence) {
+            return {
+                errorPostExistence: 'Post you are going to update not found! Please try again!'
+            }
+        } else {
+            await updatePostByPostId({ postId, tags: parsedUpdatedPublishedPost.tags, title: parsedUpdatedPublishedPost.title, content: parsedUpdatedPublishedPost.content, headerImageURL })
+        }
+    } catch (error) {
+        throw new Error(`Something went wrong with the system. Try again! ${error}`)
+    }
+    redirect('/setting/posts')
 }

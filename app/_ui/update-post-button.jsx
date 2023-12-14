@@ -1,23 +1,44 @@
 "use client";
 
+import { useEffect } from "react";
 import { useEdgeStore } from "../_lib/edgestore";
 import { updatePostAction } from "../_lib/actions";
 import { useFormStatus, useFormState } from "react-dom";
 
 import { Button } from "@/components/ui/button";
+import { useToast } from "@/components/ui/use-toast";
 import { GearIcon, PersonIcon } from "@radix-ui/react-icons";
 
 export default function UpdatePostButton({
   postId,
-  initialHeaderImageURL,
   updatedPublishedPost,
-  setUpdatedPublishedPost,
+  initialHeaderImageURL,
 }) {
-  const updatePostActionWithId = updatePostAction.bind(null, postId);
+  const updatePostActionWithId = updatePostAction.bind(
+    null,
+    postId,
+    JSON.stringify(updatedPublishedPost),
+  );
 
+  const { toast } = useToast();
   const { pending } = useFormStatus();
   const { edgestore } = useEdgeStore();
   const [state, dispatch] = useFormState(updatePostActionWithId, null);
+
+  useEffect(() => {
+    if (state?.errorPostExistence) {
+      toast({
+        title: "Something went wrong",
+        description: state.errorPostExistence,
+      });
+    }
+    if (state?.errorTitle) {
+      toast({
+        title: "Something went wrong",
+        description: state.errorTitle,
+      });
+    }
+  }, [state, toast]);
 
   return (
     <Button
@@ -29,10 +50,7 @@ export default function UpdatePostButton({
           const response = await edgestore.publicImages.upload({
             file: updatedPublishedPost.headerImageURL,
           });
-          setUpdatedPublishedPost({
-            ...updatedPublishedPost,
-            headerImageURL: response.url,
-          });
+          formData.set("validHeaderImageURL", response.url);
         } else if (
           initialHeaderImageURL &&
           !updatedPublishedPost.headerImageURL
@@ -40,10 +58,7 @@ export default function UpdatePostButton({
           await edgestore.publicImages.delete({
             url: initialHeaderImageURL,
           });
-          setUpdatedPublishedPost({
-            ...updatedPublishedPost,
-            headerImageURL: "",
-          });
+          formData.set("validHeaderImageURL", "");
         } else if (
           initialHeaderImageURL &&
           updatedPublishedPost.headerImageURL &&
@@ -55,10 +70,9 @@ export default function UpdatePostButton({
               replaceTargetUrl: initialHeaderImageURL,
             },
           });
-          setUpdatedPublishedPost({
-            ...updatedPublishedPost,
-            headerImageURL: response.url,
-          });
+          formData.set("validHeaderImageURL", response.url);
+        } else {
+          formData.set("validHeaderImageURL", initialHeaderImageURL);
         }
         dispatch(formData);
       }}
