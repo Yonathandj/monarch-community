@@ -20,7 +20,7 @@ export const metadata = {
   },
   description: "Share your ideas with people around the world through blogs",
   icons: {
-    icon: "/favicon-96x96.png",
+    icon: "/favicon.png",
   },
 };
 
