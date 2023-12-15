@@ -31,7 +31,7 @@ export default async function PostsCardFooter({ postId }) {
         )}
         <span className="text-sm">
           {!totalLikes
-            ? `0 like and be the first`
+            ? `0 like & be first`
             : totalLikes > 1
               ? `${totalLikes} likes`
               : `${totalLikes} like`}
@@ -46,7 +46,7 @@ export default async function PostsCardFooter({ postId }) {
         )}
         <span className="text-sm">
           {!totalBookmarks
-            ? `0 bookmark and be the first`
+            ? `0 bookmark & be first`
             : totalBookmarks > 1
               ? `${totalBookmarks} bookmarks`
               : `${totalBookmarks} bookmark`}

@@ -15,7 +15,7 @@ export default function MainNavbar() {
           </section>
           <Search />
         </section>
-        <section className="mt-2 block md:hidden">
+        <section className="mt-2">
           <section className="flex items-center gap-x-4">
             <section>
               <SignedIn>

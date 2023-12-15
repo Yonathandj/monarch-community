@@ -7,7 +7,7 @@ import { LightningBoltIcon } from "@radix-ui/react-icons";
 export default function SignUpButton() {
   return (
     <SignUpButtonClerk>
-      <Button variant="secondary" className="rounded-2xl">
+      <Button className="rounded-2xl">
         <LightningBoltIcon className="mr-2 h-4 w-4" />
         Sign Up
       </Button>
