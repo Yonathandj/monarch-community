@@ -1,14 +1,14 @@
 import WriteUpdatePostNavbar from "@/app/_ui/write-update-post-navbar";
 
-import WritePostContextProvider from "@/app/_provider/write-post-context-provider";
+import UpdatePostContextProvider from "@/app/_provider/update-post-context-provider";
 
 export default function Layout({ children }) {
   return (
     <>
-      <WritePostContextProvider>
+      <UpdatePostContextProvider>
         <WriteUpdatePostNavbar />
         {children}
-      </WritePostContextProvider>
+      </UpdatePostContextProvider>
     </>
   );
 }

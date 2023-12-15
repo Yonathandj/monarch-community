@@ -3,9 +3,9 @@
 import { useAuth } from "@clerk/nextjs";
 import { createContext, useEffect, useRef, useState } from "react";
 
-export const PostContext = createContext(null);
+export const WritePostContext = createContext(null);
 
-export default function PostContextProvider({ children }) {
+export default function WritePostContextProvider({ children }) {
   const { userId } = useAuth();
 
   const firstRender = useRef(true);
@@ -70,7 +70,7 @@ export default function PostContextProvider({ children }) {
   }, [userId, unpublishedPost, loadingPostUnpublishedPost]);
 
   return (
-    <PostContext.Provider
+    <WritePostContext.Provider
       value={{
         userId,
         unpublishedPost,
@@ -81,6 +81,6 @@ export default function PostContextProvider({ children }) {
       }}
     >
       {children}
-    </PostContext.Provider>
+    </WritePostContext.Provider>
   );
 }

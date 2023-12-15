@@ -4,7 +4,7 @@ import dynamic from "next/dynamic";
 
 import { publishPostAction } from "../_lib/actions";
 
-import { PostContext } from "../_provider/post-context-provider";
+import { WritePostContext } from "../_provider/write-post-context-provider";
 
 import Loading from "./loading";
 import PostPublishButton from "./post-publish-button";
@@ -28,7 +28,7 @@ export default function WritePostForm() {
     setLoadingPostHeaderImageURL,
     loadingPostHeaderImageURL,
     loadingPostUnpublishedPost,
-  } = useContext(PostContext);
+  } = useContext(WritePostContext);
 
   const updatePublishPostActionWithUserId = publishPostAction.bind(
     null,
