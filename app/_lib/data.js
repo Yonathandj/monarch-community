@@ -117,6 +117,17 @@ export const getLikesByUserId = async (userId) => {
     }
 }
 
+export const getBookmarksByUserId = async (userId) => {
+    noStore()
+    try {
+        await connectDB()
+        const bookmarks = await bookmark.find({ userId }).populate('postId', { _id: 1, data: 1 }).exec();
+        return bookmarks;
+    } catch (error) {
+        throw new Error(`Failed to fetch bookmarks! ${error}`);
+    }
+}
+
 export const getBookmarkById = async (userId, postId) => {
     noStore()
     try {

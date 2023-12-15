@@ -157,6 +157,15 @@ export const deleteLikeByLikeId = async (likeId) => {
     }
 }
 
+export const deleteBookmarkByBookmarkId = async (bookmarkId) => {
+    try {
+        connectDB();
+        await bookmark.deleteOne({ _id: bookmarkId });
+    } catch (error) {
+        throw new Error(`Failed to delete bookmark! ${error}`)
+    }
+}
+
 export const deletePostByPostId = async (postId) => {
     try {
         connectDB();
