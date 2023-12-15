@@ -12,7 +12,7 @@ export default async function UserCard({ postId }) {
   const { userId: user } = await getPublishedPostById(postId);
 
   return (
-    <Card className="mx-auto max-h-[400px] max-w-[300px] md:ml-4 lg:ml-0 lg:mt-4">
+    <Card className="mx-auto max-h-[400px] max-w-[350px] md:ml-4 lg:ml-0 lg:mt-4">
       <CardHeader>
         <CardTitle className="flex items-center gap-x-2 text-lg">
           <UserAvatar user={user} />

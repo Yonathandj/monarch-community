@@ -15,7 +15,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 
-import { IdCardIcon, ImageIcon, PersonIcon } from "@radix-ui/react-icons";
+import { HeartFilledIcon, IdCardIcon, ImageIcon, PersonIcon } from "@radix-ui/react-icons";
 const settingNavbarItems = [
   {
     title: "Preview",
@@ -31,6 +31,11 @@ const settingNavbarItems = [
     title: "Post(s)",
     href: "/setting/posts",
     icon: <IdCardIcon className="mr-2 h-4 w-4" />,
+  },
+  {
+    title: "Like(s)",
+    href: "/setting/likes",
+    icon: <HeartFilledIcon className="mr-2 h-4 w-4" />,
   },
 ];
 

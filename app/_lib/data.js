@@ -106,6 +106,17 @@ export const getTotalLikesByPostId = async (postId) => {
     }
 }
 
+export const getLikesByUserId = async (userId) => {
+    noStore()
+    try {
+        await connectDB()
+        const likes = await like.find({ userId }).populate('postId', { _id: 1, data: 1 }).exec();
+        return likes;
+    } catch (error) {
+        throw new Error(`Failed to fetch likes! ${error}`);
+    }
+}
+
 export const getBookmarkById = async (userId, postId) => {
     noStore()
     try {

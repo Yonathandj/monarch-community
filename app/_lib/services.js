@@ -148,6 +148,15 @@ export const deleteAllLikeByPostId = async (postId) => {
     }
 }
 
+export const deleteLikeByLikeId = async (likeId) => {
+    try {
+        connectDB();
+        await like.deleteOne({ _id: likeId });
+    } catch (error) {
+        throw new Error(`Failed to delete like! ${error}`)
+    }
+}
+
 export const deletePostByPostId = async (postId) => {
     try {
         connectDB();

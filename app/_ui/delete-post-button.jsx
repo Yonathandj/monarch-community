@@ -30,6 +30,7 @@ export default function DeletePostButton({ postId, profileImageURL }) {
   return (
     <Button
       disabled={pending}
+      variant="destructive"
       className="w-full rounded-2xl"
       formAction={async (formData) => {
         if (profileImageURL) {

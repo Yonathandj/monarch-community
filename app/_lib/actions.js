@@ -5,7 +5,7 @@ import { revalidatePath } from "next/cache";
 
 import { getBookmarkById, getLikeById, getPostById, getPublishedPostById, getUnpublishedPost, getUserById } from "./data";
 import { bookmarkValidationSchema, likeValidationSchema, postValidationSchema, userValidationSchema } from "./validations"
-import { addBookmarkService, addLikeService, deleteAllBookmarkByPostId, deleteAllLikeByPostId, deleteBookmarkService, deleteLikeService, deletePostByPostId, publishPostService, updatePostByPostId, updateUserService } from "./services";
+import { addBookmarkService, addLikeService, deleteAllBookmarkByPostId, deleteAllLikeByPostId, deleteBookmarkService, deleteLikeByLikeId, deleteLikeService, deletePostByPostId, publishPostService, updatePostByPostId, updateUserService } from "./services";
 
 export async function publishPostAction(userId, prevState, formData) {
     const validationResult = postValidationSchema.safeParse({ userId })
@@ -166,4 +166,16 @@ export async function updatePostAction(postId, updatedPublishedPost, prevState, 
         throw new Error(`Something went wrong with the system. Try again! ${error}`)
     }
     redirect('/setting/posts')
+}
+
+export async function deleteLikeAction(likeId, prevState, formData) {
+    if (!likeId) {
+        return revalidatePath('/setting/likes');
+    }
+    try {
+        await deleteLikeByLikeId(likeId)
+    } catch (error) {
+        throw new Error(`Something went wrong with the system. Try again! ${error}`)
+    }
+    revalidatePath('/setting/likes');
 }
