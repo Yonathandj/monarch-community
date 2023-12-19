@@ -14,7 +14,10 @@ import {
 import DeleteBookmarkButton from "./delete-bookmark-button";
 
 export default async function BookmarksTable({ userId }) {
-  const allBookmark = await getBookmarksByUserId(userId);
+  const allBookmark = await getBookmarksByUserId(userId, "postId", {
+    _id: 1,
+    "data.title": 1,
+  });
   return (
     <section>
       <Table>
@@ -33,7 +36,7 @@ export default async function BookmarksTable({ userId }) {
                   className="hover:underline"
                   href={`/posts/${bookmark.postId._id}`}
                 >
-                  {bookmark.postId.data.title}{" "}
+                  {bookmark.postId.title}{" "}
                 </Link>
               </TableCell>
               <TableCell>

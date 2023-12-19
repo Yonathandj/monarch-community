@@ -90,16 +90,7 @@ export const addBookmarkService = async (userId, postId) => {
     }
 }
 
-export const deleteBookmarkService = async (userId, postId) => {
-    try {
-        connectDB();
-        await bookmark.deleteOne({ userId, postId });
-    } catch (error) {
-        throw new Error(`Failed to delete bookmark! ${error}`)
-    }
-}
-
-export const updateUserService = async ({ _id, email, fullName, profileImageURL, work, location, instagram, facebook, twitter, tiktok, description }) => {
+export const updateUserByUserIdService = async ({ _id, email, fullName, profileImageURL, work, location, instagram, facebook, twitter, tiktok, description }) => {
     try {
         connectDB();
         const data = profileImageURL ? {
@@ -130,7 +121,7 @@ export const updateUserService = async ({ _id, email, fullName, profileImageURL,
     }
 }
 
-export const deleteAllBookmarkByPostId = async (postId) => {
+export const deleteAllBookmarkByPostIdService = async (postId) => {
     try {
         connectDB();
         await bookmark.deleteMany({ postId });
@@ -139,7 +130,7 @@ export const deleteAllBookmarkByPostId = async (postId) => {
     }
 }
 
-export const deleteAllLikeByPostId = async (postId) => {
+export const deleteAllLikeByPostIdService = async (postId) => {
     try {
         connectDB();
         await like.deleteMany({ postId });
@@ -148,7 +139,7 @@ export const deleteAllLikeByPostId = async (postId) => {
     }
 }
 
-export const deleteLikeByLikeId = async (likeId) => {
+export const deleteLikeByLikeIdService = async (likeId) => {
     try {
         connectDB();
         await like.deleteOne({ _id: likeId });
@@ -157,16 +148,20 @@ export const deleteLikeByLikeId = async (likeId) => {
     }
 }
 
-export const deleteBookmarkByBookmarkId = async (bookmarkId) => {
+export const deleteBookmarkByIdService = async ({ bookmarkId = null, userId = null, postId = null }) => {
     try {
         connectDB();
-        await bookmark.deleteOne({ _id: bookmarkId });
+        if (bookmarkId) {
+            await bookmark.deleteOne({ _id: bookmarkId });
+        } else if (userId && postId) {
+            await bookmark.deleteOne({ userId, postId });
+        }
     } catch (error) {
         throw new Error(`Failed to delete bookmark! ${error}`)
     }
 }
 
-export const deletePostByPostId = async (postId) => {
+export const deletePostByPostIdService = async (postId) => {
     try {
         connectDB();
         await post.deleteOne({ _id: postId });
@@ -175,7 +170,7 @@ export const deletePostByPostId = async (postId) => {
     }
 }
 
-export const updatePostByPostId = async ({ postId, title, tags, content, headerImageURL }) => {
+export const updatePostByPostIdService = async ({ postId, title, tags, content, headerImageURL }) => {
     try {
         connectDB();
         const data = {

@@ -5,7 +5,7 @@ import { revalidatePath } from "next/cache";
 
 import { getBookmarkById, getLikeById, getPostById, getPublishedPostById, getUnpublishedPost, getUserById } from "./data";
 import { bookmarkValidationSchema, likeValidationSchema, postValidationSchema, userValidationSchema } from "./validations"
-import { addBookmarkService, addLikeService, deleteAllBookmarkByPostId, deleteAllLikeByPostId, deleteBookmarkByBookmarkId, deleteBookmarkService, deleteLikeByLikeId, deleteLikeService, deletePostByPostId, publishPostService, updatePostByPostId, updateUserService } from "./services";
+import { addBookmarkService, addLikeService, deleteAllBookmarkByPostIdService, deleteAllLikeByPostIdService, deleteBookmarkByIdService, deleteLikeByLikeIdService, deleteLikeService, deletePostByPostIdService, publishPostService, updatePostByPostIdService, updateUserByUserIdService } from "./services";
 
 export async function publishPostAction(userId, prevState, formData) {
     const validationResult = postValidationSchema.safeParse({ userId })
@@ -73,7 +73,7 @@ export async function bookmarkAction(userId, postId, formData) {
         } else {
             const bookmarkedAlready = await getBookmarkById(userId, postId);
             if (bookmarkedAlready) {
-                await deleteBookmarkService(userId, postId);
+                await deleteBookmarkByIdService({ userId, postId });
             } else {
                 await addBookmarkService(userId, postId)
             }
@@ -112,7 +112,7 @@ export async function userProfileAction(_id, prevState, formData) {
         if (!userExistence) {
             throw new Error(`You are not sign up. Please sign up first! ${error}`)
         }
-        await updateUserService({ _id, email, fullName, profileImageURL, work, location, instagram, facebook, twitter, tiktok, description })
+        await updateUserByUserIdService({ _id, email, fullName, profileImageURL, work, location, instagram, facebook, twitter, tiktok, description })
     } catch (error) {
         throw new Error(`Something went wrong with the system. Try again! ${error}`)
     }
@@ -133,7 +133,7 @@ export async function deletePostAction(postId, prevState, formData) {
                 errorPostExistence: 'Post you are going to delete not found! Please try again!'
             }
         } else {
-            await Promise.all([deleteAllLikeByPostId(postId), deleteAllBookmarkByPostId(postId), deletePostByPostId(postId)])
+            await Promise.all([deleteAllLikeByPostIdService(postId), deleteAllBookmarkByPostIdService(postId), deletePostByPostIdService(postId)])
         }
     } catch (error) {
         throw new Error(`Something went wrong with the system. Try again! ${error}`)
@@ -160,7 +160,7 @@ export async function updatePostAction(postId, updatedPublishedPost, prevState, 
                 errorPostExistence: 'Post you are going to update not found! Please try again!'
             }
         } else {
-            await updatePostByPostId({ postId, tags: parsedUpdatedPublishedPost.tags, title: parsedUpdatedPublishedPost.title, content: parsedUpdatedPublishedPost.content, headerImageURL })
+            await updatePostByPostIdService({ postId, tags: parsedUpdatedPublishedPost.tags, title: parsedUpdatedPublishedPost.title, content: parsedUpdatedPublishedPost.content, headerImageURL })
         }
     } catch (error) {
         throw new Error(`Something went wrong with the system. Try again! ${error}`)
@@ -173,7 +173,7 @@ export async function deleteLikeAction(likeId, prevState, formData) {
         return revalidatePath('/setting/likes');
     }
     try {
-        await deleteLikeByLikeId(likeId)
+        await deleteLikeByLikeIdService(likeId)
     } catch (error) {
         throw new Error(`Something went wrong with the system. Try again! ${error}`)
     }
@@ -185,7 +185,7 @@ export async function deleteBookmarkAction(bookmarkId, prevState, formData) {
         return revalidatePath('/setting/bookmarks');
     }
     try {
-        await deleteBookmarkByBookmarkId(bookmarkId)
+        await deleteBookmarkByIdService({ bookmarkId })
     } catch (error) {
         throw new Error(`Something went wrong with the system. Try again! ${error}`)
     }
