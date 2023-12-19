@@ -70,15 +70,6 @@ export const addLikeService = async (userId, postId) => {
     }
 }
 
-export const deleteLikeService = async (userId, postId) => {
-    try {
-        connectDB();
-        await like.deleteOne({ userId, postId });
-    } catch (error) {
-        throw new Error(`Failed to delete like! ${error}`)
-    }
-}
-
 export const addBookmarkService = async (userId, postId) => {
     try {
         connectDB();
@@ -139,15 +130,18 @@ export const deleteAllLikeByPostIdService = async (postId) => {
     }
 }
 
-export const deleteLikeByLikeIdService = async (likeId) => {
+export const deleteLikeByIdService = async ({ likeId = null, userId = null, postId = null }) => {
     try {
         connectDB();
-        await like.deleteOne({ _id: likeId });
+        if (likeId) {
+            await like.deleteOne({ _id: likeId });
+        } else if (userId && postId) {
+            await like.deleteOne({ userId, postId });
+        }
     } catch (error) {
         throw new Error(`Failed to delete like! ${error}`)
     }
 }
-
 export const deleteBookmarkByIdService = async ({ bookmarkId = null, userId = null, postId = null }) => {
     try {
         connectDB();

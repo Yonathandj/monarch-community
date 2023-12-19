@@ -14,7 +14,10 @@ import {
 import DeleteLikeButton from "./delete-like-button";
 
 export default async function LikesTable({ userId }) {
-  const allLike = await getLikesByUserId(userId);
+  const allLike = await getLikesByUserId(userId, "postId", {
+    _id: 1,
+    "data.title": 1,
+  });
   return (
     <section>
       <Table>
@@ -33,7 +36,7 @@ export default async function LikesTable({ userId }) {
                   className="hover:underline"
                   href={`/posts/${like.postId._id}`}
                 >
-                  {like.postId.data.title}{" "}
+                  {like.postId.title}{" "}
                 </Link>
               </TableCell>
               <TableCell>

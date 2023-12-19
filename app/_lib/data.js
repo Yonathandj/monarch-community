@@ -106,22 +106,26 @@ export const getTotalLikesByPostId = async (postId) => {
     }
 }
 
-export const getLikesByUserId = async (userId) => {
+export const getLikesByUserId = async (userId, populateKey = null, populateValue = null) => {
     noStore()
     try {
         await connectDB()
-        const likes = await like.find({ userId }).populate('postId', { _id: 1, data: 1 }).exec();
-        return likes;
+        if (populateKey) {
+            const likes = await like.find({ userId }).populate(populateKey, populateValue).exec();
+            return likes;
+        } else {
+            const likes = await like.find({ userId }).exec();
+            return likes;
+        }
     } catch (error) {
         throw new Error(`Failed to fetch likes! ${error}`);
     }
 }
-
 export const getBookmarksByUserId = async (userId, populateKey = null, populateValue = null) => {
     noStore()
     try {
         await connectDB()
-        if (populateTitle) {
+        if (populateKey) {
             const bookmarks = await bookmark.find({ userId }).populate(populateKey, populateValue).exec();
             return bookmarks;
         } else {

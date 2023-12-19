@@ -5,7 +5,7 @@ import { revalidatePath } from "next/cache";
 
 import { getBookmarkById, getLikeById, getPostById, getPublishedPostById, getUnpublishedPost, getUserById } from "./data";
 import { bookmarkValidationSchema, likeValidationSchema, postValidationSchema, userValidationSchema } from "./validations"
-import { addBookmarkService, addLikeService, deleteAllBookmarkByPostIdService, deleteAllLikeByPostIdService, deleteBookmarkByIdService, deleteLikeByLikeIdService, deleteLikeService, deletePostByPostIdService, publishPostService, updatePostByPostIdService, updateUserByUserIdService } from "./services";
+import { addBookmarkService, addLikeService, deleteAllBookmarkByPostIdService, deleteAllLikeByPostIdService, deleteBookmarkByIdService, deleteLikeByIdService, deletePostByPostIdService, publishPostService, updatePostByPostIdService, updateUserByUserIdService } from "./services";
 
 export async function publishPostAction(userId, prevState, formData) {
     const validationResult = postValidationSchema.safeParse({ userId })
@@ -49,7 +49,7 @@ export async function likeAction(userId, postId, formData) {
         } else {
             const likedAlready = await getLikeById(userId, postId);
             if (likedAlready) {
-                await deleteLikeService(userId, postId);
+                await deleteLikeByIdService({ userId, postId });
             } else {
                 await addLikeService(userId, postId)
             }
@@ -173,7 +173,7 @@ export async function deleteLikeAction(likeId, prevState, formData) {
         return revalidatePath('/setting/likes');
     }
     try {
-        await deleteLikeByLikeIdService(likeId)
+        await deleteLikeByIdService({ likeId })
     } catch (error) {
         throw new Error(`Something went wrong with the system. Try again! ${error}`)
     }
