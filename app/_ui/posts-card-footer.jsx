@@ -1,7 +1,7 @@
 import { auth } from "@clerk/nextjs";
 import {
-  getLikeById,
-  getBookmarkById,
+  getLikeByUserIdAndPostId,
+  getBookmarkByUserIdAndPostId,
   getTotalLikesByPostId,
   getTotalBookmarksByPostId,
 } from "../_lib/data";
@@ -17,10 +17,13 @@ export default async function PostsCardFooter({ postId }) {
   const { userId } = auth();
 
   const totalLikes = await getTotalLikesByPostId(postId);
-  const likeCurrentUser = await getLikeById(userId, postId);
+  const likeCurrentUser = await getLikeByUserIdAndPostId(userId, postId);
 
   const totalBookmarks = await getTotalBookmarksByPostId(postId);
-  const bookmarkCurrentUser = await getBookmarkById(userId, postId);
+  const bookmarkCurrentUser = await getBookmarkByUserIdAndPostId(
+    userId,
+    postId,
+  );
   return (
     <section className="flex gap-x-6">
       <span className="flex items-center">

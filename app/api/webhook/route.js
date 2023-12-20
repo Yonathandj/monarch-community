@@ -1,7 +1,7 @@
 import { Webhook } from 'svix'
 import { headers } from 'next/headers'
 
-import { getUserById } from '@/app/_lib/data';
+import { getUserByUserId } from '@/app/_lib/data';
 import { addNewUserService } from '@/app/_lib/services';
 import { userValidationSchema } from '@/app/_lib/validations';
 
@@ -59,7 +59,7 @@ export async function POST(req) {
             }
             if (validationResult.success) {
                 const { _id, fullName, email, profileImageURL } = validationResult.data;
-                const userAlreadyExist = await getUserById(_id);
+                const userAlreadyExist = await getUserByUserId(_id);
                 if (userAlreadyExist) {
                     return new Response('User already exist', {
                         status: 400

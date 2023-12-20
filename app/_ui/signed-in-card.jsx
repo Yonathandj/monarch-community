@@ -7,14 +7,14 @@ import {
 } from "@/components/ui/card";
 
 import { auth } from "@clerk/nextjs";
-import { getUserById } from "../_lib/data";
+import { getUserByUserId } from "../_lib/data";
 
 import SignOutButton from "./sign-out-button";
 import WritePostButton from "./write-post-button";
 
 export default async function SignedInCard() {
-  const { userId: _id } = auth();
-  const currentUser = await getUserById(_id);
+  const { userId } = auth();
+  const currentUser = await getUserByUserId(userId);
 
   return (
     <Card>

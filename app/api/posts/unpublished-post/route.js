@@ -1,4 +1,4 @@
-import { getUnpublishedPost } from "@/app/_lib/data";
+import { getUnpublishedPostByUserId } from "@/app/_lib/data";
 
 import { addUnpublishedPostService, updateUnpublishedPostService } from "@/app/_lib/services";
 
@@ -14,7 +14,7 @@ export async function POST(request) {
         }
         if (validationResult.success) {
             const { userId, title, tags, content, headerImageURL } = validationResult.data;
-            const unpublishedPostInDatabase = await getUnpublishedPost(userId);
+            const unpublishedPostInDatabase = await getUnpublishedPostByUserId(userId);
             if (unpublishedPostInDatabase) {
                 const response = await updateUnpublishedPostService({ userId, title, tags, content, headerImageURL });
                 if (response) {
@@ -44,7 +44,7 @@ export async function GET(request) {
             }, { status: 400 });
         }
 
-        const unpublishedPost = await getUnpublishedPost(by);
+        const unpublishedPost = await getUnpublishedPostByUserId(by);
         if (unpublishedPost) {
             return Response.json({
                 message: 'Successfully fetch unpublished post data from user',

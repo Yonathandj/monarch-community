@@ -7,14 +7,14 @@ import connectDB from "./connectDB";
 
 import { unstable_noStore as noStore } from "next/cache";
 
-export const getUserById = async (_id) => {
+export const getUserByUserId = async (_id) => {
     noStore()
     try {
         await connectDB()
-        const currentUser = await user.findOne({ _id }).exec();
-        return currentUser;
+        const selectedUser = await user.findOne({ _id }).exec();
+        return selectedUser;
     } catch (error) {
-        throw new Error(`Failed to fetch current user! ${error}`);
+        throw new Error(`Failed to fetch user! ${error}`);
     }
 }
 
@@ -25,11 +25,11 @@ export const getTotalUsers = async () => {
         const totalUsers = await user.countDocuments({}).exec();
         return totalUsers;
     } catch (error) {
-        throw new Error(`Failed to fetch current user! ${error}`);
+        throw new Error(`Failed to fetch total users! ${error}`);
     }
 }
 
-export const getUnpublishedPost = async (userId) => {
+export const getUnpublishedPostByUserId = async (userId) => {
     noStore()
     try {
         await connectDB()
@@ -47,18 +47,18 @@ export const getAllPostByUserId = async (userId) => {
         const allPost = await post.find({ userId }).exec();
         return allPost;
     } catch (error) {
-        throw new Error(`Failed to fetch unpublished post! ${error}`);
+        throw new Error(`Failed to fetch posts! ${error}`);
     }
 }
 
-export const getPostById = async (postId) => {
+export const getPostByPostId = async (postId) => {
     noStore()
     try {
         await connectDB()
         const selectedPost = await post.findOne({ _id: postId }).exec();
         return selectedPost;
     } catch (error) {
-        throw new Error(`Failed to fetch unpublished post! ${error}`);
+        throw new Error(`Failed to fetch post! ${error}`);
     }
 }
 
@@ -73,7 +73,7 @@ export const getPublishedPosts = async () => {
     }
 }
 
-export const getPublishedPostById = async (postId) => {
+export const getPublishedPostByPostId = async (postId) => {
     noStore()
     try {
         await connectDB()
@@ -84,12 +84,12 @@ export const getPublishedPostById = async (postId) => {
     }
 }
 
-export const getLikeById = async (userId, postId) => {
+export const getLikeByUserIdAndPostId = async (userId, postId) => {
     noStore()
     try {
         await connectDB()
-        const likeCurrentUser = await like.countDocuments({ userId, postId }).exec();
-        return likeCurrentUser;
+        const likeSelectedUser = await like.findOne({ userId, postId }).exec();
+        return likeSelectedUser;
     } catch (error) {
         throw new Error(`Failed to fetch like! ${error}`);
     }
@@ -137,12 +137,12 @@ export const getBookmarksByUserId = async (userId, populateKey = null, populateV
     }
 }
 
-export const getBookmarkById = async (userId, postId) => {
+export const getBookmarkByUserIdAndPostId = async (userId, postId) => {
     noStore()
     try {
         await connectDB()
-        const bookmarkCurrentUser = await bookmark.countDocuments({ userId, postId }).exec();
-        return bookmarkCurrentUser;
+        const bookmarkSelectedUser = await bookmark.findOne({ userId, postId }).exec();
+        return bookmarkSelectedUser;
     } catch (error) {
         throw new Error(`Failed to fetch bookmark! ${error}`);
     }

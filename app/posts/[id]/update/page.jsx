@@ -1,6 +1,6 @@
 import { auth } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
-import { getPublishedPostById } from "@/app/_lib/data";
+import { getPublishedPostByPostId } from "@/app/_lib/data";
 
 import PostPreview from "@/app/_ui/post-preview";
 import UpdatePostForm from "@/app/_ui/update-post-form";
@@ -11,7 +11,7 @@ export default async function Page({
 }) {
   const { userId: currentUser } = auth();
   const publishedPost = JSON.parse(
-    JSON.stringify(await getPublishedPostById(postId)),
+    JSON.stringify(await getPublishedPostByPostId(postId)),
   );
 
   if (publishedPost.userId._id !== currentUser) {

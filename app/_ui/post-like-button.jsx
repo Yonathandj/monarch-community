@@ -4,13 +4,13 @@ import { SignedIn, SignedOut } from "@clerk/nextjs";
 import { SignInButtonUserInteractionLike } from "./sign-in-button";
 
 import { likeAction } from "../_lib/actions";
-import { getLikeById, getTotalLikesByPostId } from "../_lib/data";
+import { getLikeByUserIdAndPostId, getTotalLikesByPostId } from "../_lib/data";
 
 import { HeartFilledIcon, HeartIcon } from "@radix-ui/react-icons";
 
 export default async function PostLikeButton({ userId, postId }) {
   const totalLikes = await getTotalLikesByPostId(postId);
-  const likeCurrentUser = await getLikeById(userId, postId);
+  const likeCurrentUser = await getLikeByUserIdAndPostId(userId, postId);
 
   const updateLikeActionWithId = likeAction.bind(null, userId, postId);
   return (

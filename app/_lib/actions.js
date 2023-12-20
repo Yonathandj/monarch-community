@@ -3,7 +3,7 @@
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 
-import { getBookmarkById, getLikeById, getPostById, getPublishedPostById, getUnpublishedPost, getUserById } from "./data";
+import { getBookmarkByUserIdAndPostId, getLikeByUserIdAndPostId, getPostByPostId, getPublishedPostByPostId, getUnpublishedPostByUserId, getUserByUserId } from "./data";
 import { bookmarkValidationSchema, likeValidationSchema, postValidationSchema, userValidationSchema } from "./validations"
 import { addBookmarkService, addLikeService, deleteAllBookmarkByPostIdService, deleteAllLikeByPostIdService, deleteBookmarkByIdService, deleteLikeByIdService, deletePostByPostIdService, publishPostService, updatePostByPostIdService, updateUserByUserIdService } from "./services";
 
@@ -16,7 +16,7 @@ export async function publishPostAction(userId, prevState, formData) {
     }
     try {
         const { userId } = validationResult.data;
-        const unpublishedPost = await getUnpublishedPost(userId);
+        const unpublishedPost = await getUnpublishedPostByUserId(userId);
         if (!unpublishedPost) {
             return {
                 errorUnpublishedPost: 'No unpublished post is created. Please create first!'
@@ -43,11 +43,11 @@ export async function likeAction(userId, postId, formData) {
     }
     try {
         const { userId, postId } = validationResult.data
-        const publishedPostExistence = await getPublishedPostById(postId)
+        const publishedPostExistence = await getPublishedPostByPostId(postId)
         if (!publishedPostExistence) {
             return;
         } else {
-            const likedAlready = await getLikeById(userId, postId);
+            const likedAlready = await getLikeByUserIdAndPostId(userId, postId);
             if (likedAlready) {
                 await deleteLikeByIdService({ userId, postId });
             } else {
@@ -67,11 +67,11 @@ export async function bookmarkAction(userId, postId, formData) {
     }
     try {
         const { userId, postId } = validationResult.data
-        const publishedPostExistence = await getPublishedPostById(postId)
+        const publishedPostExistence = await getPublishedPostByPostId(postId)
         if (!publishedPostExistence) {
             return;
         } else {
-            const bookmarkedAlready = await getBookmarkById(userId, postId);
+            const bookmarkedAlready = await getBookmarkByUserIdAndPostId(userId, postId);
             if (bookmarkedAlready) {
                 await deleteBookmarkByIdService({ userId, postId });
             } else {
@@ -108,7 +108,7 @@ export async function userProfileAction(_id, prevState, formData) {
     try {
         const { _id, email, fullName, profileImageURL, work, location, instagram, facebook, twitter, tiktok, description } = validationResult.data;
 
-        const userExistence = await getUserById(_id);
+        const userExistence = await getUserByUserId(_id);
         if (!userExistence) {
             throw new Error(`You are not sign up. Please sign up first! ${error}`)
         }
@@ -127,7 +127,7 @@ export async function deletePostAction(postId, prevState, formData) {
         return revalidatePath('/setting/posts');
     }
     try {
-        const postExistence = await getPostById(postId);
+        const postExistence = await getPostByPostId(postId);
         if (!postExistence) {
             return {
                 errorPostExistence: 'Post you are going to delete not found! Please try again!'
@@ -154,7 +154,7 @@ export async function updatePostAction(postId, updatedPublishedPost, prevState, 
         }
     }
     try {
-        const postExistence = await getPostById(postId);
+        const postExistence = await getPostByPostId(postId);
         if (!postExistence) {
             return {
                 errorPostExistence: 'Post you are going to update not found! Please try again!'

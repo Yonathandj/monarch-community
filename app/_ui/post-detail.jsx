@@ -1,12 +1,12 @@
 import Image from "next/image";
 import dynamic from "next/dynamic";
 
-import { getPublishedPostById } from "../_lib/data";
+import { getPublishedPostByPostId } from "../_lib/data";
 
 const Editor = dynamic(() => import("@/components/ui/editor"), { ssr: false });
 
 export default async function PostDetail({ postId }) {
-  const publishedPost = await getPublishedPostById(postId);
+  const publishedPost = await getPublishedPostByPostId(postId);
 
   return (
     <section className="mx-auto flex max-w-[800px] flex-col items-center justify-center p-4">
@@ -37,10 +37,7 @@ export default async function PostDetail({ postId }) {
         {publishedPost.data.title}
       </h1>
       <section className="mt-2">
-        <Editor
-          editable={false}
-          publishedPost={publishedPost.data.content}
-        />
+        <Editor editable={false} publishedPost={publishedPost.data.content} />
       </section>
     </section>
   );

@@ -1,6 +1,6 @@
 import { auth } from "@clerk/nextjs";
 
-import { getUserById } from "../_lib/data";
+import { getUserByUserId } from "../_lib/data";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
@@ -20,8 +20,8 @@ import { SignOutButtonUserAvatar } from "./sign-out-button";
 import { WritePostButtonUserAvatar } from "./write-post-button";
 
 export default async function SignedInUserAvatar() {
-  const { userId: _id } = auth();
-  const currentUser = await getUserById(_id);
+  const { userId } = auth();
+  const currentUser = await getUserByUserId(userId);
 
   return (
     <DropdownMenu>

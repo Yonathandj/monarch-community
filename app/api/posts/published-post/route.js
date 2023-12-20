@@ -1,4 +1,4 @@
-import { getPublishedPostById } from "@/app/_lib/data";
+import { getPublishedPostByPostId } from "@/app/_lib/data";
 
 export async function GET(request) {
     try {
@@ -11,7 +11,7 @@ export async function GET(request) {
             }, { status: 400 });
         }
 
-        const publishedPost = await getPublishedPostById(by);
+        const publishedPost = await getPublishedPostByPostId(by);
         if (publishedPost) {
             return Response.json({
                 message: 'Successfully fetch published post data from user',
