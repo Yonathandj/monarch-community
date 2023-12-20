@@ -5,7 +5,7 @@ import { revalidatePath } from "next/cache";
 
 import { getBookmarkByUserIdAndPostId, getLikeByUserIdAndPostId, getPostByPostId, getPublishedPostByPostId, getUnpublishedPostByUserId, getUserByUserId } from "./data";
 import { bookmarkValidationSchema, likeValidationSchema, postValidationSchema, userValidationSchema } from "./validations"
-import { addBookmarkService, addLikeService, deleteAllBookmarkByPostIdService, deleteAllLikeByPostIdService, deleteBookmarkByIdService, deleteLikeByIdService, deletePostByPostIdService, publishPostService, updatePostByPostIdService, updateUserByUserIdService } from "./services";
+import { addBookmarkService, addLikeService, deleteAllBookmarkByPostIdService, deleteAllLikeByPostIdService, deleteBookmarkService, deleteLikeService, deletePostByPostIdService, publishPostService, updatePostService, updateUserService } from "./services";
 
 export async function publishPostAction(userId, prevState, formData) {
     const validationResult = postValidationSchema.safeParse({ userId })
@@ -49,7 +49,7 @@ export async function toggleLikeAction(userId, postId, formData) {
         } else {
             const likedAlready = await getLikeByUserIdAndPostId(userId, postId);
             if (likedAlready) {
-                await deleteLikeByIdService({ userId, postId });
+                await deleteLikeService({ userId, postId });
             } else {
                 await addLikeService(userId, postId)
             }
@@ -73,7 +73,7 @@ export async function toggleBookmarkAction(userId, postId, formData) {
         } else {
             const bookmarkedAlready = await getBookmarkByUserIdAndPostId(userId, postId);
             if (bookmarkedAlready) {
-                await deleteBookmarkByIdService({ userId, postId });
+                await deleteBookmarkService({ userId, postId });
             } else {
                 await addBookmarkService(userId, postId)
             }
@@ -112,7 +112,7 @@ export async function updateUserProfileAction(_id, prevState, formData) {
         if (!userExistence) {
             throw new Error(`You are not sign up. Please sign up first! ${error}`)
         }
-        await updateUserByUserIdService({ _id, email, fullName, profileImageURL, work, location, instagram, facebook, twitter, tiktok, description })
+        await updateUserService({ _id, email, fullName, profileImageURL, work, location, instagram, facebook, twitter, tiktok, description })
     } catch (error) {
         throw new Error(`Something went wrong with the system. Try again! ${error}`)
     }
@@ -160,7 +160,7 @@ export async function updatePostAction(postId, updatedPublishedPost, prevState, 
                 errorPostExistence: 'Post you are going to update not found! Please try again!'
             }
         } else {
-            await updatePostByPostIdService({ postId, tags: parsedUpdatedPublishedPost.tags, title: parsedUpdatedPublishedPost.title, content: parsedUpdatedPublishedPost.content, headerImageURL })
+            await updatePostService({ postId, tags: parsedUpdatedPublishedPost.tags, title: parsedUpdatedPublishedPost.title, content: parsedUpdatedPublishedPost.content, headerImageURL })
         }
     } catch (error) {
         throw new Error(`Something went wrong with the system. Try again! ${error}`)
@@ -173,7 +173,7 @@ export async function deleteLikeAction(likeId, formData) {
         return revalidatePath('/setting/likes');
     }
     try {
-        await deleteLikeByIdService({ likeId })
+        await deleteLikeService({ likeId })
     } catch (error) {
         throw new Error(`Something went wrong with the system. Try again! ${error}`)
     }
@@ -185,7 +185,7 @@ export async function deleteBookmarkAction(bookmarkId, formData) {
         return revalidatePath('/setting/bookmarks');
     }
     try {
-        await deleteBookmarkByIdService({ bookmarkId })
+        await deleteBookmarkService({ bookmarkId })
     } catch (error) {
         throw new Error(`Something went wrong with the system. Try again! ${error}`)
     }

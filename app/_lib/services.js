@@ -81,7 +81,7 @@ export const addBookmarkService = async (userId, postId) => {
     }
 }
 
-export const updateUserByUserIdService = async ({ _id, email, fullName, profileImageURL, work, location, instagram, facebook, twitter, tiktok, description }) => {
+export const updateUserService = async ({ _id, email, fullName, profileImageURL, work, location, instagram, facebook, twitter, tiktok, description }) => {
     try {
         connectDB();
         const data = profileImageURL ? {
@@ -130,7 +130,7 @@ export const deleteAllLikeByPostIdService = async (postId) => {
     }
 }
 
-export const deleteLikeByIdService = async ({ likeId = null, userId = null, postId = null }) => {
+export const deleteLikeService = async ({ likeId = null, userId = null, postId = null }) => {
     try {
         connectDB();
         if (likeId) {
@@ -142,7 +142,7 @@ export const deleteLikeByIdService = async ({ likeId = null, userId = null, post
         throw new Error(`Failed to delete like! ${error}`)
     }
 }
-export const deleteBookmarkByIdService = async ({ bookmarkId = null, userId = null, postId = null }) => {
+export const deleteBookmarkService = async ({ bookmarkId = null, userId = null, postId = null }) => {
     try {
         connectDB();
         if (bookmarkId) {
@@ -164,7 +164,7 @@ export const deletePostByPostIdService = async (postId) => {
     }
 }
 
-export const updatePostByPostIdService = async ({ postId, title, tags, content, headerImageURL }) => {
+export const updatePostService = async ({ postId, title, tags, content, headerImageURL }) => {
     try {
         connectDB();
         const data = {
