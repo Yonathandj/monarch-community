@@ -31,3 +31,8 @@ export const bookmarkValidationSchema = z.object({
     userId: z.string().trim(),
     postId: z.string().trim(),
 })
+
+export const commentValidationSchema = z.object({
+    userId: z.string().trim(),
+    comment: z.string().trim(),
+})

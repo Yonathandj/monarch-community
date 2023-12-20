@@ -168,7 +168,7 @@ export async function updatePostAction(postId, updatedPublishedPost, prevState, 
     redirect('/setting/posts')
 }
 
-export async function deleteLikeAction(likeId, prevState, formData) {
+export async function deleteLikeAction(likeId, formData) {
     if (!likeId) {
         return revalidatePath('/setting/likes');
     }
@@ -180,12 +180,24 @@ export async function deleteLikeAction(likeId, prevState, formData) {
     revalidatePath('/setting/likes');
 }
 
-export async function deleteBookmarkAction(bookmarkId, prevState, formData) {
+export async function deleteBookmarkAction(bookmarkId, formData) {
     if (!bookmarkId) {
         return revalidatePath('/setting/bookmarks');
     }
     try {
         await deleteBookmarkByIdService({ bookmarkId })
+    } catch (error) {
+        throw new Error(`Something went wrong with the system. Try again! ${error}`)
+    }
+    revalidatePath('/setting/bookmarks');
+}
+
+export async function addCommentAction(userId, formData) {
+    if (!userId) {
+        return revalidatePath('/posts/[id]', 'page')
+    }
+    try {
+        await addCommentService({ userId })
     } catch (error) {
         throw new Error(`Something went wrong with the system. Try again! ${error}`)
     }

@@ -5,7 +5,7 @@ import { useFormStatus } from "react-dom";
 import { Button } from "@/components/ui/button";
 import { GearIcon, PaperPlaneIcon } from "@radix-ui/react-icons";
 
-export default function PostPublishCommentButton() {
+export default function PostPublishCommentButton({ userId }) {
   const { pending } = useFormStatus();
 
   return (
