@@ -9,7 +9,7 @@ import {
 } from "../_lib/data";
 
 import { BookmarkFilledIcon, BookmarkIcon } from "@radix-ui/react-icons";
-import { bookmarkAction } from "../_lib/actions";
+import { toggleBookmarkAction } from "../_lib/actions";
 
 export default async function PostBookmarkButton({ userId, postId }) {
   const totalBookmarks = await getTotalBookmarksByPostId(postId);
@@ -18,7 +18,11 @@ export default async function PostBookmarkButton({ userId, postId }) {
     postId,
   );
 
-  const updateBookmarkActionWithId = bookmarkAction.bind(null, userId, postId);
+  const updatetoggleBookmarkActionWithId = toggleBookmarkAction.bind(
+    null,
+    userId,
+    postId,
+  );
   return (
     <>
       <SignedOut>
@@ -26,7 +30,7 @@ export default async function PostBookmarkButton({ userId, postId }) {
       </SignedOut>
 
       <SignedIn>
-        <form action={updateBookmarkActionWithId}>
+        <form action={updatetoggleBookmarkActionWithId}>
           <Button variant="ghost">
             {bookmarkCurrentUser ? (
               <BookmarkFilledIcon className="mr-2 h-5 w-5 text-sky-600" />

@@ -1,9 +1,10 @@
 "use client";
 
 import { useFormStatus } from "react-dom";
+import { deleteLikeAction } from "../_lib/actions";
+
 import { Button } from "@/components/ui/button";
 import { GearIcon, TrashIcon } from "@radix-ui/react-icons";
-import { deleteLikeAction } from "../_lib/actions";
 
 export default function DeleteLikeButton({ likeId }) {
   const { pending } = useFormStatus();

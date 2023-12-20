@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { SignedIn, SignedOut } from "@clerk/nextjs";
 import { SignInButtonUserInteractionLike } from "./sign-in-button";
 
-import { likeAction } from "../_lib/actions";
+import { toggleLikeAction } from "../_lib/actions";
 import { getLikeByUserIdAndPostId, getTotalLikesByPostId } from "../_lib/data";
 
 import { HeartFilledIcon, HeartIcon } from "@radix-ui/react-icons";
@@ -12,7 +12,11 @@ export default async function PostLikeButton({ userId, postId }) {
   const totalLikes = await getTotalLikesByPostId(postId);
   const likeCurrentUser = await getLikeByUserIdAndPostId(userId, postId);
 
-  const updateLikeActionWithId = likeAction.bind(null, userId, postId);
+  const updatetoggleLikeActionWithId = toggleLikeAction.bind(
+    null,
+    userId,
+    postId,
+  );
   return (
     <>
       <SignedOut>
@@ -20,7 +24,7 @@ export default async function PostLikeButton({ userId, postId }) {
       </SignedOut>
 
       <SignedIn>
-        <form action={updateLikeActionWithId}>
+        <form action={updatetoggleLikeActionWithId}>
           <Button variant="ghost">
             {likeCurrentUser ? (
               <HeartFilledIcon className="mr-2 h-5 w-5 text-red-600" />

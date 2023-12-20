@@ -33,19 +33,19 @@ export async function publishPostAction(userId, prevState, formData) {
     } catch (error) {
         throw new Error(`Something went wrong with the system. Try again! ${error}`)
     }
-    redirect('/')
+    return redirect('/')
 }
 
-export async function likeAction(userId, postId, formData) {
+export async function toggleLikeAction(userId, postId, formData) {
     const validationResult = likeValidationSchema.safeParse({ userId, postId });
     if (!validationResult.success) {
-        return;
+        return revalidatePath('/posts/[id]', 'page');
     }
     try {
         const { userId, postId } = validationResult.data
         const publishedPostExistence = await getPublishedPostByPostId(postId)
         if (!publishedPostExistence) {
-            return;
+            return redirect('/');
         } else {
             const likedAlready = await getLikeByUserIdAndPostId(userId, postId);
             if (likedAlready) {
@@ -57,19 +57,19 @@ export async function likeAction(userId, postId, formData) {
     } catch (error) {
         throw new Error(`Something went wrong with the system. Try again! ${error}`)
     }
-    revalidatePath('/posts/[id]', 'page')
+    return revalidatePath('/posts/[id]', 'page')
 }
 
-export async function bookmarkAction(userId, postId, formData) {
+export async function toggleBookmarkAction(userId, postId, formData) {
     const validationResult = bookmarkValidationSchema.safeParse({ userId, postId });
     if (!validationResult.success) {
-        return;
+        return revalidatePath('/posts/[id]', 'page');;
     }
     try {
         const { userId, postId } = validationResult.data
         const publishedPostExistence = await getPublishedPostByPostId(postId)
         if (!publishedPostExistence) {
-            return;
+            return redirect('/');
         } else {
             const bookmarkedAlready = await getBookmarkByUserIdAndPostId(userId, postId);
             if (bookmarkedAlready) {
@@ -81,10 +81,10 @@ export async function bookmarkAction(userId, postId, formData) {
     } catch (error) {
         throw new Error(`Something went wrong with the system. Try again! ${error}`)
     }
-    revalidatePath('/posts/[id]', 'page')
+    return revalidatePath('/posts/[id]', 'page')
 }
 
-export async function userProfileAction(_id, prevState, formData) {
+export async function updateUserProfileAction(_id, prevState, formData) {
     const validUserValidationSchema = formData.get("profileImageURL")?.size === 0 && formData.get("profileImageURL")?.name === 'undefined' ? userValidationSchema.omit({ profileImageURL: true }) : userValidationSchema;
 
     const validationResult = validUserValidationSchema.safeParse({
@@ -138,7 +138,7 @@ export async function deletePostAction(postId, prevState, formData) {
     } catch (error) {
         throw new Error(`Something went wrong with the system. Try again! ${error}`)
     }
-    revalidatePath('/setting/posts');
+    return revalidatePath('/setting/posts');
 }
 
 export async function updatePostAction(postId, updatedPublishedPost, prevState, formData) {
@@ -165,7 +165,7 @@ export async function updatePostAction(postId, updatedPublishedPost, prevState, 
     } catch (error) {
         throw new Error(`Something went wrong with the system. Try again! ${error}`)
     }
-    redirect('/setting/posts')
+    return redirect('/setting/posts')
 }
 
 export async function deleteLikeAction(likeId, formData) {
@@ -177,7 +177,7 @@ export async function deleteLikeAction(likeId, formData) {
     } catch (error) {
         throw new Error(`Something went wrong with the system. Try again! ${error}`)
     }
-    revalidatePath('/setting/likes');
+    return revalidatePath('/setting/likes');
 }
 
 export async function deleteBookmarkAction(bookmarkId, formData) {
@@ -189,7 +189,7 @@ export async function deleteBookmarkAction(bookmarkId, formData) {
     } catch (error) {
         throw new Error(`Something went wrong with the system. Try again! ${error}`)
     }
-    revalidatePath('/setting/bookmarks');
+    return revalidatePath('/setting/bookmarks');
 }
 
 export async function addCommentAction(userId, formData) {
