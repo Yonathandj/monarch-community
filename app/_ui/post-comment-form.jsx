@@ -4,18 +4,21 @@ import { Textarea } from "@/components/ui/textarea";
 import { SignInButtonPostPublishComment } from "./sign-in-button";
 import PostPublishCommentButton from "./post-publish-comment-button";
 
-export default function PostCommentForm({ userId }) {
+export default function PostCommentForm({ userId, parentCommentId = null }) {
   return (
     <>
       <SignedIn>
         <form className="mx-auto mb-12 flex max-w-[600px] flex-col gap-y-2 lg:flex-row lg:items-center lg:gap-x-2 lg:gap-y-0">
           <Textarea
-            name="comment"
+            name="content"
             placeholder="Share your comment"
             className="resize-none overflow-hidden shadow-none focus-visible:ring-0"
           />
           <section>
-            <PostPublishCommentButton userId={userId} />
+            <PostPublishCommentButton
+              userId={userId}
+              parentCommentId={parentCommentId}
+            />
           </section>
         </form>
       </SignedIn>

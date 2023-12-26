@@ -4,8 +4,8 @@ import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 
 import { getBookmarkByUserIdAndPostId, getLikeByUserIdAndPostId, getPostByPostId, getPublishedPostByPostId, getUnpublishedPostByUserId, getUserByUserId } from "./data";
-import { bookmarkValidationSchema, likeValidationSchema, postValidationSchema, userValidationSchema } from "./validations"
-import { addBookmarkService, addLikeService, deleteAllBookmarkByPostIdService, deleteAllLikeByPostIdService, deleteBookmarkService, deleteLikeService, deletePostByPostIdService, publishPostService, updatePostService, updateUserService } from "./services";
+import { bookmarkValidationSchema, commentValidationSchema, likeValidationSchema, postValidationSchema, userValidationSchema } from "./validations"
+import { addBookmarkService, addCommentService, addLikeService, deleteAllBookmarkByPostIdService, deleteAllLikeByPostIdService, deleteBookmarkService, deleteLikeService, deletePostByPostIdService, publishPostService, updatePostService, updateUserService } from "./services";
 
 export async function publishPostAction(userId, prevState, formData) {
     const validationResult = postValidationSchema.safeParse({ userId })
@@ -192,14 +192,24 @@ export async function deleteBookmarkAction(bookmarkId, formData) {
     return revalidatePath('/setting/bookmarks');
 }
 
-export async function addCommentAction(userId, formData) {
-    if (!userId) {
-        return revalidatePath('/posts/[id]', 'page')
+export async function addCommentAction(userId, parentCommentId, prevState, formData) {
+    const validationResult = commentValidationSchema.safeParse(
+        {
+            userId,
+            parentCommentId,
+            content: formData.get('content'),
+        }
+    )
+    if (!validationResult.success) {
+        return {
+            errorValidation: validationResult.error.flatten().fieldErrors
+        }
     }
     try {
-        await addCommentService({ userId })
+        const { userId, content, parentCommentId } = validationResult.data;
+        await addCommentService(userId, content, parentCommentId)
     } catch (error) {
         throw new Error(`Something went wrong with the system. Try again! ${error}`)
     }
-    revalidatePath('/setting/bookmarks');
+    return revalidatePath('/posts/[id]', 'page')
 }

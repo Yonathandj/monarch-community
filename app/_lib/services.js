@@ -3,6 +3,7 @@ import { nanoid } from "nanoid";
 import like from "./_models/like";
 import post from "./_models/post";
 import user from "./_models/user";
+import comment from "./_models/comment";
 import bookmark from "./_models/bookmark";
 
 import connectDB from "./connectDB"
@@ -175,6 +176,22 @@ export const updatePostService = async ({ postId, title, tags, content, headerIm
         }
         await post.updateOne({ _id: postId }, data);
     } catch (error) {
-        throw new Error(`Failed to delete post! ${error}`)
+        throw new Error(`Failed to update post! ${error}`)
+    }
+}
+
+export const addCommentService = async (userId, content, parentCommentId) => {
+    try {
+        connectDB();
+        const _id = `comment_${nanoid(16)}`;
+        const newComment = new comment({
+            _id,
+            userId,
+            content,
+            parentCommentId
+        })
+        await newComment.save();
+    } catch (error) {
+        throw new Error(`Failed to add comment! ${error}`)
     }
 }

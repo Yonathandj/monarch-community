@@ -34,5 +34,6 @@ export const bookmarkValidationSchema = z.object({
 
 export const commentValidationSchema = z.object({
     userId: z.string().trim(),
-    comment: z.string().trim(),
+    content: z.string().trim().min(4),
+    parentCommentId: z.string().trim().optional(),
 })
